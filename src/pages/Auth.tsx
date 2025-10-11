@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AuthForm } from "@/components/auth/AuthForm";
 import { SubtleBackground } from "@/components/auth/SubtleBackground";
 import { FeatureCards } from "@/components/auth/FeatureCards";
+import { AnimatedHeader } from "@/components/auth/AnimatedHeader";
 
 const Auth = () => {
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -36,18 +37,7 @@ const Auth = () => {
       <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 items-center">
         {/* Branding Section */}
         <div className="space-y-6 text-center md:text-left">
-          <div className="space-y-2">
-            <div className="inline-block px-4 py-1 bg-primary/10 border border-primary/20 rounded-full mb-4">
-              <span className="text-primary font-semibold text-sm">Financial Intelligence</span>
-            </div>
-            <h1 className="text-5xl font-bold text-foreground">
-              Default<span className="text-primary">Detect</span>
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Advanced default risk detection and monitoring system
-            </p>
-          </div>
-
+          <AnimatedHeader />
           <FeatureCards />
         </div>
 
