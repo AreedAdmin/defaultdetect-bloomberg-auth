@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthForm } from "@/components/auth/AuthForm";
-import { HelixBackground } from "@/components/auth/HelixBackground";
+import { FinancialBackground } from "@/components/auth/FinancialBackground";
 import { FeatureCards } from "@/components/auth/FeatureCards";
 
 const Auth = () => {
@@ -31,8 +31,8 @@ const Auth = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
-      <HelixBackground />
+    <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4 relative overflow-hidden">
+      <FinancialBackground />
       <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 items-center relative z-10">
         {/* Branding Section */}
         <div className="space-y-6 text-center md:text-left">
