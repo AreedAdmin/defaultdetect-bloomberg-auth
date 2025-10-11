@@ -112,8 +112,8 @@ export function FinancialBackground() {
     let waveOffset = 0;
 
     const animate = () => {
-      // Clear with orange background
-      ctx.fillStyle = "#ff6600";
+      // Clear with deep black
+      ctx.fillStyle = "#0a0a0a";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw grid lines
