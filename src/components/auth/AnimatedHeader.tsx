@@ -153,7 +153,7 @@ export const AnimatedHeader = () => {
               ease: "linear",
             }}
           />
-          <span className="text-cyan-400 font-semibold text-sm relative z-10">Financial telligence</span>
+          <span className="text-cyan-400 font-semibold text-sm relative z-10">Financial intelligence</span>
         </motion.div>
       </motion.div>
 
