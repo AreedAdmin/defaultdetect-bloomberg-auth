@@ -20,7 +20,7 @@ const GlitchText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
             }
             return characters[Math.floor(Math.random() * characters.length)];
           })
-          .join("")
+          .join(""),
       );
 
       if (iterations >= text.length) {
@@ -35,11 +35,7 @@ const GlitchText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   }, [text, isGlitching]);
 
   return (
-    <motion.span
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay, duration: 0.3 }}
-    >
+    <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay, duration: 0.3 }}>
       {displayText}
     </motion.span>
   );
@@ -83,12 +79,15 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (currentIndex < text.length) {
-        setDisplayedText((prev) => prev + text[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
-      }
-    }, delay + currentIndex * 50);
+    const timeout = setTimeout(
+      () => {
+        if (currentIndex < text.length) {
+          setDisplayedText((prev) => prev + text[currentIndex]);
+          setCurrentIndex((prev) => prev + 1);
+        }
+      },
+      delay + currentIndex * 50,
+    );
 
     return () => clearTimeout(timeout);
   }, [currentIndex, text, delay]);
@@ -143,8 +142,7 @@ export const AnimatedHeader = () => {
           <motion.div
             className="absolute inset-0 rounded-full"
             style={{
-              background:
-                "linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent)",
+              background: "linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent)",
             }}
             animate={{
               x: ["-100%", "200%"],
@@ -155,9 +153,7 @@ export const AnimatedHeader = () => {
               ease: "linear",
             }}
           />
-          <span className="text-cyan-400 font-semibold text-sm relative z-10">
-            Financial Intelligence
-          </span>
+          <span className="text-cyan-400 font-semibold text-sm relative z-10">Financial telligence</span>
         </motion.div>
       </motion.div>
 
@@ -181,16 +177,10 @@ export const AnimatedHeader = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           {/* 3D shadow layers */}
-          <span
-            className="absolute inset-0 text-cyan-500/20 blur-sm"
-            style={{ transform: "translateZ(-10px)" }}
-          >
+          <span className="absolute inset-0 text-cyan-500/20 blur-sm" style={{ transform: "translateZ(-10px)" }}>
             DefaultDetect
           </span>
-          <span
-            className="absolute inset-0 text-cyan-400/30 blur-[2px]"
-            style={{ transform: "translateZ(-5px)" }}
-          >
+          <span className="absolute inset-0 text-cyan-400/30 blur-[2px]" style={{ transform: "translateZ(-5px)" }}>
             DefaultDetect
           </span>
 
@@ -234,10 +224,7 @@ export const AnimatedHeader = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.5 }}
       >
-        <TypewriterText
-          text="Advanced default risk detection and monitoring system"
-          delay={1500}
-        />
+        <TypewriterText text="Advanced default risk detection and monitoring system" delay={1500} />
       </motion.p>
 
       {/* Custom gradient animation */}
