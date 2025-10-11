@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Form from "./pages/Form";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import BulkImport from "./pages/BulkImport";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/form" element={<Form />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/bulk-import" element={<BulkImport />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
