@@ -469,6 +469,7 @@ export type Database = {
           region_rating_client: number | null
           region_rating_client_w_city: number | null
           registration_years_ago: number | null
+          risk_score: number | null
           same_contract_type: boolean | null
           same_weekday_appr: boolean | null
           sellerplace_area: number | null
@@ -476,6 +477,7 @@ export type Database = {
           sk_id_curr: number
           sk_id_prev: number | null
           stability_score: number | null
+          target_default: boolean | null
           time_to_first_payment_days: number | null
           time_to_termination_days: number | null
           updated_at: string | null
@@ -635,6 +637,7 @@ export type Database = {
           region_rating_client?: number | null
           region_rating_client_w_city?: number | null
           registration_years_ago?: number | null
+          risk_score?: number | null
           same_contract_type?: boolean | null
           same_weekday_appr?: boolean | null
           sellerplace_area?: number | null
@@ -642,6 +645,7 @@ export type Database = {
           sk_id_curr: number
           sk_id_prev?: number | null
           stability_score?: number | null
+          target_default?: boolean | null
           time_to_first_payment_days?: number | null
           time_to_termination_days?: number | null
           updated_at?: string | null
@@ -801,6 +805,7 @@ export type Database = {
           region_rating_client?: number | null
           region_rating_client_w_city?: number | null
           registration_years_ago?: number | null
+          risk_score?: number | null
           same_contract_type?: boolean | null
           same_weekday_appr?: boolean | null
           sellerplace_area?: number | null
@@ -808,6 +813,7 @@ export type Database = {
           sk_id_curr?: number
           sk_id_prev?: number | null
           stability_score?: number | null
+          target_default?: boolean | null
           time_to_first_payment_days?: number | null
           time_to_termination_days?: number | null
           updated_at?: string | null
