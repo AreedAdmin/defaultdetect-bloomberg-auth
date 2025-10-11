@@ -108,8 +108,8 @@ export const AnimatedHeader = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useTransform(mouseY, [0, 1], [5, -5]);
-  const rotateY = useTransform(mouseX, [0, 1], [-5, 5]);
+  const rotateX = useTransform(mouseY, [0, 1], [10, -10]);
+  const rotateY = useTransform(mouseX, [0, 1], [-10, 10]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -204,7 +204,7 @@ export const AnimatedHeader = () => {
           <motion.span
             className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/30 to-transparent bg-clip-text text-transparent"
             animate={{
-              x: isHovered ? ["-2%", "20%"] : "-100%",
+              x: isHovered ? ["0%", "25%"] : "-100%",
             }}
             transition={{
               duration: 1.5,
