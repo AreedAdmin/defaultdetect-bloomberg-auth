@@ -136,7 +136,7 @@ export const AnimatedHeader = () => {
         transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
       >
         <motion.div
-          className="px-25 py-25 bg-cyan-500/10 rounded-full backdrop-blur-sm relative overflow-hidden isolate"
+          className="px-4 py-1 bg-cyan-500/10 rounded-full backdrop-blur-sm relative overflow-hidden isolate"
           whileHover={{
             backdropFilter: "blur(12px)",
             backgroundColor: "rgba(6, 182, 212, 0.15)",
