@@ -214,16 +214,42 @@ export const AnimatedHeader = () => {
         </motion.h1>
 
         {/* Glow effect behind text */}
-        <motion.div
-          className="absolute inset-0 blur-3xl opacity-0"
-          animate={{
-            opacity: isHovered ? 0.3 : 0,
-          }}
-          style={{
-            background: "radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%)",
-          }}
-        />
-      </motion.div>
+        {/* Badge with animation */}
+<motion.div
+  className="inline-block relative"
+  initial={{ scale: 0, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
+>
+  <motion.div
+    className="px-4 py-1 bg-cyan-500/10 border border-cyan-400/30 rounded-full backdrop-blur-sm relative overflow-hidden"
+    whileHover={{
+      boxShadow: [
+        "0 0 20px rgba(6, 182, 212, 0.3)",
+        "0 0 30px rgba(6, 182, 212, 0.5)",
+        "0 0 20px rgba(6, 182, 212, 0.3)",
+      ],
+    }}
+    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+  >
+    {/* Animated border glow */}
+    <motion.div
+      className="absolute inset-0 rounded-full opacity-0"
+      style={{
+        background: "linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent)",
+      }}
+      whileHover={{
+        opacity: 1,
+        x: ["-100%", "200%"],
+      }}
+      transition={{
+        x: { duration: 2, repeat: Infinity, ease: "linear" },
+        opacity: { duration: 0.3 }
+      }}
+    />
+    <span className="text-cyan-400 font-semibold text-sm relative z-10">Financial intelligence</span>
+  </motion.div>
+</motion.div>
 
       {/* Subtitle with typewriter effect */}
       {/* Subtitle with typewriter effect */}
