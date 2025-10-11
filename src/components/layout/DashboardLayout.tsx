@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Sidebar } from "./Sidebar";
 
 interface DashboardLayoutProps {
@@ -6,12 +8,19 @@ interface DashboardLayoutProps {
 }
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+  const location = useLocation();
+  const isCollapsed = ["/form", "/reports", "/settings"].includes(location.pathname);
+
   return (
     <div className="min-h-screen bg-background">
       <Sidebar />
-      <main className="ml-[250px] min-h-screen">
+      <motion.main 
+        className="min-h-screen"
+        animate={{ marginLeft: isCollapsed ? "80px" : "250px" }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
         {children}
-      </main>
+      </motion.main>
     </div>
   );
 };
