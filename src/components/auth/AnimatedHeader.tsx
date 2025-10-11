@@ -167,7 +167,7 @@ export const AnimatedHeader = () => {
             className="
     relative z-10 cursor-pointer
     text-cyan-300 font-semibold text-sm
-    px-3 py-1 rounded-xl
+    px-6 py-1 rounded-xl
     before:content-[''] before:absolute before:inset-0 before:rounded-xl before:ring-1 before:ring-cyan-300/20
   "
             initial={false}
@@ -197,7 +197,7 @@ export const AnimatedHeader = () => {
         }}
       >
         <motion.h1
-          className="text-5xl md:text-6xl font-bold relative"
+          className="text-5xl md:text-lg font-bold relative"
           style={{
             rotateX: isHovered ? rotateX : 0,
             rotateY: isHovered ? rotateY : 0,
