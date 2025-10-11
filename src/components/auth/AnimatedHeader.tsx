@@ -86,7 +86,7 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
           setCurrentIndex((prev) => prev + 1);
         }
       },
-      delay + currentIndex * 50,
+      delay + currentIndex * 10,
     );
 
     return () => clearTimeout(timeout);
