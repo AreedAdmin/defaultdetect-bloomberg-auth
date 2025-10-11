@@ -84,7 +84,8 @@ export const Sidebar = () => {
                 <Icon
                   className={cn(
                     "relative z-10 transition-all duration-300",
-                    isCollapsed ? "w-8 h-8" : "w-5 h-5", // <-- Cette ligne fait la condition
+                    isCollapsed ? "w-[42px] h-[42px]" : "w-5 h-5"
+ 
                     "group-hover:text-cyan-400 group-hover:scale-110",
                     isActive && "text-cyan-400",
                   )}
