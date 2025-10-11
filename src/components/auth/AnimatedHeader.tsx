@@ -1,7 +1,18 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const GlitchText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
+/* === Faster Glitch === */
+const GlitchText = ({
+  text,
+  delay = 0,
+  step = 3,   // combien de caractères se “lock” par tick (plus grand = plus rapide)
+  tick = 16,  // intervalle en ms (plus petit = plus rapide)
+}: {
+  text: string;
+  delay?: number;
+  step?: number;
+  tick?: number;
+}) => {
   const [isGlitching, setIsGlitching] = useState(true);
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
   const [displayText, setDisplayText] = useState(text);
@@ -9,33 +20,28 @@ const GlitchText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   useEffect(() => {
     if (!isGlitching) return;
 
-    let iterations = 0;
+    let locked = 0;
     const interval = setInterval(() => {
       setDisplayText((prev) =>
         prev
           .split("")
-          .map((char, index) => {
-            if (index < iterations) {
-              return text[index];
-            }
-            return characters[Math.floor(Math.random() * characters.length)];
-          })
+          .map((_, idx) => (idx < locked ? text[idx] : characters[Math.floor(Math.random() * characters.length)]))
           .join(""),
       );
 
-      if (iterations >= text.length) {
+      locked += step;
+      if (locked >= text.length) {
         clearInterval(interval);
+        setDisplayText(text);
         setIsGlitching(false);
       }
-
-      iterations += 1 / 3;
-    }, 30);
+    }, tick);
 
     return () => clearInterval(interval);
-  }, [text, isGlitching]);
+  }, [text, isGlitching, step, tick]);
 
   return (
-    <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay, duration: 0.3 }}>
+    <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay, duration: 0.2 }}>
       {displayText}
     </motion.span>
   );
@@ -53,46 +59,63 @@ const FloatingParticle = ({ index, mouseX, mouseY }: { index: number; mouseX: an
   return (
     <motion.div
       className="absolute w-1 h-1 rounded-full bg-cyan-400/30"
-      style={{
-        left: `${randomX}%`,
-        top: `${randomY}%`,
-        x,
-        y,
-      }}
-      animate={{
-        y: [0, -20, 0],
-        opacity: [0.3, 0.8, 0.3],
-        scale: [1, 1.5, 1],
-      }}
-      transition={{
-        duration: randomDuration,
-        repeat: Infinity,
-        delay: randomDelay,
-        ease: "easeInOut",
-      }}
+      style={{ left: `${randomX}%`, top: `${randomY}%`, x, y }}
+      animate={{ y: [0, -20, 0], opacity: [0.3, 0.8, 0.3], scale: [1, 1.5, 1] }}
+      transition={{ duration: randomDuration, repeat: Infinity, delay: randomDelay, ease: "easeInOut" }}
     />
   );
 };
 
-const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
+/* === Fast terminal-like typewriter + blinking cursor === */
+const TypewriterText = ({
+  text,
+  startDelay = 120, // lancement quasi immédiat
+  speed = 12,       // ms par caractère (8–14 donne un bon effet terminal)
+  showCursor = true,
+}: {
+  text: string;
+  startDelay?: number;
+  speed?: number;
+  showCursor?: boolean;
+}) => {
+  const [out, setOut] = useState("");
+  const [i, setI] = useState(0);
 
   useEffect(() => {
-    const timeout = setTimeout(
-      () => {
-        if (currentIndex < text.length) {
-          setDisplayedText((prev) => prev + text[currentIndex]);
-          setCurrentIndex((prev) => prev + 1);
+    let startTimer: ReturnType<typeof setTimeout> | null = null;
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    startTimer = setTimeout(() => {
+      interval = setInterval(() => {
+        setI((prev) => {
+          const next = prev + 1;
+          setOut(text.slice(0, next));
+          if (next >= text.length && interval) clearInterval(interval);
+          return next;
+        });
+      }, speed);
+    }, startDelay);
+
+    return () => {
+      if (startTimer) clearTimeout(startTimer);
+      if (interval) clearInterval(interval);
+    };
+  }, [text, startDelay, speed]);
+
+  return (
+    <span>
+      {out}
+      {showCursor && <span className="type-cursor">▍</span>}
+      <style>{`
+        .type-cursor {
+          display: inline-block;
+          margin-left: 2px;
+          animation: blink 0.9s steps(1) infinite;
         }
-      },
-      delay + currentIndex * 10,
-    );
-
-    return () => clearTimeout(timeout);
-  }, [currentIndex, text, delay]);
-
-  return <span>{displayedText}</span>;
+        @keyframes blink { 0%, 50% { opacity: 1 } 50.01%, 100% { opacity: 0 } }
+      `}</style>
+    </span>
+  );
 };
 
 export const AnimatedHeader = () => {
@@ -141,17 +164,9 @@ export const AnimatedHeader = () => {
           {/* Animated border glow */}
           <motion.div
             className="absolute inset-0 rounded-full"
-            style={{
-              background: "linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent)",
-            }}
-            animate={{
-              x: ["-100%", "200%"],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "linear",
-            }}
+            style={{ background: "linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent)" }}
+            animate={{ x: ["-100%", "200%"] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
           />
           <span className="text-cyan-400 font-semibold text-sm relative z-10">Financial intelligence</span>
         </motion.div>
@@ -163,17 +178,11 @@ export const AnimatedHeader = () => {
         onMouseMove={handleMouseMove}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
-        style={{
-          perspective: 1000,
-        }}
+        style={{ perspective: 1000 }}
       >
         <motion.h1
           className="text-5xl md:text-6xl font-bold relative"
-          style={{
-            rotateX: isHovered ? rotateX : 0,
-            rotateY: isHovered ? rotateY : 0,
-            transformStyle: "preserve-3d",
-          }}
+          style={{ rotateX: isHovered ? rotateX : 0, rotateY: isHovered ? rotateY : 0, transformStyle: "preserve-3d" }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           {/* 3D shadow layers */}
@@ -186,20 +195,15 @@ export const AnimatedHeader = () => {
 
           {/* Main text with animated gradient */}
           <span className="relative inline-block bg-gradient-to-r from-cyan-400 via-blue-400 to-sky-300 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
-            <GlitchText text="Default" delay={0.5} />
-            <GlitchText text="Detect" delay={0.8} />
+            <GlitchText text="Default" delay={0.2} step={3} tick={16} />
+            <GlitchText text="Detect"  delay={0.25} step={3} tick={16} />
           </span>
 
           {/* Holographic effect overlay */}
           <motion.span
             className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/30 to-transparent bg-clip-text text-transparent"
-            animate={{
-              x: isHovered ? ["-100%", "200%"] : "-100%",
-            }}
-            transition={{
-              duration: 1.5,
-              ease: "easeInOut",
-            }}
+            animate={{ x: isHovered ? ["-100%", "200%"] : "-100%" }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
           >
             DefaultDetect
           </motion.span>
@@ -208,23 +212,24 @@ export const AnimatedHeader = () => {
         {/* Glow effect behind text */}
         <motion.div
           className="absolute inset-0 blur-3xl opacity-0"
-          animate={{
-            opacity: isHovered ? 0.3 : 0,
-          }}
-          style={{
-            background: "radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%)",
-          }}
+          animate={{ opacity: isHovered ? 0.3 : 0 }}
+          style={{ background: "radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%)" }}
         />
       </motion.div>
 
-      {/* Subtitle with typewriter effect */}
+      {/* Subtitle with typewriter effect — now fast */}
       <motion.p
         className="text-xl text-cyan-100/80 font-light"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
+        transition={{ delay: 0.2, duration: 0.4 }}  {/* était 1.5s → beaucoup plus vif */}
       >
-        <TypewriterText text="Advanced default risk detection and monitoring system" delay={1500} />
+        <TypewriterText
+          text="Advanced default risk detection and monitoring system"
+          startDelay={120}    // lancement rapide
+          speed={12}          // 8–14 pour un effet terminal; diminue pour aller plus vite
+          showCursor
+        />
       </motion.p>
 
       {/* Custom gradient animation */}
