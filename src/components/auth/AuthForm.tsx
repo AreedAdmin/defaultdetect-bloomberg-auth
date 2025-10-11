@@ -54,7 +54,7 @@ export const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
         if (error) throw error;
 
         toast({
-          title: "Welck",
+          title: "Welcome back",
           description: "Successfully logged in to DefaultDetect.",
         });
       }
