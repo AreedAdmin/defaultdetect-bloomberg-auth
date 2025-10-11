@@ -222,9 +222,21 @@ export const AnimatedHeader = () => {
         className="text-xl text-cyan-100/80 font-light"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
+        transition={{ delay: 0.15, duration: 0.35 }} // était 1.5s → quasi immédiat
       >
-        <TypewriterText text="Advanced default risk detection and monitoring system" delay={50} />
+        <TypewriterText
+          text="Advanced default risk detection and monitoring system"
+          delay={0} // démarre tout de suite
+        />
+        <span className="type-cursor">▍</span>
+        <style>{`
+        .type-cursor {
+          display: inline-block;
+          margin-left: 2px;
+          animation: blink 0.9s steps(1) infinite;
+        }
+        @keyframes blink { 0%, 50% { opacity: 1 } 50.01%, 100% { opacity: 0 } }
+      `}</style>
       </motion.p>
 
       {/* Custom gradient animation */}
