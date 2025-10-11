@@ -109,7 +109,7 @@ export const AnimatedHeader = () => {
   const mouseY = useMotionValue(0);
 
   const rotateX = useTransform(mouseY, [0, 1], [10, -10]);
-  const rotateY = useTransform(mouseX, [0, 1], [-10, 10]);
+  const rotateY = useTransform(mouseX, [0, 1], [-5, 5]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
