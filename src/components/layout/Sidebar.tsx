@@ -17,12 +17,12 @@ export const Sidebar = () => {
 
   return (
     <motion.aside
-      className="fixed left-0 top-0 h-screen bg-[#0a0f1e] border-r border-cyan-500/10"
+      className="fixed left-0 top-0 h-screen bg-[#0c1222] border-r border-cyan-400/20"
       animate={{ width: isCollapsed ? "80px" : "250px" }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       {/* Logo */}
-      <div className="px-6 py-8 border-b border-cyan-500/10 flex items-center justify-center">
+      <div className="px-6 py-8 border-b border-cyan-400/20 flex items-center justify-center">
         <AnimatePresence mode="wait">
           {isCollapsed ? (
             <motion.h1
@@ -30,16 +30,14 @@ export const Sidebar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent tracking-tight"
+              className="text-2xl font-bold text-cyan-400 tracking-tight"
             >
               DD
             </motion.h1>
           ) : (
             <motion.div key="expanded" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent tracking-tight">
-                DefaultDetect
-              </h1>
-              <p className="text-xs text-gray-400 mt-1">Financial Intelligence</p>
+              <h1 className="text-2xl font-bold text-cyan-400 tracking-tight">DefaultDetect</h1>
+              <p className="text-xs text-cyan-400/60 mt-1">Financial Intelligence</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -56,7 +54,7 @@ export const Sidebar = () => {
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute left-0 top-0 bottom-0 w-[3px] bg-cyan-400 rounded-r-full"
+                    className="absolute left-0 top-0 bottom-0 w-[3px] bg-cyan-400 rounded-r-full shadow-[0_0_10px_rgba(6,182,212,0.5)]"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -65,9 +63,9 @@ export const Sidebar = () => {
                 <div
                   className={cn(
                     "absolute inset-0 rounded-xl transition-all duration-300",
-                    "bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0",
+                    "bg-cyan-500/5 opacity-0",
                     "group-hover:opacity-100",
-                    isActive && "opacity-100 from-cyan-500/10 to-blue-500/10",
+                    isActive && "opacity-100 bg-cyan-500/10",
                   )}
                 />
 
@@ -75,19 +73,19 @@ export const Sidebar = () => {
                 <div
                   className={cn(
                     "absolute inset-0 rounded-xl blur-xl transition-opacity duration-300 opacity-0",
-                    "group-hover:opacity-20 bg-cyan-400/50",
-                    isActive && "opacity-10",
+                    "group-hover:opacity-30 bg-cyan-400/40",
+                    isActive && "opacity-20 bg-cyan-400/30",
                   )}
                 />
 
                 {/* Icon */}
                 <Icon
-                  size={20} // stays big in collapsed mode
                   className={cn(
-                    "relative z-10 transition-transform duration-300 shrink-0", // <- don't let flex shrink it
-                    isCollapsed ? "" : "size-5", // optional smaller size when expanded
-                    "group-hover:text-cyan-400 group-hover:scale-110",
-                    isActive && "text-cyan-400",
+                    "relative z-10 transition-all duration-300 shrink-0",
+                    isCollapsed ? "w-12 h-12" : "w-5 h-5",
+                    "text-gray-400",
+                    "group-hover:text-cyan-400 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]",
+                    isActive && "text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]",
                   )}
                 />
 
@@ -100,8 +98,9 @@ export const Sidebar = () => {
                       exit={{ opacity: 0, width: 0 }}
                       className={cn(
                         "font-medium relative z-10 transition-colors duration-300 overflow-hidden whitespace-nowrap",
-                        "group-hover:text-white",
-                        isActive && "text-white",
+                        "text-gray-400",
+                        "group-hover:text-cyan-400",
+                        isActive && "text-cyan-400",
                       )}
                     >
                       {item.name}
@@ -122,14 +121,17 @@ export const Sidebar = () => {
                           cn(
                             "relative flex items-center justify-center px-5 py-4 rounded-xl transition-all duration-300",
                             "text-gray-400 group overflow-hidden",
-                            isActive && "text-white",
+                            isActive && "text-cyan-400",
                           )
                         }
                       >
                         {navContent}
                       </NavLink>
                     </TooltipTrigger>
-                    <TooltipContent side="right" className="bg-[#0a0f1e] border-cyan-500/20">
+                    <TooltipContent
+                      side="right"
+                      className="bg-[#1e293b] border-cyan-400/30 text-cyan-100 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                    >
                       <p>{item.name}</p>
                     </TooltipContent>
                   </Tooltip>
@@ -140,7 +142,7 @@ export const Sidebar = () => {
                       cn(
                         "relative flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-300",
                         "text-gray-400 group overflow-hidden",
-                        isActive && "text-white",
+                        isActive && "text-cyan-400",
                       )
                     }
                   >
@@ -155,7 +157,7 @@ export const Sidebar = () => {
 
       {/* Bottom decoration */}
       <div className="absolute bottom-8 left-4 right-4">
-        <div className="h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
       </div>
     </motion.aside>
   );
