@@ -5,7 +5,7 @@ import { useState } from "react";
 const features = [
   {
     icon: Activity,
-    title: "Real-time  Analysis",
+    title: "Real-tis",
     description: "Monitor default probabilities across your portfolio",
     progress: 100,
     color: "from-accent/20 to-accent/5",
