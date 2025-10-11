@@ -128,96 +128,92 @@ export const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
 
           {/* Form with staggered animations */}
           <div className="space-y-6">
-            {/* Email field - Professional floating label design */}
+            {/* Email field */}
             <div
-              className="space-y-1 animate-in fade-in slide-in-from-left-4 duration-500"
+              className="space-y-2 animate-in fade-in slide-in-from-left-4 duration-500"
               style={{ animationDelay: "0.3s", animationFillMode: "both" }}
             >
+              <Label
+                htmlFor="email"
+                className="text-sm font-semibold text-slate-300 transition-colors duration-300"
+                style={{ color: focusedField === "email" ? "#60a5fa" : "" }}
+              >
+                Email
+              </Label>
               <div className="relative group/input">
                 <Input
                   id="email"
                   type="email"
+                  placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
                   required
                   disabled={loading}
-                  className="peer bg-transparent border-0 border-b-2 border-slate-600/60 text-slate-100 placeholder-transparent
-                           focus:border-blue-400 focus:ring-0 focus:outline-none
-                           transition-all duration-300 rounded-none pb-2 pt-6 px-0 text-base font-medium
-                           hover:border-slate-500/80"
-                  placeholder="name@company.com"
+                  className="bg-slate-900/60 border-slate-600/40 text-slate-100 placeholder-slate-500 
+                           focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 
+                           transition-all duration-300 backdrop-blur-sm
+                           hover:bg-slate-800/60 hover:border-slate-500/60
+                           focus:bg-slate-800/80"
                   style={{
-                    background:
+                    boxShadow:
                       focusedField === "email"
-                        ? "linear-gradient(to right, rgba(59, 130, 246, 0.05), transparent)"
-                        : "transparent",
+                        ? "0 0 0 3px rgba(59, 130, 246, 0.15), 0 0 25px rgba(59, 130, 246, 0.25)"
+                        : "0 2px 4px rgba(0, 0, 0, 0.1)",
+                    transform: focusedField === "email" ? "translateY(-2px)" : "translateY(0)",
                   }}
                 />
-                <label
-                  htmlFor="email"
-                  className="absolute left-0 top-2 text-slate-400 transition-all duration-300 cursor-text
-                           peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500
-                           peer-focus:top-2 peer-focus:text-xs peer-focus:text-blue-400 peer-focus:font-semibold
-                           peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-blue-400 peer-[:not(:placeholder-shown)]:font-semibold
-                           text-xs font-semibold"
-                >
-                  Email Address
-                </label>
-                {/* Animated underline */}
+                {/* Floating focus ring */}
                 <div
-                  className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-500 transition-all duration-300"
-                  style={{
-                    width: focusedField === "email" ? "100%" : "0%",
-                  }}
+                  className={`absolute inset-0 rounded-lg border-2 border-blue-400/40 pointer-events-none transition-all duration-300 ${
+                    focusedField === "email" ? "opacity-100 scale-105" : "opacity-0 scale-100"
+                  }`}
                 />
               </div>
             </div>
 
-            {/* Password field - Professional floating label design */}
+            {/* Password field */}
             <div
-              className="space-y-1 animate-in fade-in slide-in-from-left-4 duration-500"
+              className="space-y-2 animate-in fade-in slide-in-from-left-4 duration-500"
               style={{ animationDelay: "0.4s", animationFillMode: "both" }}
             >
+              <Label
+                htmlFor="password"
+                className="text-sm font-semibold text-slate-300 transition-colors duration-300"
+                style={{ color: focusedField === "password" ? "#60a5fa" : "" }}
+              >
+                Password
+              </Label>
               <div className="relative group/input">
                 <Input
                   id="password"
                   type="password"
+                  placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setFocusedField("password")}
                   onBlur={() => setFocusedField(null)}
                   required
                   disabled={loading}
-                  className="peer bg-transparent border-0 border-b-2 border-slate-600/60 text-slate-100 placeholder-transparent
-                           focus:border-blue-400 focus:ring-0 focus:outline-none
-                           transition-all duration-300 rounded-none pb-2 pt-6 px-0 text-base font-medium
-                           hover:border-slate-500/80"
-                  placeholder="password"
+                  className="bg-slate-900/60 border-slate-600/40 text-slate-100 placeholder-slate-500 
+                           focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 
+                           transition-all duration-300 backdrop-blur-sm
+                           hover:bg-slate-800/60 hover:border-slate-500/60
+                           focus:bg-slate-800/80"
                   style={{
-                    background:
+                    boxShadow:
                       focusedField === "password"
-                        ? "linear-gradient(to right, rgba(59, 130, 246, 0.05), transparent)"
-                        : "transparent",
+                        ? "0 0 0 3px rgba(59, 130, 246, 0.15), 0 0 25px rgba(59, 130, 246, 0.25)"
+                        : "0 2px 4px rgba(0, 0, 0, 0.1)",
+                    transform: focusedField === "password" ? "translateY(-2px)" : "translateY(0)",
                   }}
                 />
-                <label
-                  htmlFor="password"
-                  className="absolute left-0 top-2 text-slate-400 transition-all duration-300 cursor-text
-                           peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500
-                           peer-focus:top-2 peer-focus:text-xs peer-focus:text-blue-400 peer-focus:font-semibold
-                           peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-blue-400 peer-[:not(:placeholder-shown)]:font-semibold
-                           text-xs font-semibold"
-                >
-                  Password
-                </label>
-                {/* Animated underline */}
+                {/* Floating focus ring */}
                 <div
-                  className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-500 transition-all duration-300"
-                  style={{
-                    width: focusedField === "password" ? "100%" : "0%",
-                  }}
+                  className={`absolute inset-0 rounded-lg border-2 border-blue-400/40 pointer-events-none transition-all duration-300 ${
+                    focusedField === "password" ? "opacity-100 scale-105" : "opacity-0 scale-100"
+                  }`}
                 />
               </div>
             </div>
