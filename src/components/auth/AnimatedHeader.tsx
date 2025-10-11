@@ -163,7 +163,12 @@ export const AnimatedHeader = () => {
               opacity: { duration: 0.3 },
             }}
           />
-          <span className="text-cyan-400 font-semibold text-sm relative z-10">Financial intelligence</span>
+          <span
+            className="text-cyan-400 font-semibold text-sm relative z-10 cursor-pointer transition-all duration-200
+                       hover:text-cyan-300 hover:underline underline-offset-4 decoration-cyan-300/70"
+          >
+            Financial intelligence
+          </span>
         </motion.div>
       </motion.div>
 
