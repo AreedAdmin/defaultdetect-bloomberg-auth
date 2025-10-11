@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthForm } from "@/components/auth/AuthForm";
+import { HelixBackground } from "@/components/auth/HelixBackground";
 
 const Auth = () => {
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -29,7 +30,8 @@ const Auth = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
+      <HelixBackground />
       <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 items-center">
         {/* Branding Section */}
         <div className="space-y-6 text-center md:text-left">
