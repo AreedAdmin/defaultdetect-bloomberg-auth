@@ -1,13 +1,113 @@
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { FormProvider, useFormContext } from "@/contexts/FormContext";
+import { ProgressBar } from "@/components/form/ProgressBar";
+import { SectionNavigation } from "@/components/form/SectionNavigation";
+import { FormHeader } from "@/components/form/FormHeader";
+import { Section1 } from "@/components/form/sections/Section1";
+import { Section2 } from "@/components/form/sections/Section2";
+import { Section3 } from "@/components/form/sections/Section3";
+import { Section4 } from "@/components/form/sections/Section4";
+import { Section5 } from "@/components/form/sections/Section5";
+import { SectionNavButtons } from "@/components/form/SectionNavButtons";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+
+const FormContent = () => {
+  const { currentSection, loadFromLocalStorage, clearDraft } = useFormContext();
+  const [showResumeDialog, setShowResumeDialog] = useState(false);
+
+  useEffect(() => {
+    const hasDraft = loadFromLocalStorage();
+    if (hasDraft) {
+      setShowResumeDialog(true);
+    }
+  }, []);
+
+  const handleResume = () => {
+    setShowResumeDialog(false);
+  };
+
+  const handleStartFresh = () => {
+    clearDraft();
+    setShowResumeDialog(false);
+  };
+
+  const renderSection = () => {
+    switch (currentSection) {
+      case 1:
+        return <Section1 />;
+      case 2:
+        return <Section2 />;
+      case 3:
+        return <Section3 />;
+      case 4:
+        return <Section4 />;
+      case 5:
+        return <Section5 />;
+      case 6:
+        return <div className="text-center text-muted-foreground py-12">Section 6 coming soon...</div>;
+      case 7:
+        return <div className="text-center text-muted-foreground py-12">Section 7 coming soon...</div>;
+      case 8:
+        return <div className="text-center text-muted-foreground py-12">Section 8 coming soon...</div>;
+      case 9:
+        return <div className="text-center text-muted-foreground py-12">Section 9 coming soon...</div>;
+      case 10:
+        return <div className="text-center text-muted-foreground py-12">Section 10 coming soon...</div>;
+      case 11:
+        return <div className="text-center text-muted-foreground py-12">Section 11 coming soon...</div>;
+      case 12:
+        return <div className="text-center text-muted-foreground py-12">Section 12 coming soon...</div>;
+      default:
+        return <Section1 />;
+    }
+  };
+
+  return (
+    <DashboardLayout>
+      {showResumeDialog && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="bg-card border border-border rounded-lg p-6 max-w-md shadow-xl">
+            <h3 className="text-lg font-semibold text-foreground mb-2">Resume Previous Draft?</h3>
+            <p className="text-muted-foreground mb-6">
+              We found a saved draft. Would you like to continue where you left off?
+            </p>
+            <div className="flex gap-3">
+              <Button onClick={handleResume} className="flex-1 bg-accent hover:bg-accent/90">
+                Resume Draft
+              </Button>
+              <Button onClick={handleStartFresh} variant="outline" className="flex-1">
+                Start Fresh
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="flex flex-col h-screen">
+        <FormHeader />
+        <ProgressBar />
+        
+        <div className="flex flex-1 overflow-hidden">
+          <SectionNavigation />
+          
+          <main className="flex-1 overflow-y-auto">
+            <div className="max-w-4xl mx-auto p-8">
+              {renderSection()}
+              <SectionNavButtons />
+            </div>
+          </main>
+        </div>
+      </div>
+    </DashboardLayout>
+  );
+};
 
 const Form = () => {
   return (
-    <DashboardLayout>
-      <div className="p-8">
-        <h1 className="text-3xl font-bold text-foreground mb-4">Fill the Form</h1>
-        <p className="text-muted-foreground">Form page coming soon in Phase 2...</p>
-      </div>
-    </DashboardLayout>
+    <FormProvider>
+      <FormContent />
+    </FormProvider>
   );
 };
 
