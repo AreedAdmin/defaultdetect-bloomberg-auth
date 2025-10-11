@@ -62,14 +62,12 @@ export const Sidebar = () => {
                 )}
 
                 {/* Hover background effect */}
-
                 <div
                   className={cn(
-                    "absolute inset-0 rounded-xl transition-all duration-200", // faster
-                    "backdrop-blur-sm group-hover:backdrop-blur-md", // more glass on hover
-                    "border border-white/5 group-hover:border-white/10", // sharper border on hover
-                    "bg-gradient-to-br from-sky-500/25 via-blue-600/20 to-indigo-600/25", // more saturated
-                    "opacity-0 group-hover:opacity-100 group-hover:saturate-150",
+                    "absolute inset-0 rounded-xl transition-all duration-300",
+                    "bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0",
+                    "group-hover:opacity-100",
+                    isActive && "opacity-100 from-cyan-500/10 to-blue-500/10",
                   )}
                 />
 
