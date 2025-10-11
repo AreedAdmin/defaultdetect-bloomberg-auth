@@ -1,1 +1,4 @@
 project_id = "xfbescugwgvhoheewtxd"
+
+[functions.bulk-load-csv]
+verify_jwt = false
