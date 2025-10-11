@@ -77,6 +77,7 @@ const FloatingParticle = ({ index, mouseX, mouseY }: { index: number; mouseX: an
 const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(
@@ -84,15 +85,22 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
         if (currentIndex < text.length) {
           setDisplayedText((prev) => prev + text[currentIndex]);
           setCurrentIndex((prev) => prev + 1);
+        } else if (currentIndex === text.length && !isComplete) {
+          setIsComplete(true);
         }
       },
       delay + currentIndex * 2,
     );
 
     return () => clearTimeout(timeout);
-  }, [currentIndex, text, delay]);
+  }, [currentIndex, text, delay, isComplete]);
 
-  return <span>{displayedText}</span>;
+  return (
+    <>
+      <span>{displayedText}</span>
+      {!isComplete && <span className="type-cursor">▍</span>}
+    </>
+  );
 };
 
 export const AnimatedHeader = () => {
@@ -218,22 +226,19 @@ export const AnimatedHeader = () => {
       </motion.div>
 
       {/* Subtitle with typewriter effect */}
+      {/* Subtitle with typewriter effect */}
       <motion.p
         className="text-xl text-cyan-100/80 font-light"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.15, duration: 0.35 }} // était 1.5s → quasi immédiat
+        transition={{ delay: 0.15, duration: 0.35 }}
       >
-        <TypewriterText
-          text="Advanced default risk detection and monitoring system"
-          delay={0} // démarre tout de suite
-        />
-        <span className="type-cursor">▍</span>
+        <TypewriterText text="Advanced default risk detection and monitoring system" delay={0} />
         <style>{`
     .type-cursor {
       display: inline-block;
       margin-left: 2px;
-      animation: blink 0.9s steps(1) infinite;
+      animation: blink 0.5s steps(1) infinite;
     }
     @keyframes blink { 0%, 50% { opacity: 1 } 50.01%, 100% { opacity: 0 } }
   `}</style>
