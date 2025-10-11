@@ -82,7 +82,7 @@ export const Sidebar = () => {
 
                 {/* Icon */}
                 <Icon
-                  size={40} // stays big in collapsed mode
+                  size={20} // stays big in collapsed mode
                   className={cn(
                     "relative z-10 transition-transform duration-300 shrink-0", // <- don't let flex shrink it
                     isCollapsed ? "" : "size-5", // optional smaller size when expanded
