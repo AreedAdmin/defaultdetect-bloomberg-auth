@@ -137,7 +137,7 @@ export const AnimatedHeader = () => {
       >
         <motion.div
           className="px-4 py-1 bg-cyan-500/10 border border-cyan-400/30 rounded-full backdrop-blur-sm relative overflow-hidden"
-          animate={{
+          whileHover={{
             boxShadow: [
               "0 0 20px rgba(6, 182, 212, 0.3)",
               "0 0 30px rgba(6, 182, 212, 0.5)",
@@ -148,17 +148,17 @@ export const AnimatedHeader = () => {
         >
           {/* Animated border glow */}
           <motion.div
-            className="absolute inset-0 rounded-full"
+            className="absolute inset-0 rounded-full opacity-0"
             style={{
               background: "linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent)",
             }}
-            animate={{
+            whileHover={{
+              opacity: 1,
               x: ["-100%", "200%"],
             }}
             transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "linear",
+              x: { duration: 2, repeat: Infinity, ease: "linear" },
+              opacity: { duration: 0.3 },
             }}
           />
           <span className="text-cyan-400 font-semibold text-sm relative z-10">Financial intelligence</span>
