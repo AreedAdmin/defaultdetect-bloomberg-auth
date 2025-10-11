@@ -10,22 +10,28 @@ const features = [
     progress: 100,
     color: "from-accent/20 to-accent/5",
     glowColor: "rgba(30, 201, 232, 0.3)",
+    iconColor: "text-accent",
+    progressColor: "from-accent to-accent/50",
   },
   {
     icon: Brain,
     title: "Advanced Analytics",
     description: "Leverage machine learning for predictive insights",
     progress: 100,
-    color: "from-primary/20 to-primary/5",
-    glowColor: "rgba(255, 106, 19, 0.3)",
+    color: "from-blue-600/20 to-blue-900/5",
+    glowColor: "rgba(37, 99, 235, 0.4)",
+    iconColor: "text-blue-400",
+    progressColor: "from-blue-500 to-blue-400",
   },
   {
     icon: Shield,
     title: "Secure Platform",
     description: "Enterprise-grade security for your financial data",
     progress: 100,
-    color: "from-success/20 to-success/5",
-    glowColor: "rgba(34, 197, 94, 0.3)",
+    color: "from-indigo-700/20 to-indigo-900/5",
+    glowColor: "rgba(67, 56, 202, 0.4)",
+    iconColor: "text-indigo-400",
+    progressColor: "from-indigo-600 to-indigo-400",
   },
 ];
 
@@ -115,9 +121,7 @@ export function FeatureCards() {
                     ease: "easeInOut",
                   }}
                 >
-                  <Icon
-                    className={`w-6 h-6 ${index === 0 ? "text-accent" : index === 1 ? "text-primary" : "text-success"}`}
-                  />
+                  <Icon className={`w-6 h-6 ${feature.iconColor}`} />
                 </motion.div>
 
                 {/* Text content */}
@@ -140,13 +144,7 @@ export function FeatureCards() {
                     </div>
                     <div className="h-1 bg-background/50 rounded-full overflow-hidden">
                       <motion.div
-                        className={`h-full bg-gradient-to-r ${
-                          index === 0
-                            ? "from-accent to-accent/50"
-                            : index === 1
-                              ? "from-primary to-primary/50"
-                              : "from-success to-success/50"
-                        }`}
+                        className={`h-full bg-gradient-to-r ${feature.progressColor}`}
                         initial={{ width: 0 }}
                         animate={{ width: `${feature.progress}%` }}
                         transition={{
