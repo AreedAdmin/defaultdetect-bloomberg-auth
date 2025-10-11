@@ -88,14 +88,12 @@ export function FeatureCards() {
               }}
               transition={{ duration: 0.3 }}
               style={{
-                boxShadow: isHovered
-                  ? `0 20px 40px -10px ${feature.glowColor}`
-                  : "none",
+                boxShadow: isHovered ? `0 20px 40px -10px ${feature.glowColor}` : "none",
               }}
             >
               {/* Glass morphism overlay */}
               <div className="absolute inset-0 bg-card/30 backdrop-blur-md" />
-              
+
               {/* Particle effects */}
               <ParticleEffect color={feature.glowColor} />
 
@@ -118,24 +116,14 @@ export function FeatureCards() {
                   }}
                 >
                   <Icon
-                    className={`w-6 h-6 ${
-                      index === 0
-                        ? "text-accent"
-                        : index === 1
-                        ? "text-primary"
-                        : "text-success"
-                    }`}
+                    className={`w-6 h-6 ${index === 0 ? "text-accent" : index === 1 ? "text-primary" : "text-success"}`}
                   />
                 </motion.div>
 
                 {/* Text content */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground mb-1">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {feature.description}
-                  </p>
+                  <h3 className="font-semibold text-foreground mb-1">{feature.title}</h3>
+                  <p className="text-sm text-muted-foreground">{feature.description}</p>
 
                   {/* Progress indicator */}
                   <div className="mt-3 space-y-1">
@@ -156,8 +144,8 @@ export function FeatureCards() {
                           index === 0
                             ? "from-accent to-accent/50"
                             : index === 1
-                            ? "from-primary to-primary/50"
-                            : "from-success to-success/50"
+                              ? "from-primary to-primary/50"
+                              : "from-success to-success/50"
                         }`}
                         initial={{ width: 0 }}
                         animate={{ width: `${feature.progress}%` }}
