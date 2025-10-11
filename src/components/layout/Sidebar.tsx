@@ -16,7 +16,7 @@ export const Sidebar = () => {
   const isCollapsed = ["/form", "/reports", "/settings"].includes(location.pathname);
 
   return (
-    <motion.aside 
+    <motion.aside
       className="fixed left-0 top-0 h-screen bg-[#0a0f1e] border-r border-cyan-500/10"
       animate={{ width: isCollapsed ? "80px" : "250px" }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -25,7 +25,7 @@ export const Sidebar = () => {
       <div className="px-6 py-8 border-b border-cyan-500/10 flex items-center justify-center">
         <AnimatePresence mode="wait">
           {isCollapsed ? (
-            <motion.h1 
+            <motion.h1
               key="collapsed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -35,12 +35,7 @@ export const Sidebar = () => {
               DD
             </motion.h1>
           ) : (
-            <motion.div
-              key="expanded"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
+            <motion.div key="expanded" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent tracking-tight">
                 DefaultDetect
               </h1>
@@ -89,7 +84,7 @@ export const Sidebar = () => {
                 <Icon
                   className={cn(
                     "relative z-10 transition-all duration-300",
-                    isCollapsed ? "w-6 h-6" : "w-5 h-5",
+                    isCollapsed ? "w-8 h-8" : "w-5 h-5", // <-- Cette ligne fait la condition
                     "group-hover:text-cyan-400 group-hover:scale-110",
                     isActive && "text-cyan-400",
                   )}
