@@ -163,12 +163,26 @@ export const AnimatedHeader = () => {
               opacity: { duration: 0.3 },
             }}
           />
-          <span
-            className="text-cyan-400 font-semibold text-sm relative z-10 cursor-pointer transition-all duration-200
-                       hover:text-cyan-300 hover:underline underline-offset-4 decoration-cyan-300/70"
+          <motion.span
+            className="
+    relative z-10 cursor-pointer
+    text-cyan-300 font-semibold text-sm
+    px-3 py-1 rounded-xl
+    before:content-[''] before:absolute before:inset-0 before:rounded-xl before:ring-1 before:ring-cyan-300/20
+  "
+            initial={false}
+            whileHover={{
+              backgroundColor: "rgba(255,255,255,0.06)", // voile translucide
+              backdropFilter: "blur(10px)", // blur verre
+              WebkitBackdropFilter: "blur(10px)",
+              boxShadow: "0 8px 30px rgba(34,211,238,0.35)", // glow cyan doux
+              scale: 1.03, // léger zoom
+              letterSpacing: "0.01em",
+            }}
+            transition={{ type: "spring", stiffness: 320, damping: 22 }}
           >
             Financial intelligence
-          </span>
+          </motion.span>
         </motion.div>
       </motion.div>
 
