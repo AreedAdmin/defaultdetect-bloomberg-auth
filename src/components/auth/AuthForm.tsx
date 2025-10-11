@@ -54,7 +54,7 @@ export const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
         if (error) throw error;
 
         toast({
-          title: "Welcome back",
+          title: "Welcomback",
           description: "Successfully logged in to DefaultDetect.",
         });
       }
@@ -131,9 +131,7 @@ export const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
           className="text-accent hover:text-accent/80 transition-colors"
           disabled={loading}
         >
-          {mode === "login"
-            ? "Don't have an account? Sign up"
-            : "Already have an account? Sign in"}
+          {mode === "login" ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
         </button>
       </div>
     </div>
