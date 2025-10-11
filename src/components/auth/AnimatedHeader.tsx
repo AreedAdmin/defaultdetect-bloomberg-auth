@@ -222,7 +222,7 @@ export const AnimatedHeader = () => {
         className="text-xl text-cyan-100/80 font-light"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.15, duration: 0.35 }} // apparition rapide
+        transition={{ delay: 0.15, duration: 0.35 }} // était 1.5s → quasi immédiat
       >
         <TypewriterText
           text="Advanced default risk detection and monitoring system"
@@ -230,22 +230,13 @@ export const AnimatedHeader = () => {
         />
         <span className="type-cursor">▍</span>
         <style>{`
-          .type-cursor {
-            display: inline-block;
-            margin-left: 2px;
-            /* clignote au début puis disparaît automatiquement */
-            animation:
-              blink 0.9s steps(1) infinite,
-              vanish 0s linear 0.7s forwards; /* ⟵ cache le curseur ~0.7s après le début */
-          }
-          @keyframes blink {
-            0%, 50% { opacity: 1 }
-            50.01%, 100% { opacity: 0 }
-          }
-          @keyframes vanish {
-            to { opacity: 0; visibility: hidden }
-          }
-        `}</style>
+    .type-cursor {
+      display: inline-block;
+      margin-left: 2px;
+      animation: blink 0.9s steps(1) infinite;
+    }
+    @keyframes blink { 0%, 50% { opacity: 1 } 50.01%, 100% { opacity: 0 } }
+  `}</style>
       </motion.p>
 
       {/* Custom gradient animation */}
