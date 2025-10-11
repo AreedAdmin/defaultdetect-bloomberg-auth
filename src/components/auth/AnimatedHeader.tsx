@@ -108,7 +108,7 @@ export const AnimatedHeader = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useTransform(mouseY, [0, 1], [5, -5]);
+  const rotateX = useTransform(mouseY, [0, 1], [10, -10]);
   const rotateY = useTransform(mouseX, [0, 1], [-5, 5]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -136,7 +136,7 @@ export const AnimatedHeader = () => {
         transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
       >
         <motion.div
-          className="px-4 py-1 bg-cyan-500/10 border border-cyan-400/30 rounded-full relative overflow-hidden"
+          className="px-4 py-1 bg-cyan-500/10 border border-cyan-400/30 rounded-full backdrop-blur-sm relative overflow-hidden"
           whileHover={{
             backdropFilter: "blur(12px)",
             backgroundColor: "rgba(6, 182, 212, 0.15)",
@@ -204,7 +204,7 @@ export const AnimatedHeader = () => {
           <motion.span
             className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/30 to-transparent bg-clip-text text-transparent"
             animate={{
-              x: isHovered ? ["-100%", "200%"] : "-100%",
+              x: isHovered ? ["0%", "25%"] : "-100%",
             }}
             transition={{
               duration: 1.5,
