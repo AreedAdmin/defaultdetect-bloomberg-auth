@@ -35,7 +35,7 @@ export const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
           email: validatedData.email,
           password: validatedData.password,
           options: {
-            emailRedirectTo: `${window.location.origin}/`,
+            emailRedirectTo: `${window.location.origin}/dashboard`,
           },
         });
 
