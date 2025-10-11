@@ -18,103 +18,73 @@ export function HelixBackground() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Helix parameters - more visible configuration
-    let rotation = 0;
-    const radius = 200;
-    const turns = 5;
-    const pointsPerTurn = 25;
+    // Helix parameters
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 150;
+    const turns = 4;
+    const pointsPerTurn = 30;
     const totalPoints = turns * pointsPerTurn;
+    const verticalSpacing = canvas.height / totalPoints;
 
     // Animation
     let animationFrame: number;
+    let rotation = 0;
 
     const animate = () => {
-      // Semi-transparent clear for trail effect
-      ctx.fillStyle = 'rgba(11, 15, 25, 0.1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      rotation += 0.008;
+      rotation += 0.005;
 
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      const heightSpan = Math.min(canvas.height * 0.8, 800);
-
-      // Draw helix with depth sorting
-      const points: Array<{x: number, y: number, z: number, i: number}> = [];
-      
+      // Draw helix
       for (let i = 0; i < totalPoints; i++) {
-        const progress = i / totalPoints;
         const angle = (i / pointsPerTurn) * Math.PI * 2 + rotation;
-        const y = centerY - heightSpan / 2 + progress * heightSpan;
+        const y = i * verticalSpacing - canvas.height * 0.2;
         const x = centerX + Math.cos(angle) * radius;
         const z = Math.sin(angle) * radius;
         
-        points.push({ x, y, z, i });
-      }
-
-      // Sort by z-index for depth
-      points.sort((a, b) => a.z - b.z);
-
-      // Draw connections first (back to front)
-      for (let idx = 0; idx < points.length - 1; idx++) {
-        const point = points[idx];
-        const nextPoint = points[idx + 1];
-        
-        if (Math.abs(point.i - nextPoint.i) === 1) {
-          const scale = (point.z + radius) / (radius * 2);
-          const opacity = 0.2 + scale * 0.3;
-          
-          ctx.beginPath();
-          ctx.moveTo(point.x, point.y);
-          ctx.lineTo(nextPoint.x, nextPoint.y);
-          ctx.strokeStyle = `rgba(255, 106, 19, ${opacity})`;
-          ctx.lineWidth = 1 + scale;
-          ctx.stroke();
-        }
-      }
-
-      // Draw points (back to front)
-      points.forEach(point => {
-        const scale = (point.z + radius) / (radius * 2);
-        const size = 4 + scale * 6;
-        const opacity = 0.4 + scale * 0.6;
+        // Calculate size based on depth (z-axis)
+        const scale = (z + radius) / (radius * 2);
+        const size = 3 + scale * 4;
+        const opacity = 0.3 + scale * 0.7;
         
         // Alternate colors
-        const isAccent = point.i % 6 === 0;
+        const isAccent = i % 5 === 0;
         const color = isAccent 
           ? `rgba(30, 201, 232, ${opacity})` // accent cyan
           : `rgba(255, 106, 19, ${opacity})`; // primary orange
         
-        // Outer glow
-        const glowGradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, size * 4);
-        glowGradient.addColorStop(0, color);
-        glowGradient.addColorStop(0.5, isAccent ? 'rgba(30, 201, 232, 0)' : 'rgba(255, 106, 19, 0)');
-        glowGradient.addColorStop(1, 'transparent');
-        ctx.fillStyle = glowGradient;
+        // Draw point
         ctx.beginPath();
-        ctx.arc(point.x, point.y, size * 4, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Core point
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
+        ctx.arc(x, y, size, 0, Math.PI * 2);
         ctx.fillStyle = color;
         ctx.fill();
         
-        // Bright center
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, size * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = isAccent ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.6)';
+        // Draw glow
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, size * 3);
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(1, 'transparent');
+        ctx.fillStyle = gradient;
         ctx.fill();
-      });
+        
+        // Connect adjacent points
+        if (i > 0) {
+          const prevAngle = ((i - 1) / pointsPerTurn) * Math.PI * 2 + rotation;
+          const prevY = (i - 1) * verticalSpacing - canvas.height * 0.2;
+          const prevX = centerX + Math.cos(prevAngle) * radius;
+          
+          ctx.beginPath();
+          ctx.moveTo(prevX, prevY);
+          ctx.lineTo(x, y);
+          ctx.strokeStyle = `rgba(255, 106, 19, ${opacity * 0.2})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
 
       animationFrame = requestAnimationFrame(animate);
     };
 
-    // Initial clear
-    ctx.fillStyle = 'rgb(11, 15, 25)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
     animate();
 
     return () => {
@@ -126,8 +96,8 @@ export function HelixBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: 0 }}
+      className="fixed inset-0 -z-10 pointer-events-none"
+      style={{ background: 'transparent' }}
     />
   );
 }

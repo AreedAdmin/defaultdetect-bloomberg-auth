@@ -33,7 +33,7 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
       <HelixBackground />
-      <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 items-center relative z-10">
+      <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 items-center">
         {/* Branding Section */}
         <div className="space-y-6 text-center md:text-left">
           <div className="space-y-2">
