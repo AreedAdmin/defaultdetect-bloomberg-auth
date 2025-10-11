@@ -1,177 +1,319 @@
-import { motion } from "framer-motion";
-import { Activity, Brain, Shield } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const features = [
-  {
-    icon: Activity,
-    title: "Real-time Risk Analysis",
-    description: "Monitor default probabilities across your portfolio",
-    progress: 100,
-    color: "from-sky-500/20 to-sky-800/5",
-    glowColor: "rgba(14, 165, 233, 0.4)",
-    iconColor: "text-sky-400",
-    progressColor: "from-sky-500 to-sky-400",
-  },
-  {
-    icon: Brain,
-    title: "Advanced Analytics",
-    description: "Leverage machine learning for predictive insights",
-    progress: 100,
-    color: "from-blue-600/20 to-blue-800/5",
-    glowColor: "rgba(37, 99, 235, 0.4)",
-    iconColor: "text-blue-400",
-    progressColor: "from-blue-500 to-blue-400",
-  },
-  {
-    icon: Shield,
-    title: "Secure Platform",
-    description: "Enterprise-grade security for your financial data",
-    progress: 100,
-    color: "from-indigo-600/20 to-indigo-800/5",
-    glowColor: "rgba(99, 102, 241, 0.4)",
-    iconColor: "text-indigo-400",
-    progressColor: "from-indigo-500 to-indigo-400",
-  },
-];
+const stockSymbols = ["AAPL", "TSLA", "MSFT", "GOOGL", "AMZN", "META", "NVDA", "JPM", "BAC", "GS"];
+const currencies = ["$", "€", "£", "¥", "₿"];
 
-const ParticleEffect = ({ color }: { color: string }) => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full"
-          style={{
-            background: color,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0, 1, 0],
-            scale: [0, 1.5, 0],
-          }}
-          transition={{
-            duration: 2 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 2,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+interface Ticker {
+  symbol: string;
+  x: number;
+  y: number;
+  speed: number;
+  opacity: number;
+}
 
-export function FeatureCards() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+interface DataPoint {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  trail: Array<{ x: number; y: number }>;
+}
 
-  return (
-    <div className="space-y-4 pt-8">
-      {features.map((feature, index) => {
-        const Icon = feature.icon;
-        const isHovered = hoveredIndex === index;
+interface CandlestickBar {
+  x: number;
+  open: number;
+  close: number;
+  high: number;
+  low: number;
+  isGreen: boolean;
+}
 
-        return (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              duration: 0.5,
-              delay: index * 0.2,
-              ease: [0.25, 0.4, 0.25, 1],
-            }}
-            onHoverStart={() => setHoveredIndex(index)}
-            onHoverEnd={() => setHoveredIndex(null)}
-            className="relative group"
-          >
-            <motion.div
-              className={`relative overflow-hidden rounded-lg border border-border/50 backdrop-blur-sm bg-gradient-to-br ${feature.color} p-4`}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                boxShadow: isHovered ? `0 20px 40px -10px ${feature.glowColor}` : "none",
-              }}
-            >
-              {/* Glass morphism overlay */}
-              <div className="absolute inset-0 bg-card/30 backdrop-blur-md" />
+export function FinancialBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const tickersRef = useRef<Ticker[]>([]);
+  const dataPointsRef = useRef<DataPoint[]>([]);
+  const numberStreamsRef = useRef<Array<{ x: number; y: number; speed: number; numbers: string[] }>>([]);
+  const candlesticksRef = useRef<CandlestickBar[]>([]);
 
-              {/* Particle effects */}
-              <ParticleEffect color={feature.glowColor} />
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-              {/* Content */}
-              <div className="relative flex items-start gap-4">
-                {/* Animated icon */}
-                <motion.div
-                  className="w-12 h-12 rounded-full bg-gradient-to-br from-background/50 to-background/30 flex items-center justify-center flex-shrink-0 border border-border/50"
-                  animate={
-                    isHovered
-                      ? {
-                          rotate: [0, 5, -5, 0],
-                          scale: [1, 1.1, 1.1, 1],
-                        }
-                      : {}
-                  }
-                  transition={{
-                    duration: 0.6,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Icon className={`w-6 h-6 ${feature.iconColor}`} />
-                </motion.div>
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) return;
 
-                {/* Text content */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground mb-1">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.description}</p>
+    // Set canvas size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initializeElements();
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-                  {/* Progress indicator */}
-                  <div className="mt-3 space-y-1">
-                    <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">Status</span>
-                      <motion.span
-                        className="font-medium text-foreground"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: index * 0.2 + 0.5 }}
-                      >
-                        {feature.progress}%
-                      </motion.span>
-                    </div>
-                    <div className="h-1 bg-background/50 rounded-full overflow-hidden">
-                      <motion.div
-                        className={`h-full bg-gradient-to-r ${feature.progressColor}`}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${feature.progress}%` }}
-                        transition={{
-                          duration: 1,
-                          delay: index * 0.2 + 0.3,
-                          ease: "easeOut",
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+    // Mouse tracking
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
 
-              {/* Glow effect on hover */}
-              <motion.div
-                className="absolute inset-0 rounded-lg pointer-events-none"
-                style={{
-                  background: `radial-gradient(circle at center, ${feature.glowColor}, transparent 70%)`,
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isHovered ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.div>
-          </motion.div>
-        );
-      })}
-    </div>
-  );
+    // Initialize elements
+    const initializeElements = () => {
+      // Stock tickers
+      tickersRef.current = stockSymbols.map((symbol, i) => ({
+        symbol,
+        x: Math.random() * canvas.width,
+        y: 50 + i * 80,
+        speed: 0.3 + Math.random() * 0.5,
+        opacity: 0.08 + Math.random() * 0.07,
+      }));
+
+      // Data points
+      dataPointsRef.current = Array.from({ length: 15 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        trail: [],
+      }));
+
+      // Number streams
+      numberStreamsRef.current = Array.from({ length: 12 }, () => ({
+        x: Math.random() * canvas.width,
+        y: -Math.random() * canvas.height,
+        speed: 0.5 + Math.random() * 1,
+        numbers: Array.from({ length: 8 }, () =>
+          Math.random() > 0.5
+            ? `${(Math.random() * 100).toFixed(2)}`
+            : currencies[Math.floor(Math.random() * currencies.length)] + (Math.random() * 1000).toFixed(0),
+        ),
+      }));
+
+      // Candlestick data
+      candlesticksRef.current = Array.from({ length: 40 }, (_, i) => {
+        const basePrice = 100 + Math.random() * 50;
+        const open = basePrice + (Math.random() - 0.5) * 10;
+        const close = basePrice + (Math.random() - 0.5) * 10;
+        return {
+          x: i * 30,
+          open,
+          close,
+          high: Math.max(open, close) + Math.random() * 5,
+          low: Math.min(open, close) - Math.random() * 5,
+          isGreen: close > open,
+        };
+      });
+    };
+
+    initializeElements();
+
+    let animationFrame: number;
+    let waveOffset = 0;
+
+    const animate = () => {
+      // Clear with orange background
+      ctx.fillStyle = "#ff6600";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw grid lines
+      ctx.strokeStyle = "rgba(6, 182, 212, 0.05)";
+      ctx.lineWidth = 1;
+
+      // Vertical lines
+      for (let x = 0; x < canvas.width; x += 100) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+
+      // Horizontal lines
+      for (let y = 0; y < canvas.height; y += 100) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // Draw candlestick charts (blurred background)
+      ctx.save();
+      ctx.filter = "blur(8px)";
+      const candleStartY = canvas.height * 0.6;
+      const candleScale = 2;
+
+      candlesticksRef.current.forEach((candle) => {
+        const x = candle.x + waveOffset * 0.1;
+        const bodyTop = candleStartY - candle.close * candleScale;
+        const bodyBottom = candleStartY - candle.open * candleScale;
+        const wickTop = candleStartY - candle.high * candleScale;
+        const wickBottom = candleStartY - candle.low * candleScale;
+
+        ctx.strokeStyle = candle.isGreen ? "rgba(6, 182, 212, 0.1)" : "rgba(59, 130, 246, 0.08)";
+        ctx.fillStyle = candle.isGreen ? "rgba(6, 182, 212, 0.08)" : "rgba(59, 130, 246, 0.06)";
+
+        // Wick
+        ctx.beginPath();
+        ctx.moveTo(x, wickTop);
+        ctx.lineTo(x, wickBottom);
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Body
+        ctx.fillRect(x - 5, Math.min(bodyTop, bodyBottom), 10, Math.abs(bodyTop - bodyBottom));
+      });
+      ctx.restore();
+
+      // Draw wave patterns
+      waveOffset += 0.5;
+      ctx.strokeStyle = "rgba(6, 182, 212, 0.06)";
+      ctx.lineWidth = 2;
+
+      for (let wave = 0; wave < 3; wave++) {
+        ctx.beginPath();
+        const waveY = canvas.height * 0.3 + wave * 100;
+        const waveSpeed = 0.002 + wave * 0.001;
+
+        for (let x = 0; x < canvas.width; x += 5) {
+          const y = waveY + Math.sin((x + waveOffset) * waveSpeed) * 30;
+          if (x === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.stroke();
+      }
+
+      // Draw and update stock tickers with parallax
+      tickersRef.current.forEach((ticker, i) => {
+        const parallaxFactor = 1 + i * 0.05;
+        const mouseInfluence = (mousePos.x / canvas.width - 0.5) * 20 * parallaxFactor;
+
+        ticker.x += ticker.speed + mouseInfluence * 0.01;
+        if (ticker.x > canvas.width + 100) {
+          ticker.x = -100;
+        }
+
+        ctx.font = "bold 14px monospace";
+        ctx.fillStyle = `rgba(6, 182, 212, ${ticker.opacity})`;
+        ctx.fillText(ticker.symbol, ticker.x, ticker.y);
+
+        // Price change
+        const change = (Math.random() - 0.5) * 5;
+        const changeColor = change > 0 ? "rgba(16, 185, 129, " : "rgba(59, 130, 246, ";
+        ctx.font = "11px monospace";
+        ctx.fillStyle = changeColor + ticker.opacity + ")";
+        ctx.fillText(`${change > 0 ? "+" : ""}${change.toFixed(2)}%`, ticker.x + 60, ticker.y);
+      });
+
+      // Draw and update data points with trails
+      dataPointsRef.current.forEach((point) => {
+        // Mouse interaction - repel points
+        const dx = point.x - mousePos.x;
+        const dy = point.y - mousePos.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 200) {
+          const force = (200 - dist) / 200;
+          point.vx += (dx / dist) * force * 0.5;
+          point.vy += (dy / dist) * force * 0.5;
+        }
+
+        // Update position
+        point.x += point.vx;
+        point.y += point.vy;
+
+        // Damping
+        point.vx *= 0.98;
+        point.vy *= 0.98;
+
+        // Bounds
+        if (point.x < 0 || point.x > canvas.width) point.vx *= -1;
+        if (point.y < 0 || point.y > canvas.height) point.vy *= -1;
+
+        point.x = Math.max(0, Math.min(canvas.width, point.x));
+        point.y = Math.max(0, Math.min(canvas.height, point.y));
+
+        // Update trail
+        point.trail.push({ x: point.x, y: point.y });
+        if (point.trail.length > 20) {
+          point.trail.shift();
+        }
+
+        // Draw trail
+        point.trail.forEach((pos, i) => {
+          const alpha = (i / point.trail.length) * 0.1;
+          ctx.fillStyle = `rgba(6, 182, 212, ${alpha})`;
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, 2, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Draw point
+        ctx.fillStyle = "rgba(6, 182, 212, 0.15)";
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Glow
+        const gradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, 10);
+        gradient.addColorStop(0, "rgba(6, 182, 212, 0.15)");
+        gradient.addColorStop(1, "rgba(6, 182, 212, 0)");
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 10, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Draw number streams (matrix-style)
+      numberStreamsRef.current.forEach((stream) => {
+        stream.y += stream.speed;
+
+        if (stream.y > canvas.height + 200) {
+          stream.y = -200;
+          stream.x = Math.random() * canvas.width;
+        }
+
+        ctx.font = "12px monospace";
+        stream.numbers.forEach((num, i) => {
+          const y = stream.y + i * 25;
+          const alpha = Math.max(0, 0.12 - i * 0.015);
+          ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`;
+          ctx.fillText(num, stream.x, y);
+        });
+      });
+
+      // Draw connecting lines between nearby data points
+      dataPointsRef.current.forEach((point, i) => {
+        dataPointsRef.current.slice(i + 1).forEach((otherPoint) => {
+          const dx = point.x - otherPoint.x;
+          const dy = point.y - otherPoint.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 150) {
+            const alpha = (1 - dist / 150) * 0.08;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(point.x, point.y);
+            ctx.lineTo(otherPoint.x, otherPoint.y);
+            ctx.stroke();
+          }
+        });
+      });
+
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [mousePos.x, mousePos.y]);
+
+  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }} />;
 }
