@@ -156,7 +156,7 @@ export const AnimatedHeader = () => {
             }}
             whileHover={{
               opacity: 1,
-              x: ["-12%", "12%"],
+              x: ["-100%", "200%"],
             }}
             transition={{
               x: { duration: 2, repeat: Infinity, ease: "linear" },
@@ -204,7 +204,7 @@ export const AnimatedHeader = () => {
           <motion.span
             className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/30 to-transparent bg-clip-text text-transparent"
             animate={{
-              x: isHovered ? ["-100%", "200%"] : "-100%",
+              x: isHovered ? ["-10%", "10%"] : "-100%",
             }}
             transition={{
               duration: 1.5,
