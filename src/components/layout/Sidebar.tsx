@@ -88,7 +88,8 @@ export const Sidebar = () => {
                 {/* Icon */}
                 <Icon
                   className={cn(
-                    "w-5 h-5 relative z-10 transition-all duration-300",
+                    "relative z-10 transition-all duration-300",
+                    isCollapsed ? "w-6 h-6" : "w-5 h-5",
                     "group-hover:text-cyan-400 group-hover:scale-110",
                     isActive && "text-cyan-400",
                   )}
