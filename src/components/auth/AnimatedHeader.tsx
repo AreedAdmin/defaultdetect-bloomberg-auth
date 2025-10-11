@@ -136,7 +136,7 @@ export const AnimatedHeader = () => {
         transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
       >
         <motion.div
-          className="px-4 py-1 bg-cyan-500/10 rounded-full backdrop-blur-sm relative overflow-hidden isolate"
+          className="px-4 py-1 bg-cyan-500/10 border border-cyan-400/30 rounded-full backdrop-blur-sm relative overflow-hidden"
           whileHover={{
             backdropFilter: "blur(12px)",
             backgroundColor: "rgba(6, 182, 212, 0.15)",
@@ -156,33 +156,14 @@ export const AnimatedHeader = () => {
             }}
             whileHover={{
               opacity: 1,
-              x: ["-100%", "200%"],
+              x: ["-12%", "12%"],
             }}
             transition={{
               x: { duration: 2, repeat: Infinity, ease: "linear" },
               opacity: { duration: 0.3 },
             }}
           />
-          <motion.span
-            className="
-    relative z-10 cursor-pointer
-    text-cyan-300 font-semibold text-sm
-    px-3 py-1 rounded-xl
-    before:content-[''] before:absolute before:inset-0 before:rounded-xl before:ring-1 before:ring-cyan-300/20
-  "
-            initial={false}
-            whileHover={{
-              backgroundColor: "rgba(255,255,255,0.06)", // voile translucide
-              backdropFilter: "blur(10px)", // blur verre
-              WebkitBackdropFilter: "blur(10px)",
-              boxShadow: "0 8px 30px rgba(34,211,238,0.35)", // glow cyan doux
-              scale: 1.03, // léger zoom
-              letterSpacing: "0.01em",
-            }}
-            transition={{ type: "spring", stiffness: 320, damping: 22 }}
-          >
-            Financial intelligence
-          </motion.span>
+          <span className="text-cyan-400 font-semibold text-sm relative z-10">Financial intelligence</span>
         </motion.div>
       </motion.div>
 
