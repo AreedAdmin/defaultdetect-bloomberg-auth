@@ -81,7 +81,7 @@ export const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
     <div className="w-full max-w-md space-y-6">
       <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          {mode === "login" ? "Welc Back" : "Create Account"}
+          {mode === "login" ? "Welcome Back" : "Create Account"}
         </h1>
         <p className="text-muted-foreground">
           {mode === "login"
