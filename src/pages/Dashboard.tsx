@@ -1,8 +1,13 @@
+import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { HeroSection } from "@/components/dashboard/HeroSection";
+import { StatsCards } from "@/components/dashboard/StatsCards";
+
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Dashboard content will go here */}
-    </div>
+    <DashboardLayout>
+      <HeroSection />
+      <StatsCards />
+    </DashboardLayout>
   );
 };
 
