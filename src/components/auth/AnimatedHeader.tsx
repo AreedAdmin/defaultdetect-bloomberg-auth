@@ -136,7 +136,7 @@ export const AnimatedHeader = () => {
         transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
       >
         <motion.div
-          className="px-4 py-1 bg-cyan-500/10 border border-cyan-400/30 rounded-full backdrop-blur-sm relative overflow-hidden"
+          className="px-4 py-1 bg-cyan-500/10 rounded-full backdrop-blur-sm relative overflow-hidden isolate"
           whileHover={{
             backdropFilter: "blur(12px)",
             backgroundColor: "rgba(6, 182, 212, 0.15)",
@@ -167,7 +167,7 @@ export const AnimatedHeader = () => {
             className="
     relative z-10 cursor-pointer
     text-cyan-300 font-semibold text-sm
-    px-6 py-1 rounded-xl
+    px-3 py-1 rounded-xl
     before:content-[''] before:absolute before:inset-0 before:rounded-xl before:ring-1 before:ring-cyan-300/20
   "
             initial={false}
@@ -197,7 +197,7 @@ export const AnimatedHeader = () => {
         }}
       >
         <motion.h1
-          className="text-5xl md:text-lg font-bold relative"
+          className="text-5xl md:text-6xl font-bold relative"
           style={{
             rotateX: isHovered ? rotateX : 0,
             rotateY: isHovered ? rotateY : 0,
