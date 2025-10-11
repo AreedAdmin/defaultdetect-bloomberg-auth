@@ -139,9 +139,12 @@ export const AnimatedHeader = () => {
           className="px-4 py-1 bg-cyan-500/10 border border-cyan-400/30 rounded-full backdrop-blur-sm relative overflow-hidden"
           whileHover={{
             boxShadow: [
-              "0 0 20px rgba(6, 182, 212, 0.3)",
-              "0 0 30px rgba(6, 182, 212, 0.5)",
-              "0 0 20px rgba(6, 182, 212, 0.3)",
+              backdropFilter: "blur(12px)",
+              backgroundColor: "rgba(6, 182, 212, 0.15)",
+              boxShadow: [
+                "0 0 20px rgba(6, 182, 212, 0.3)",
+                "0 0 30px rgba(6, 182, 212, 0.5)",
+                "0 0 20px rgba(6, 182, 212, 0.3)",
             ],
           }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
