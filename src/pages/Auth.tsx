@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthForm } from "@/components/auth/AuthForm";
 import { HelixBackground } from "@/components/auth/HelixBackground";
+import { FeatureCards } from "@/components/auth/FeatureCards";
 
 const Auth = () => {
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -47,41 +48,7 @@ const Auth = () => {
             </p>
           </div>
 
-          <div className="space-y-3 pt-8">
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <div className="w-2 h-2 rounded-full bg-accent" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground">Real-time Risk Analysis</h3>
-                <p className="text-sm text-muted-foreground">
-                  Monitor default probabilities across your portfolio
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <div className="w-2 h-2 rounded-full bg-accent" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground">Advanced Analytics</h3>
-                <p className="text-sm text-muted-foreground">
-                  Leverage machine learning for predictive insights
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <div className="w-2 h-2 rounded-full bg-accent" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground">Secure Platform</h3>
-                <p className="text-sm text-muted-foreground">
-                  Enterprise-grade security for your financial data
-                </p>
-              </div>
-            </div>
-          </div>
+          <FeatureCards />
         </div>
 
         {/* Auth Form Section */}
