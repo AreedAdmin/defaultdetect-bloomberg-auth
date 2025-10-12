@@ -9,26 +9,20 @@ export const Section1 = () => {
 
   return (
     <div className="space-y-6">
-      {/* Section header box with hover effect */}
-      <div className="group relative overflow-hidden px-6 py-5 rounded-xl backdrop-blur-xl bg-gradient-to-br from-indigo-600/20 to-indigo-800/5 border border-indigo-400/30 transition-all duration-500 ease-out hover:border-indigo-400/50 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(99,102,241,0.4)]">
-        {/* Glow effect on hover */}
+      {/* Section header box with hover effect - Indigo */}
+      <div 
+        className="group relative overflow-hidden px-6 py-5 rounded-xl backdrop-blur-xl bg-gradient-to-br from-indigo-600/20 to-indigo-800/5 border border-indigo-400/30 transition-all duration-500 ease-out hover:border-indigo-400/50 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(99,102,241,0.4)]"
+      >
         <div
           className="absolute inset-0 rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
             background: "radial-gradient(circle at center, rgba(99, 102, 241, 0.2), transparent 70%)",
           }}
         />
-
-        {/* Glass morphism overlay */}
         <div className="absolute inset-0 bg-card/30 backdrop-blur-md" />
-
-        {/* Content */}
         <div className="relative">
-          <h2 className="text-2xl font-bold text-indigo-400 mb-2">Section 1: Client Identification</h2>
-          <p className="text-indigo-300/70 text-sm">Basic identification information</p>
+          <h2 className="text-xl font-bold text-indigo-400">Client Identification</h2>
         </div>
-
-        {/* Animated shine effect */}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500"
           style={{
@@ -38,16 +32,16 @@ export const Section1 = () => {
         />
       </div>
 
-      {/* Form inputs with enhanced hover effects */}
+      {/* Form inputs with color gradient */}
       <div className="space-y-4">
-        {/* Client ID */}
-        <div
+        {/* Client ID - Indigo */}
+        <div 
           className="group/input relative"
-          onMouseEnter={() => setHoveredInput("SK_ID_CURR")}
+          onMouseEnter={() => setHoveredInput('SK_ID_CURR')}
           onMouseLeave={() => setHoveredInput(null)}
         >
-          <Label
-            htmlFor="SK_ID_CURR"
+          <Label 
+            htmlFor="SK_ID_CURR" 
             className="required text-sm font-semibold text-indigo-300 group-hover/input:text-indigo-400 transition-all duration-300 inline-block group-hover/input:translate-x-1"
           >
             Client ID
@@ -63,28 +57,27 @@ export const Section1 = () => {
               required
               className="transition-all duration-300 border-indigo-400/30 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] bg-slate-900/50 text-indigo-100 placeholder:text-indigo-300/30"
             />
-            {/* Animated border glow on hover */}
-            {hoveredInput === "SK_ID_CURR" && (
-              <div
+            {hoveredInput === 'SK_ID_CURR' && (
+              <div 
                 className="absolute inset-0 rounded-md pointer-events-none"
                 style={{
                   background: "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent)",
-                  animation: "borderGlow 2s ease-in-out infinite",
+                  animation: "borderGlow 2s ease-in-out infinite"
                 }}
               />
             )}
           </div>
         </div>
 
-        {/* Previous Application ID */}
-        <div
+        {/* Previous Application ID - Blue */}
+        <div 
           className="group/input relative"
-          onMouseEnter={() => setHoveredInput("SK_ID_PREV")}
+          onMouseEnter={() => setHoveredInput('SK_ID_PREV')}
           onMouseLeave={() => setHoveredInput(null)}
         >
-          <Label
-            htmlFor="SK_ID_PREV"
-            className="text-sm font-semibold text-indigo-300 group-hover/input:text-indigo-400 transition-all duration-300 inline-block group-hover/input:translate-x-1"
+          <Label 
+            htmlFor="SK_ID_PREV" 
+            className="text-sm font-semibold text-blue-300 group-hover/input:text-blue-400 transition-all duration-300 inline-block group-hover/input:translate-x-1"
           >
             Previous Application ID
           </Label>
@@ -96,29 +89,29 @@ export const Section1 = () => {
               value={formData.SK_ID_PREV || ""}
               onChange={(e) => updateFormData({ SK_ID_PREV: Number(e.target.value) || null })}
               min={1}
-              className="transition-all duration-300 border-indigo-400/30 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] bg-slate-900/50 text-indigo-100 placeholder:text-indigo-300/30"
+              className="transition-all duration-300 border-blue-400/30 focus:border-blue-500 focus:ring-4 focus:ring-blue-400/20 hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] bg-slate-900/50 text-blue-100 placeholder:text-blue-300/30"
             />
-            {hoveredInput === "SK_ID_PREV" && (
-              <div
+            {hoveredInput === 'SK_ID_PREV' && (
+              <div 
                 className="absolute inset-0 rounded-md pointer-events-none"
                 style={{
-                  background: "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent)",
-                  animation: "borderGlow 2s ease-in-out infinite",
+                  background: "linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent)",
+                  animation: "borderGlow 2s ease-in-out infinite"
                 }}
               />
             )}
           </div>
         </div>
 
-        {/* Community ID */}
-        <div
+        {/* Community ID - Sky/Cyan */}
+        <div 
           className="group/input relative"
-          onMouseEnter={() => setHoveredInput("community_id")}
+          onMouseEnter={() => setHoveredInput('community_id')}
           onMouseLeave={() => setHoveredInput(null)}
         >
-          <Label
-            htmlFor="community_id"
-            className="required text-sm font-semibold text-indigo-300 group-hover/input:text-indigo-400 transition-all duration-300 inline-block group-hover/input:translate-x-1"
+          <Label 
+            htmlFor="community_id" 
+            className="required text-sm font-semibold text-sky-300 group-hover/input:text-sky-400 transition-all duration-300 inline-block group-hover/input:translate-x-1"
           >
             Community ID
           </Label>
@@ -131,31 +124,12 @@ export const Section1 = () => {
               onChange={(e) => updateFormData({ community_id: Number(e.target.value) || null })}
               min={1}
               required
-              className="transition-all duration-300 border-indigo-400/30 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] bg-slate-900/50 text-indigo-100 placeholder:text-indigo-300/30"
+              className="transition-all duration-300 border-sky-400/30 focus:border-sky-500 focus:ring-4 focus:ring-sky-400/20 hover:border-sky-400/50 hover:shadow-[0_0_20px_rgba(14,165,233,0.15)] bg-slate-900/50 text-sky-100 placeholder:text-sky-300/30"
             />
-            {hoveredInput === "community_id" && (
-              <div
+            {hoveredInput === 'community_id' && (
+              <div 
                 className="absolute inset-0 rounded-md pointer-events-none"
                 style={{
-                  background: "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent)",
-                  animation: "borderGlow 2s ease-in-out infinite",
+                  background: "linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.2), transparent)",
+                  animation: "borderGlow 2s ease-in-out infinite"
                 }}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes slideRight {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        @keyframes borderGlow {
-          0%, 100% { transform: translateX(-100%); }
-          50% { transform: translateX(100%); }
-        }
-      `}</style>
-    </div>
-  );
-};
