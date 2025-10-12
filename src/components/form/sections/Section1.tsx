@@ -13,7 +13,7 @@ export default function Section1() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-slate-950 p-8">
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Form inputs with color gradient */}
         <div className="space-y-4">
