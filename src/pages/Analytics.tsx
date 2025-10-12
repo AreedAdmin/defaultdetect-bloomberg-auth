@@ -3,6 +3,7 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
+import { SocialCircleDefaultRisk } from "@/components/analytics/SocialCircleDefaultRisk";
 
 const Analytics = () => {
   const [skIdCurr, setSkIdCurr] = useState("");
@@ -59,13 +60,15 @@ const Analytics = () => {
 
           {/* Results Area */}
           {searchedId && (
-            <div className="bg-[#0b1220]/50 border border-blue-400/20 rounded-xl p-6">
-              <p className="text-blue-200/70">
-                Displaying analytics for <span className="text-sky-400 font-semibold">{searchedId}</span>
-              </p>
-              <p className="text-blue-200/50 text-sm mt-2">
-                Visualizations will be added here
-              </p>
+            <div className="space-y-6">
+              <div className="bg-[#0b1220]/50 border border-blue-400/20 rounded-xl p-4">
+                <p className="text-blue-200/70">
+                  Displaying analytics for <span className="text-sky-400 font-semibold">{searchedId}</span>
+                </p>
+              </div>
+
+              {/* Social Circle Default Risk Visualization */}
+              <SocialCircleDefaultRisk skIdCurr={searchedId} />
             </div>
           )}
         </div>
