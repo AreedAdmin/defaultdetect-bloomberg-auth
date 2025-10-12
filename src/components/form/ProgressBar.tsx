@@ -9,30 +9,50 @@ export const ProgressBar = () => {
 
   return (
     <div className="px-6 pb-4">
-      <div 
-        className="max-w-7xl mx-auto px-6 py-4 rounded-lg backdrop-blur-md bg-[hsl(217_33%_7%/0.5)] border border-[hsl(187_85%_48%/0.15)] shadow-lg"
+      <div
+        className="max-w-7xl mx-auto px-6 py-4 rounded-xl backdrop-blur-xl bg-gradient-to-br from-blue-600/20 to-blue-800/5 border border-blue-400/30 shadow-lg transition-all duration-300 hover:border-blue-400/40"
+        style={{
+          boxShadow: "0 10px 30px -10px rgba(37, 99, 235, 0.2)",
+        }}
       >
         <div className="flex items-center justify-between mb-3">
-          <span className="text-sm font-medium text-foreground">
+          <span className="text-sm font-semibold text-blue-400">
             Section {currentSection}/12 - {Math.round(progress)}% Complete
           </span>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm text-sky-400/70">
             <Clock className="w-4 h-4" />
             <span>~{estimatedMinutes} min remaining</span>
           </div>
         </div>
-        <div className="relative h-3 bg-secondary/50 rounded-full overflow-hidden">
+
+        <div className="relative h-3 bg-slate-800/50 rounded-full overflow-hidden border border-blue-400/20">
           <motion.div
-            className="absolute inset-y-0 left-0 rounded-full shimmer-effect"
-            style={{
-              background: 'linear-gradient(90deg, hsl(187 85% 48%), hsl(25 95% 53%))',
-            }}
+            className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-blue-500 to-sky-400"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          />
+            style={{
+              boxShadow: "0 0 20px rgba(37, 99, 235, 0.4)",
+            }}
+          >
+            {/* Shimmer effect */}
+            <div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"
+              style={{
+                backgroundSize: "200% 100%",
+                animation: "shimmer 2s infinite",
+              }}
+            />
+          </motion.div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}</style>
     </div>
   );
 };
