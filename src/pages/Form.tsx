@@ -6,7 +6,7 @@ import Section1 from "@/components/form/sections/Section1";
 import Section2 from "@/components/form/sections/Section2";
 import Section3 from "@/components/form/sections/Section3";
 import Section4 from "@/components/form/sections/Section4";
-import { Section5 } from "@/components/form/sections/Section5";
+import Section5 from "@/components/form/sections/Section5";
 import { SectionNavButtons } from "@/components/form/SectionNavButtons";
 import { SectionTitle } from "@/components/form/SectionTitle";
 import { useEffect, useState } from "react";
