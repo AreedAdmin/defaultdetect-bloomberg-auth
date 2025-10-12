@@ -1,4 +1,4 @@
-import { Home, FileText, FolderOpen, Settings } from "lucide-react";
+{ Home, FileText, FolderOpen, Settings } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -43,7 +43,7 @@ export const Sidebar = () => {
   return (
     <motion.aside
       className="
-        fixed left-0 top-0 h-screen
+        fixed left-0 top-0 h-screen z-50
         bg-gradient-to-b from-[#0b1220] via-[#0a1222] to-[#0b1528]
         backdrop-blur-md
         border-r border-blue-400/15
