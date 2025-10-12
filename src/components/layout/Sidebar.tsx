@@ -121,8 +121,9 @@ export const Sidebar = () => {
                 <Icon
                   size={22}
                   className={cn(
-                    "relative z-10 transition-transform duration-300 shrink-0",
+                    "relative z-10 transition-all duration-300 shrink-0",
                     "text-blue-200/90",
+                    "group-hover:" + theme.iconHover.replace("text-", "text-"),
                     isActive && theme.iconHover,
                     !isCollapsed && "size-5",
                   )}
@@ -158,7 +159,7 @@ export const Sidebar = () => {
                         className={({ isActive }) =>
                           cn(
                             "relative flex items-center justify-center px-5 py-4 rounded-xl transition-all duration-300 min-h-[64px]",
-                            "text-blue-200/80 overflow-hidden",
+                            "text-blue-200/80 overflow-hidden group",
                             isActive && "text-white",
                           )
                         }
@@ -176,7 +177,7 @@ export const Sidebar = () => {
                     className={({ isActive }) =>
                       cn(
                         "relative flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-300",
-                        "text-blue-200/80 overflow-hidden",
+                        "text-blue-200/80 overflow-hidden group",
                         isActive && "text-white",
                       )
                     }
