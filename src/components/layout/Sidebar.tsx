@@ -10,7 +10,6 @@ import { SignOutDialog } from "@/components/auth/SignOutDialog";
 const navigationItems = [
   { name: "Dashboard", path: "/dashboard", icon: Home },
   { name: "Fill the Form", path: "/form", icon: FileText },
-  { name: "Access Reports", path: "/reports", icon: FolderOpen },
   { name: "Analytics", path: "/analytics", icon: BarChart3 },
 ];
 
