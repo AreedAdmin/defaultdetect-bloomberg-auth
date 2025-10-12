@@ -37,7 +37,7 @@ const Analytics = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="max-w-2xl mb-12">
+          <div className="max-w-2xl mb-8">
             <div className="flex gap-3">
               <div className="relative flex-1">
                 <Input
@@ -73,7 +73,7 @@ const Analytics = () => {
             <BasicInformation skIdCurr={searchedId} />
 
             {/* Social Circle Default Risk Visualization */}
-            {searchedId && <SocialCircleDefaultRisk skIdCurr={searchedId} />}
+            <SocialCircleDefaultRisk skIdCurr={searchedId} />
           </div>
         </div>
       </div>
