@@ -9,27 +9,28 @@ export default function Section6() {
     <div className="min-h-screen bg-slate-950 p-8">
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="space-y-4">
-          {/* REGION_POPULATION_RELATIVE - Indigo */}
+          {/* REGION_POPULATION_RELATIVE - Indigo Toggle */}
           <div
             className="group/input relative"
             onMouseEnter={() => setHoveredInput("REGION_POPULATION_RELATIVE")}
             onMouseLeave={() => setHoveredInput(null)}
           >
-            <label
-              htmlFor="REGION_POPULATION_RELATIVE"
-              className="text-sm font-semibold text-indigo-300 group-hover/input:text-indigo-400 transition-all duration-300 inline-block group-hover/input:translate-x-1"
-            >
-              Region Population Relative
-            </label>
-            <div className="relative mt-2">
+            <div className="flex items-center justify-between p-4 rounded-md transition-all duration-300 border-indigo-400/30 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] bg-slate-900/50 border">
+              <label
+                htmlFor="REGION_POPULATION_RELATIVE"
+                className="text-sm font-semibold text-indigo-300 group-hover/input:text-indigo-400 transition-all duration-300 cursor-pointer"
+              >
+                Region Population Relative
+              </label>
               <input
                 id="REGION_POPULATION_RELATIVE"
-                type="number"
-                step="0.0001"
-                placeholder="Enter region population ratio"
-                value={formData.REGION_POPULATION_RELATIVE || ""}
-                onChange={(e) => updateFormData({ REGION_POPULATION_RELATIVE: Number(e.target.value) || null })}
-                className="w-full px-4 py-2 rounded-md transition-all duration-300 border-indigo-400/30 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] bg-slate-900/50 text-indigo-100 placeholder:text-indigo-300/30 border focus:outline-none"
+                type="checkbox"
+                checked={formData.REGION_POPULATION_RELATIVE}
+                onChange={(e) => updateFormData({ REGION_POPULATION_RELATIVE: e.target.checked })}
+                className="w-12 h-6 appearance-none bg-slate-700 rounded-full relative cursor-pointer transition-colors duration-300 checked:bg-indigo-500"
+                style={{
+                  boxShadow: formData.REGION_POPULATION_RELATIVE ? "0 0 10px rgba(99,102,241,0.5)" : "none",
+                }}
               />
               {hoveredInput === "REGION_POPULATION_RELATIVE" && (
                 <div
