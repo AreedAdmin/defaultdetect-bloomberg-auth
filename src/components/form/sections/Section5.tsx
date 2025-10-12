@@ -1,19 +1,9 @@
 import { useState } from "react";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Section5() {
-  const [formData, setFormData] = useState({
-    FLAG_MOBIL: false,
-    FLAG_EMP_PHONE: false,
-    FLAG_WORK_PHONE: false,
-    FLAG_CONT_MOBILE: false,
-    FLAG_PHONE: false,
-    FLAG_EMAIL: false,
-  });
+  const { formData, updateFormData } = useFormContext();
   const [hoveredInput, setHoveredInput] = useState(null);
-
-  const updateFormData = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-  };
 
   const numActiveContacts = [
     formData.FLAG_MOBIL,

@@ -1,42 +1,9 @@
 import { useState } from "react";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Section8() {
-  const [formData, setFormData] = useState({
-    AMT_ANNUITY_y: null,
-    AMT_APPLICATION: null,
-    AMT_CREDIT_y: null,
-    AMT_GOODS_PRICE_y: null,
-    SELLERPLACE_AREA: null,
-    AMT_GOODS_PRICE_y_missing: false,
-    AMT_ANNUITY_y_missing: false,
-    NAME_CONTRACT_TYPE_y: "",
-    NAME_CASH_LOAN_PURPOSE: "",
-    NAME_CONTRACT_STATUS: "",
-    NAME_PAYMENT_TYPE: "",
-    CODE_REJECT_REASON: "",
-    NAME_CLIENT_TYPE: "",
-    NAME_GOODS_CATEGORY: "",
-    NAME_PORTFOLIO: "",
-    NAME_PRODUCT_TYPE: "",
-    CHANNEL_TYPE: "",
-    NAME_SELLER_INDUSTRY: "",
-    NAME_YIELD_GROUP: "",
-    PRODUCT_COMBINATION: "",
-    FLAG_LAST_APPL_PER_CONTRACT: false,
-    NFLAG_LAST_APPL_IN_DAY: false,
-    NFLAG_INSURED_ON_APPROVAL: false,
-    NFLAG_INSURED_ON_APPROVAL_missing: false,
-    is_CashLoan: false,
-    BUREAU_QUERY_INTENSITY: null,
-    SHORT_TERM_BUREAU_RATIO: null,
-    HAS_ALL_DOCS: null,
-    STABILITY_SCORE: null,
-  });
+  const { formData, updateFormData } = useFormContext();
   const [hoveredInput, setHoveredInput] = useState(null);
-
-  const updateFormData = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-  };
 
   return (
     <div className="min-h-screen bg-slate-950 p-8">

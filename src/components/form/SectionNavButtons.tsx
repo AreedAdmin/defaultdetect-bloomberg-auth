@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export const SectionNavButtons = () => {
-  const { currentSection, setCurrentSection, markSectionVisited, formData } = useFormContext();
+  const { currentSection, setCurrentSection, markSectionVisited, formData, saveToLocalStorage } = useFormContext();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -18,14 +18,20 @@ export const SectionNavButtons = () => {
     }
   };
 
-  const validateForm = () => {
-    const requiredFields = [
-      'SK_ID_CURR', 'CODE_GENDER', 'NAME_EDUCATION_TYPE', 'NAME_FAMILY_STATUS',
-      'NAME_HOUSING_TYPE', 'OCCUPATION_TYPE', 'ORGANIZATION_TYPE', 'AMT_INCOME_TOTAL',
-      'NAME_INCOME_TYPE', 'AMT_CREDIT_x', 'DAYS_BIRTH', 'DAYS_EMPLOYED',
-      'NAME_CONTRACT_TYPE_x', 'NAME_TYPE_SUITE_x', 'WEEKDAY_APPR_PROCESS_START_x'
-    ];
+  const validateCurrentSection = () => {
+    // Define required fields for each section
+    const requiredFieldsBySection: Record<number, string[]> = {
+      1: ['SK_ID_CURR', 'community_id'],
+      2: ['CODE_GENDER', 'NAME_EDUCATION_TYPE', 'NAME_FAMILY_STATUS', 'NAME_HOUSING_TYPE', 'OCCUPATION_TYPE', 'ORGANIZATION_TYPE'],
+      3: ['AMT_INCOME_TOTAL', 'NAME_INCOME_TYPE', 'AMT_CREDIT_x'],
+      4: ['DAYS_BIRTH', 'DAYS_EMPLOYED'],
+      5: [], // Contact flags are all boolean with defaults
+      6: [], // Regional data has defaults
+      7: ['NAME_CONTRACT_TYPE_x', 'NAME_TYPE_SUITE_x', 'WEEKDAY_APPR_PROCESS_START_x'],
+      8: [], // External sources are optional
+    };
 
+    const requiredFields = requiredFieldsBySection[currentSection] || [];
     const missingFields = requiredFields.filter(field => {
       const value = formData[field as keyof typeof formData];
       return value === null || value === '' || value === undefined;
@@ -34,9 +40,25 @@ export const SectionNavButtons = () => {
     return missingFields;
   };
 
+  const validateAllRequiredFields = () => {
+    const allRequiredFields = [
+      'SK_ID_CURR', 'community_id', 'CODE_GENDER', 'NAME_EDUCATION_TYPE', 'NAME_FAMILY_STATUS',
+      'NAME_HOUSING_TYPE', 'OCCUPATION_TYPE', 'ORGANIZATION_TYPE', 'AMT_INCOME_TOTAL',
+      'NAME_INCOME_TYPE', 'AMT_CREDIT_x', 'DAYS_BIRTH', 'DAYS_EMPLOYED',
+      'NAME_CONTRACT_TYPE_x', 'NAME_TYPE_SUITE_x', 'WEEKDAY_APPR_PROCESS_START_x'
+    ];
+
+    const missingFields = allRequiredFields.filter(field => {
+      const value = formData[field as keyof typeof formData];
+      return value === null || value === '' || value === undefined;
+    });
+
+    return missingFields;
+  };
+
   const handleSubmit = async () => {
-    // Validate form
-    const missingFields = validateForm();
+    // Validate all required fields across all sections
+    const missingFields = validateAllRequiredFields();
     
     if (missingFields.length > 0) {
       toast.error("Incomplete Form", {
@@ -91,6 +113,20 @@ export const SectionNavButtons = () => {
   };
 
   const handleNext = () => {
+    // Validate current section before proceeding
+    const missingFields = validateCurrentSection();
+    
+    if (missingFields.length > 0) {
+      toast.error("Required Fields Missing", {
+        description: `Please fill in all required fields before continuing.`,
+        duration: 3000,
+      });
+      return;
+    }
+
+    // Auto-save before moving to next section
+    saveToLocalStorage();
+    
     if (currentSection < 8) {
       const nextSection = currentSection + 1;
       setCurrentSection(nextSection);

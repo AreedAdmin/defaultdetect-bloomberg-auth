@@ -1,22 +1,9 @@
 import { useState } from "react";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Section3() {
-  const [formData, setFormData] = useState({
-    AMT_INCOME_TOTAL: null,
-    NAME_INCOME_TYPE: "",
-    AMT_CREDIT_x: null,
-    AMT_ANNUITY_x: null,
-    AMT_ANNUITY_x_missing: false,
-    AMT_GOODS_PRICE_x: null,
-    AMT_GOODS_PRICE_x_missing: false,
-    CNT_FAM_MEMBERS: 1,
-    CNT_CHILDREN: 0,
-  });
+  const { formData, updateFormData } = useFormContext();
   const [hoveredInput, setHoveredInput] = useState(null);
-
-  const updateFormData = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-  };
 
   // Auto-calculated ratios
   const creditIncomeRatio =

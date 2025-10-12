@@ -1,16 +1,9 @@
 import { useState } from "react";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Section1() {
-  const [formData, setFormData] = useState({
-    SK_ID_CURR: null,
-    SK_ID_PREV: null,
-    community_id: null,
-  });
+  const { formData, updateFormData } = useFormContext();
   const [hoveredInput, setHoveredInput] = useState(null);
-
-  const updateFormData = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-  };
 
   return (
     <div className="min-h-screen bg-slate-950 p-8">

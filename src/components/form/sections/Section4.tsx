@@ -1,18 +1,9 @@
 import { useState } from "react";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Section4() {
-  const [formData, setFormData] = useState({
-    DAYS_BIRTH: null,
-    DAYS_EMPLOYED: null,
-    DAYS_REGISTRATION: null,
-    DAYS_ID_PUBLISH: null,
-    DAYS_LAST_PHONE_CHANGE: null,
-  });
+  const { formData, updateFormData } = useFormContext();
   const [hoveredInput, setHoveredInput] = useState(null);
-
-  const updateFormData = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-  };
 
   // Auto-calculated values
   const ageYears = formData.DAYS_BIRTH ? Math.abs(formData.DAYS_BIRTH) / 365.25 : 0;

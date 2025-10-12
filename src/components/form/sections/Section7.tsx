@@ -1,57 +1,9 @@
 import { useState } from "react";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Section7() {
-  const [formData, setFormData] = useState({
-    FLAG_DOCUMENT_2: false,
-    FLAG_DOCUMENT_3: false,
-    FLAG_DOCUMENT_4: false,
-    FLAG_DOCUMENT_5: false,
-    FLAG_DOCUMENT_6: false,
-    FLAG_DOCUMENT_7: false,
-    FLAG_DOCUMENT_8: false,
-    FLAG_DOCUMENT_9: false,
-    FLAG_DOCUMENT_10: false,
-    FLAG_DOCUMENT_11: false,
-    FLAG_DOCUMENT_12: false,
-    FLAG_DOCUMENT_13: false,
-    FLAG_DOCUMENT_14: false,
-    FLAG_DOCUMENT_15: false,
-    FLAG_DOCUMENT_16: false,
-    FLAG_DOCUMENT_17: false,
-    FLAG_DOCUMENT_18: false,
-    FLAG_DOCUMENT_19: false,
-    FLAG_DOCUMENT_20: false,
-    FLAG_DOCUMENT_21: false,
-    DAYS_FIRST_DRAWING: null,
-    DAYS_FIRST_DUE: null,
-    DAYS_LAST_DUE_1ST_VERSION: null,
-    DAYS_LAST_DUE: null,
-    DAYS_TERMINATION: null,
-    DAYS_DECISION: null,
-    DAYS_FIRST_DRAWING_missing: false,
-    DAYS_FIRST_DUE_missing: false,
-    DAYS_LAST_DUE_1ST_VERSION_missing: false,
-    DAYS_LAST_DUE_missing: false,
-    DAYS_TERMINATION_missing: false,
-    CNT_PAYMENT: null,
-    CNT_PAYMENT_missing: false,
-    CREDIT_DIFF: null,
-    ANNUITY_DIFF: null,
-    GOODS_PRICE_DIFF: null,
-    CREDIT_TO_GOODS_DELTA_RATIO: null,
-    CREDIT_DURATION_DAYS: null,
-    TIME_TO_FIRST_PAYMENT_DAYS: null,
-    TIME_TO_TERMINATION_DAYS: null,
-    OVERLAP_WITH_CURRENT: false,
-    SAME_CONTRACT_TYPE: false,
-    SAME_WEEKDAY_APPR: false,
-    HOUR_APPR_DIFF: null,
-  });
+  const { formData, updateFormData } = useFormContext();
   const [hoveredInput, setHoveredInput] = useState(null);
-
-  const updateFormData = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-  };
 
   const colors = ['indigo', 'blue', 'sky', 'cyan', 'teal', 'emerald', 'green', 'lime', 'yellow', 'amber'];
   const rgbValues = {

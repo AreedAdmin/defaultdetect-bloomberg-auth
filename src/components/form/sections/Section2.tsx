@@ -1,23 +1,9 @@
 import { useState } from "react";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Section2() {
-  const [formData, setFormData] = useState({
-    CODE_GENDER: null,
-    FLAG_OWN_CAR: false,
-    FLAG_OWN_REALTY: false,
-    CNT_CHILDREN: null,
-    CNT_FAM_MEMBERS: null,
-    NAME_EDUCATION_TYPE: "",
-    NAME_FAMILY_STATUS: "",
-    NAME_HOUSING_TYPE: "",
-    OCCUPATION_TYPE: "",
-    ORGANIZATION_TYPE: "",
-  });
+  const { formData, updateFormData } = useFormContext();
   const [hoveredInput, setHoveredInput] = useState(null);
-
-  const updateFormData = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-  };
 
   return (
     <div className="min-h-screen bg-slate-950 p-8">
@@ -39,7 +25,7 @@ export default function Section2() {
               <select
                 id="CODE_GENDER"
                 value={formData.CODE_GENDER === null ? "" : formData.CODE_GENDER}
-                onChange={(e) => updateFormData({ CODE_GENDER: e.target.value === "" ? null : Number(e.target.value) })}
+                onChange={(e) => updateFormData({ CODE_GENDER: e.target.value === "" ? "" : e.target.value })}
                 required
                 className="w-full px-4 py-2 rounded-md transition-all duration-300 border-indigo-400/30 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] bg-slate-900/50 text-indigo-100 border focus:outline-none appearance-none cursor-pointer"
               >

@@ -1,51 +1,9 @@
 import { useState } from "react";
+import { useFormContext } from "@/contexts/FormContext";
 
 export default function Section6() {
-  const [formData, setFormData] = useState({
-    REGION_POPULATION_RELATIVE: null,
-    REGION_RATING_CLIENT: null,
-    REGION_RATING_CLIENT_W_CITY: null,
-    REG_REGION_NOT_LIVE_REGION: false,
-    REG_REGION_NOT_WORK_REGION: false,
-    LIVE_REGION_NOT_WORK_REGION: false,
-    REG_CITY_NOT_LIVE_CITY: false,
-    REG_CITY_NOT_WORK_CITY: false,
-    LIVE_CITY_NOT_WORK_CITY: false,
-    URBAN_RURAL: false,
-    CITY_REGION_MISMATCH_SCORE: null,
-    EXT_SOURCE_2: null,
-    EXT_SOURCE_2_missing: false,
-    EXT_SOURCE_3: null,
-    EXT_SOURCE_3_missing: false,
-    OBS_30_CNT_SOCIAL_CIRCLE: null,
-    DEF_30_CNT_SOCIAL_CIRCLE: null,
-    OBS_60_CNT_SOCIAL_CIRCLE: null,
-    DEF_60_CNT_SOCIAL_CIRCLE: null,
-    OBS_30_CNT_SOCIAL_CIRCLE_missing: false,
-    DEF_30_CNT_SOCIAL_CIRCLE_missing: false,
-    OBS_60_CNT_SOCIAL_CIRCLE_missing: false,
-    DEF_60_CNT_SOCIAL_CIRCLE_missing: false,
-    AMT_REQ_CREDIT_BUREAU_HOUR: null,
-    AMT_REQ_CREDIT_BUREAU_DAY: null,
-    AMT_REQ_CREDIT_BUREAU_WEEK: null,
-    AMT_REQ_CREDIT_BUREAU_MON: null,
-    AMT_REQ_CREDIT_BUREAU_QRT: null,
-    AMT_REQ_CREDIT_BUREAU_YEAR: null,
-    AMT_REQ_CREDIT_BUREAU_HOUR_missing: false,
-    AMT_REQ_CREDIT_BUREAU_DAY_missing: false,
-    AMT_REQ_CREDIT_BUREAU_WEEK_missing: false,
-    AMT_REQ_CREDIT_BUREAU_MON_missing: false,
-    AMT_REQ_CREDIT_BUREAU_QRT_missing: false,
-    AMT_REQ_CREDIT_BUREAU_YEAR_missing: false,
-    BUREAU_QUERY_INTENSITY: null,
-    SHORT_TERM_BUREAU_RATIO: null,
-    STABILITY_SCORE: null,
-  });
+  const { formData, updateFormData } = useFormContext();
   const [hoveredInput, setHoveredInput] = useState(null);
-
-  const updateFormData = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-  };
 
   return (
     <div className="min-h-screen bg-slate-950 p-8">
@@ -538,31 +496,31 @@ export default function Section6() {
             </div>
           </div>
 
-          {/* OBS_30_CNT_SOCIAL_CIRCLE_missing - Violet Toggle */}
+          {/* OBS_30_missing - Violet Toggle */}
           <div
             className="group/input relative"
-            onMouseEnter={() => setHoveredInput("OBS_30_CNT_SOCIAL_CIRCLE_missing")}
+            onMouseEnter={() => setHoveredInput("OBS_30_missing")}
             onMouseLeave={() => setHoveredInput(null)}
           >
             <div className="flex items-center justify-between p-4 rounded-md transition-all duration-300 border-violet-400/30 hover:border-violet-400/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] bg-slate-900/50 border">
               <label
-                htmlFor="OBS_30_CNT_SOCIAL_CIRCLE_missing"
+                htmlFor="OBS_30_missing"
                 className="text-sm font-semibold text-violet-300 group-hover/input:text-violet-400 transition-all duration-300 cursor-pointer"
               >
                 OBS 30 Days Missing
               </label>
               <input
-                id="OBS_30_CNT_SOCIAL_CIRCLE_missing"
+                id="OBS_30_missing"
                 type="checkbox"
-                checked={formData.OBS_30_CNT_SOCIAL_CIRCLE_missing}
-                onChange={(e) => updateFormData({ OBS_30_CNT_SOCIAL_CIRCLE_missing: e.target.checked })}
+                checked={formData.OBS_30_missing}
+                onChange={(e) => updateFormData({ OBS_30_missing: e.target.checked })}
                 className="w-12 h-6 appearance-none bg-slate-700 rounded-full relative cursor-pointer transition-colors duration-300 checked:bg-violet-500"
                 style={{
-                  boxShadow: formData.OBS_30_CNT_SOCIAL_CIRCLE_missing ? "0 0 10px rgba(139,92,246,0.5)" : "none",
+                  boxShadow: formData.OBS_30_missing ? "0 0 10px rgba(139,92,246,0.5)" : "none",
                 }}
               />
             </div>
-            {hoveredInput === "OBS_30_CNT_SOCIAL_CIRCLE_missing" && (
+            {hoveredInput === "OBS_30_missing" && (
               <div
                 className="absolute inset-0 rounded-md pointer-events-none"
                 style={{
@@ -592,46 +550,6 @@ export default function Section6() {
               />
               {hoveredInput === "DEF_30_CNT_SOCIAL_CIRCLE" && (
                 <div className="absolute inset-0 rounded-md pointer-events-none" style={{ background: "linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent)", animation: "borderGlow 2s ease-in-out infinite" }} />
-              )}
-            </div>
-          </div>
-
-          {/* Add BUREAU_QUERY_INTENSITY and STABILITY_SCORE at the end */}
-          <div className="group/input relative" onMouseEnter={() => setHoveredInput("BUREAU_QUERY_INTENSITY")} onMouseLeave={() => setHoveredInput(null)}>
-            <label htmlFor="BUREAU_QUERY_INTENSITY" className="text-sm font-semibold text-blue-300 group-hover/input:text-blue-400 transition-all duration-300 inline-block group-hover/input:translate-x-1">
-              Bureau Query Intensity
-            </label>
-            <div className="relative mt-2">
-              <input
-                id="BUREAU_QUERY_INTENSITY"
-                type="number"
-                placeholder="Enter intensity"
-                value={formData.BUREAU_QUERY_INTENSITY || ""}
-                onChange={(e) => updateFormData({ BUREAU_QUERY_INTENSITY: Number(e.target.value) || null })}
-                className="w-full px-4 py-2 rounded-md transition-all duration-300 border-blue-400/30 focus:border-blue-500 focus:ring-4 focus:ring-blue-400/20 hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] bg-slate-900/50 text-blue-100 placeholder:text-blue-300/30 border focus:outline-none"
-              />
-              {hoveredInput === "BUREAU_QUERY_INTENSITY" && (
-                <div className="absolute inset-0 rounded-md pointer-events-none" style={{ background: "linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent)", animation: "borderGlow 2s ease-in-out infinite" }} />
-              )}
-            </div>
-          </div>
-
-          <div className="group/input relative" onMouseEnter={() => setHoveredInput("STABILITY_SCORE")} onMouseLeave={() => setHoveredInput(null)}>
-            <label htmlFor="STABILITY_SCORE" className="text-sm font-semibold text-sky-300 group-hover/input:text-sky-400 transition-all duration-300 inline-block group-hover/input:translate-x-1">
-              Stability Score
-            </label>
-            <div className="relative mt-2">
-              <input
-                id="STABILITY_SCORE"
-                type="number"
-                step="0.01"
-                placeholder="Enter stability score"
-                value={formData.STABILITY_SCORE || ""}
-                onChange={(e) => updateFormData({ STABILITY_SCORE: Number(e.target.value) || null })}
-                className="w-full px-4 py-2 rounded-md transition-all duration-300 border-sky-400/30 focus:border-sky-500 focus:ring-4 focus:ring-sky-400/20 hover:border-sky-400/50 hover:shadow-[0_0_20px_rgba(14,165,233,0.15)] bg-slate-900/50 text-sky-100 placeholder:text-sky-300/30 border focus:outline-none"
-              />
-              {hoveredInput === "STABILITY_SCORE" && (
-                <div className="absolute inset-0 rounded-md pointer-events-none" style={{ background: "linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.2), transparent)", animation: "borderGlow 2s ease-in-out infinite" }} />
               )}
             </div>
           </div>
