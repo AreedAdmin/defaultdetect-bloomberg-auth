@@ -27,6 +27,13 @@ const Index = () => {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Redirect to /auth outside of render to avoid React warning
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/auth", { replace: true });
+    }
+  }, [loading, user, navigate]);
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate("/auth");
@@ -44,8 +51,11 @@ const Index = () => {
   }
 
   if (!user) {
-    navigate("/auth");
-    return null;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <p className="text-muted-foreground">Redirecting to login...</p>
+      </div>
+    );
   }
 
   return (
