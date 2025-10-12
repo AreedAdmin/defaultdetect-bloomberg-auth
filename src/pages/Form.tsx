@@ -119,10 +119,8 @@ const FormContent = () => {
         <ProgressBar />
         
         <div className="flex flex-1 overflow-hidden">
-          <SectionNavigation />
-          
           <main className="flex-1 overflow-y-auto">
-            <div className="max-w-4xl mx-auto px-12 py-8">
+            <div className="max-w-5xl mx-auto px-8 py-6">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSection}
@@ -131,8 +129,8 @@ const FormContent = () => {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  {renderSection()}
                   <SectionNavButtons />
+                  {renderSection()}
                 </motion.div>
               </AnimatePresence>
             </div>
