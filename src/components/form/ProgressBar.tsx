@@ -27,12 +27,12 @@ export const ProgressBar = () => {
 
         <div className="relative h-3 bg-slate-800/50 rounded-full overflow-hidden border border-blue-400/20">
           <motion.div
-            className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-blue-500 to-sky-400"
+            className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-indigo-600 via-blue-500 to-sky-400"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             style={{
-              boxShadow: "0 0 20px rgba(37, 99, 235, 0.4)",
+              boxShadow: "0 0 20px rgba(99, 102, 241, 0.4)",
             }}
           >
             {/* Shimmer effect */}
