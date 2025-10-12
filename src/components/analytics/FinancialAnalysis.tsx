@@ -208,7 +208,7 @@ export const FinancialAnalysis = ({ skIdCurr }: FinancialAnalysisProps) => {
                 <div>
                   <h3 className="text-sm font-medium text-blue-200/70">Credit-to-Income Ratio</h3>
                   <p className="text-2xl font-bold text-white">
-                    {data?.credit_income_ratio !== null 
+                    {data?.credit_income_ratio !== null && data?.credit_income_ratio !== undefined
                       ? `${data.credit_income_ratio.toFixed(2)}:1` 
                       : "—"}
                   </p>
@@ -232,7 +232,7 @@ export const FinancialAnalysis = ({ skIdCurr }: FinancialAnalysisProps) => {
                 <div>
                   <h3 className="text-sm font-medium text-blue-200/70">Annuity-to-Income Ratio</h3>
                   <p className="text-2xl font-bold text-white">
-                    {data?.annuity_income_ratio !== null 
+                    {data?.annuity_income_ratio !== null && data?.annuity_income_ratio !== undefined
                       ? `${(data.annuity_income_ratio * 100).toFixed(1)}%` 
                       : "—"}
                   </p>
@@ -275,7 +275,7 @@ export const FinancialAnalysis = ({ skIdCurr }: FinancialAnalysisProps) => {
                 <div>
                   <h3 className="text-sm font-medium text-blue-200/70">Credit-to-Goods Ratio</h3>
                   <p className="text-2xl font-bold text-white">
-                    {data?.credit_goods_ratio !== null 
+                    {data?.credit_goods_ratio !== null && data?.credit_goods_ratio !== undefined
                       ? data.credit_goods_ratio.toFixed(2) 
                       : "—"}
                   </p>
@@ -325,7 +325,7 @@ export const FinancialAnalysis = ({ skIdCurr }: FinancialAnalysisProps) => {
                 <div>
                   <h3 className="text-sm font-medium text-blue-200/70">Payment Rate</h3>
                   <p className="text-2xl font-bold text-white">
-                    {data?.payment_rate !== null 
+                    {data?.payment_rate !== null && data?.payment_rate !== undefined
                       ? `${(data.payment_rate * 100).toFixed(2)}%` 
                       : "—"}
                   </p>
