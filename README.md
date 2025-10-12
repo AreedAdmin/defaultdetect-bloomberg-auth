@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./docs/images/logo.png" alt="DefaultDetect Logo" width="150"/>
+  <img src="./docs/images/DD.jpg" alt="DefaultDetect Logo" width="150"/>
 </p>
 
 <h1 align="center">🧠 DefaultDetect</h1>
@@ -195,4 +195,21 @@ Implements role-based access (`admin`, `user`) with RLS enforced.
 | Backend | **Supabase** | Managed PostgreSQL + Edge Functions |
 | Domain | Custom domain | SSL enabled |
 
-### **Environment Variables**
+
+### **Local Development Setup**
+```bash
+# 1. Clone repository
+git clone <repo-url>
+cd defaultdetect
+
+# 2. Install dependencies
+npm install
+
+# 3. Start dev server
+npm run dev
+
+# 4. Build for production
+npm run build
+
+# 5. Preview production build
+npm run preview
