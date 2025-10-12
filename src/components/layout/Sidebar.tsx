@@ -94,6 +94,28 @@ export const Sidebar = () => {
                   />
                 )}
 
+                {/* Hover background */}
+                <div
+                  className={cn(
+                    "absolute inset-0 rounded-xl transition-all duration-300 pointer-events-none",
+                    "backdrop-blur-sm border border-white/5",
+                    "bg-gradient-to-br",
+                    theme.hoverGrad,
+                    "opacity-0 group-hover:opacity-100",
+                    isActive && "opacity-100",
+                  )}
+                />
+
+                {/* Hover glow */}
+                <div
+                  className={cn(
+                    "absolute inset-0 rounded-xl transition-opacity duration-300 opacity-0 group-hover:opacity-60 pointer-events-none",
+                  )}
+                  style={{
+                    background: `radial-gradient(140px 90px at 75% 50%, ${theme.glowColor}, transparent 70%)`,
+                  }}
+                />
+
                 {/* Active background */}
                 <div
                   className={cn(
@@ -155,7 +177,7 @@ export const Sidebar = () => {
                       exit={{ opacity: 0, width: 0 }}
                       className={cn(
                         "font-medium relative z-10 transition-colors duration-300 overflow-hidden whitespace-nowrap",
-                        "text-blue-100/90",
+                        "text-blue-100/90 group-hover:text-white",
                         isActive && "text-white",
                       )}
                     >
