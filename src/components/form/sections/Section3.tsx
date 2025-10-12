@@ -102,39 +102,15 @@ export default function Section3() {
               Income Type
             </label>
             <div className="relative mt-2">
-              <select
+              <input
                 id="NAME_INCOME_TYPE"
+                type="text"
+                placeholder="Enter income type (e.g., Working, Pensioner)"
                 value={formData.NAME_INCOME_TYPE}
                 onChange={(e) => updateFormData({ NAME_INCOME_TYPE: e.target.value })}
                 required
-                className="w-full px-4 py-2 rounded-md transition-all duration-300 border-blue-400/30 focus:border-blue-500 focus:ring-4 focus:ring-blue-400/20 hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] bg-slate-900/50 text-blue-100 border focus:outline-none appearance-none cursor-pointer"
-              >
-                <option value="" className="bg-slate-900">
-                  Select income type
-                </option>
-                <option value="Working" className="bg-slate-900">
-                  Working
-                </option>
-                <option value="Commercial associate" className="bg-slate-900">
-                  Commercial associate
-                </option>
-                <option value="Pensioner" className="bg-slate-900">
-                  Pensioner
-                </option>
-                <option value="State servant" className="bg-slate-900">
-                  State servant
-                </option>
-                <option value="Student" className="bg-slate-900">
-                  Student
-                </option>
-                <option value="Businessman" className="bg-slate-900">
-                  Businessman
-                </option>
-                <option value="Maternity leave" className="bg-slate-900">
-                  Maternity leave
-                </option>
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-blue-300">▼</div>
+                className="w-full px-4 py-2 rounded-md transition-all duration-300 border-blue-400/30 focus:border-blue-500 focus:ring-4 focus:ring-blue-400/20 hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] bg-slate-900/50 text-blue-100 placeholder:text-blue-300/30 border focus:outline-none"
+              />
               {hoveredInput === "NAME_INCOME_TYPE" && (
                 <div
                   className="absolute inset-0 rounded-md pointer-events-none"
