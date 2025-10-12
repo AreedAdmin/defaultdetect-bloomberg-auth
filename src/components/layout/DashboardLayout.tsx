@@ -9,7 +9,7 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const location = useLocation();
-  const isCollapsed = ["/form", "/reports", "/settings", "/analytics"].includes(location.pathname);
+  const isCollapsed = ["/form", "/reports", "/settings"].includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-background">
