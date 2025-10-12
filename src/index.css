@@ -67,6 +67,66 @@ All colors MUST be HSL.
 
     /* Transitions */
     --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Glassmorphism */
+    --glass-bg: hsl(217 33% 7% / 0.7);
+    --glass-border: hsl(187 85% 48% / 0.2);
+    --glass-shadow: 0 8px 32px 0 hsl(0 0% 0% / 0.37);
+
+    /* Gradients */
+    --gradient-blue: linear-gradient(135deg, hsl(217 33% 15%), hsl(217 33% 7%));
+    --gradient-text: linear-gradient(135deg, hsl(217 33% 25%), hsl(187 85% 48%));
+    --gradient-progress: linear-gradient(90deg, hsl(187 85% 48%), hsl(25 95% 53%));
+  }
+}
+
+@layer base {
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
+
+  .shimmer-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(0 0% 100% / 0.2),
+      transparent
+    );
+    animation: shimmer 2s infinite;
   }
 }
 

@@ -20,12 +20,12 @@ export const SectionNavButtons = () => {
   };
 
   return (
-    <div className="flex items-center justify-between pt-8 mt-8 border-t border-border">
+    <div className="flex items-center justify-between pt-8 mt-8 border-t border-border/50">
       <Button
         onClick={handlePrevious}
         disabled={currentSection === 1}
         variant="outline"
-        className="gap-2"
+        className="gap-2 bg-background border-border hover:border-accent hover:bg-accent/5 transition-all duration-200"
       >
         <ChevronLeft className="w-4 h-4" />
         Previous
@@ -34,7 +34,7 @@ export const SectionNavButtons = () => {
       <Button
         onClick={handleNext}
         disabled={currentSection === 12}
-        className="gap-2 bg-accent hover:bg-accent/90"
+        className="gap-2 bg-gradient-to-r from-accent to-primary text-white border-0 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
       >
         Next
         <ChevronRight className="w-4 h-4" />
