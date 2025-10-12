@@ -78,7 +78,7 @@ serve(async (req) => {
     console.log('📤 Uploading PDF to storage:', filePath)
 
     const { error: uploadError } = await supabase.storage
-      .from('loan-reports')
+      .from('loan_applications')
       .upload(filePath, pdfBuffer, {
         contentType: 'application/pdf',
         upsert: true
@@ -87,7 +87,7 @@ serve(async (req) => {
     if (uploadError) {
       console.error('Storage upload error:', uploadError)
       // Try to create bucket if it doesn't exist
-      const { error: bucketError } = await supabase.storage.createBucket('loan-reports', {
+      const { error: bucketError } = await supabase.storage.createBucket('loan_applications', {
         public: true,
         fileSizeLimit: 52428800, // 50MB
       })
@@ -97,7 +97,7 @@ serve(async (req) => {
       } else {
         // Retry upload
         const { error: retryError } = await supabase.storage
-          .from('loan-reports')
+          .from('loan_applications')
           .upload(filePath, pdfBuffer, {
             contentType: 'application/pdf',
             upsert: true
@@ -111,7 +111,7 @@ serve(async (req) => {
 
     // Get public URL
     const { data: urlData } = supabase.storage
-      .from('loan-reports')
+      .from('loan_applications')
       .getPublicUrl(filePath)
 
     const pdfUrl = urlData.publicUrl
