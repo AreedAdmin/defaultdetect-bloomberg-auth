@@ -94,14 +94,14 @@ export const Sidebar = () => {
                   />
                 )}
 
-                {/* Hover background: verre + dégradé EXACT */}
+                {/* Active background */}
                 <div
                   className={cn(
                     "absolute inset-0 rounded-xl transition-all duration-300",
                     "backdrop-blur-sm border border-white/5",
                     "bg-gradient-to-br",
                     theme.hoverGrad,
-                    "opacity-0 group-hover:opacity-100",
+                    "opacity-0",
                     isActive && "opacity-100",
                   )}
                 />
@@ -123,8 +123,6 @@ export const Sidebar = () => {
                   className={cn(
                     "relative z-10 transition-transform duration-300 shrink-0",
                     "text-blue-200/90",
-                    "group-hover:scale-110",
-                    theme.iconHover, // donne la teinte au hover via cascade
                     isActive && theme.iconHover,
                     !isCollapsed && "size-5",
                   )}
@@ -139,7 +137,7 @@ export const Sidebar = () => {
                       exit={{ opacity: 0, width: 0 }}
                       className={cn(
                         "font-medium relative z-10 transition-colors duration-300 overflow-hidden whitespace-nowrap",
-                        "text-blue-100/90 group-hover:text-white",
+                        "text-blue-100/90",
                         isActive && "text-white",
                       )}
                     >
@@ -160,7 +158,7 @@ export const Sidebar = () => {
                         className={({ isActive }) =>
                           cn(
                             "relative flex items-center justify-center px-5 py-4 rounded-xl transition-all duration-300 min-h-[64px]",
-                            "text-blue-200/80 group overflow-hidden",
+                            "text-blue-200/80 overflow-hidden",
                             isActive && "text-white",
                           )
                         }
@@ -178,7 +176,7 @@ export const Sidebar = () => {
                     className={({ isActive }) =>
                       cn(
                         "relative flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-300",
-                        "text-blue-200/80 group overflow-hidden",
+                        "text-blue-200/80 overflow-hidden",
                         isActive && "text-white",
                       )
                     }
