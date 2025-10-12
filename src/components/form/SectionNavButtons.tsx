@@ -12,7 +12,7 @@ export const SectionNavButtons = () => {
   };
 
   const handleNext = () => {
-    if (currentSection < 12) {
+    if (currentSection < 8) {
       const nextSection = currentSection + 1;
       setCurrentSection(nextSection);
       markSectionVisited(nextSection);
@@ -33,7 +33,7 @@ export const SectionNavButtons = () => {
 
       <Button
         onClick={handleNext}
-        disabled={currentSection === 12}
+        disabled={currentSection === 8}
         className="gap-2 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
       >
         Next

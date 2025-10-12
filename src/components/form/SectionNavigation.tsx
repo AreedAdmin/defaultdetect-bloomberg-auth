@@ -8,13 +8,9 @@ const sections = [
   "Income & Financial",
   "Age & Employment",
   "Contact Information",
-  "Regional & Location",
-  "Current Application",
-  "External Data Sources",
-  "Social Circle & Bureau",
-  "Documents Provided",
-  "Previous Application",
-  "Derived Metrics",
+  "Regional & Social & Bureau",
+  "Documents & Timing",
+  "Previous Loan Attributes",
 ];
 
 export const SectionNavigation = () => {
@@ -28,7 +24,7 @@ export const SectionNavigation = () => {
     }
   };
 
-  const completionPercentage = Math.round((visitedSections.size / 12) * 100);
+  const completionPercentage = Math.round((visitedSections.size / 8) * 100);
 
   return (
     <aside className="w-56 flex flex-col h-full bg-gradient-to-b from-[hsl(217_25%_15%)] to-[hsl(217_33%_7%)] border-r border-[hsl(187_85%_48%/0.2)]">

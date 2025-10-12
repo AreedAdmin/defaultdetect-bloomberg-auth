@@ -4,8 +4,8 @@ import { Clock } from "lucide-react";
 
 export const ProgressBar = () => {
   const { currentSection } = useFormContext();
-  const progress = (currentSection / 12) * 100;
-  const estimatedMinutes = Math.max(1, Math.ceil((12 - currentSection) * 2));
+  const progress = (currentSection / 8) * 100;
+  const estimatedMinutes = Math.max(1, Math.ceil((8 - currentSection) * 2));
 
   return (
     <div className="px-6 pb-4">
@@ -17,7 +17,7 @@ export const ProgressBar = () => {
       >
         <div className="flex items-center justify-between mb-3">
           <span className="text-sm font-semibold text-blue-400">
-            Section {currentSection}/12 - {Math.round(progress)}% Complete
+            Section {currentSection}/8 - {Math.round(progress)}% Complete
           </span>
           <div className="flex items-center gap-2 text-sm text-sky-400/70">
             <Clock className="w-4 h-4" />

@@ -7,6 +7,9 @@ import Section2 from "@/components/form/sections/Section2";
 import Section3 from "@/components/form/sections/Section3";
 import Section4 from "@/components/form/sections/Section4";
 import Section5 from "@/components/form/sections/Section5";
+import Section6 from "@/components/form/sections/Section6";
+import Section7 from "@/components/form/sections/Section7";
+import Section8 from "@/components/form/sections/Section8";
 import { SectionNavButtons } from "@/components/form/SectionNavButtons";
 import { SectionTitle } from "@/components/form/SectionTitle";
 import { useEffect, useState } from "react";
@@ -39,13 +42,9 @@ const FormContent = () => {
     { title: "Income & Financial", description: "Financial status and income details" },
     { title: "Age & Employment", description: "Employment and age information" },
     { title: "Contact Information", description: "Contact details and preferences" },
-    { title: "Regional & Location", description: "Location and regional data" },
-    { title: "Current Application", description: "Current application details" },
-    { title: "External Data Sources", description: "External verification data" },
-    { title: "Social Circle & Bureau", description: "Social and credit bureau information" },
-    { title: "Documents Provided", description: "Required documentation" },
-    { title: "Previous Application", description: "Historical application data" },
-    { title: "Derived Metrics", description: "Calculated risk metrics" },
+    { title: "Regional & Social & Bureau", description: "Location, social circle, and credit bureau data" },
+    { title: "Documents & Timing", description: "Required documentation and timing details" },
+    { title: "Previous Loan Attributes", description: "Historical loan application data" },
   ];
 
   const renderSection = () => {
@@ -71,19 +70,11 @@ const FormContent = () => {
             case 5:
               return <Section5 />;
             case 6:
-              return <div className="text-center text-muted-foreground py-12">Section 6 coming soon...</div>;
+              return <Section6 />;
             case 7:
-              return <div className="text-center text-muted-foreground py-12">Section 7 coming soon...</div>;
+              return <Section7 />;
             case 8:
-              return <div className="text-center text-muted-foreground py-12">Section 8 coming soon...</div>;
-            case 9:
-              return <div className="text-center text-muted-foreground py-12">Section 9 coming soon...</div>;
-            case 10:
-              return <div className="text-center text-muted-foreground py-12">Section 10 coming soon...</div>;
-            case 11:
-              return <div className="text-center text-muted-foreground py-12">Section 11 coming soon...</div>;
-            case 12:
-              return <div className="text-center text-muted-foreground py-12">Section 12 coming soon...</div>;
+              return <Section8 />;
             default:
               return <Section1 />;
           }
