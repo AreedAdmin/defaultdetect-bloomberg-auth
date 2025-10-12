@@ -21,11 +21,22 @@ export const FormHeader = () => {
           <LastSavedIndicator />
           <Button
             onClick={handleSaveAndExit}
-            className="group/btn relative gap-2 px-5 py-2.5 bg-gradient-to-br from-blue-900/80 to-indigo-900/80 hover:from-blue-800/90 hover:to-indigo-800/90 border border-blue-400/40 text-blue-100 backdrop-blur-sm transition-all duration-300 hover:border-blue-300/60 hover:shadow-[0_8px_20px_-5px_rgba(37,99,235,0.5)] overflow-hidden"
+            className="group/btn relative gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-blue-400/20 hover:border-blue-400/40 text-slate-700 hover:text-blue-600 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_8px_24px_-8px_rgba(37,99,235,0.3)] overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-indigo-400/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-            <Save className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110 group-hover/btn:rotate-12" />
-            <span className="relative font-medium">Save & Exit</span>
+            {/* Glass effect overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/10 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+
+            {/* Shimmer effect */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+              style={{
+                background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)",
+                animation: "shimmer 2s ease-in-out infinite",
+              }}
+            />
+
+            <Save className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110" />
+            <span className="relative font-semibold">Save & Exit</span>
           </Button>
         </div>
 
@@ -64,6 +75,10 @@ export const FormHeader = () => {
         @keyframes slideRight {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
+        }
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(200%); }
         }
       `}</style>
     </div>
