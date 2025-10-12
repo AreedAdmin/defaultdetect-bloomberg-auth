@@ -1,4 +1,4 @@
-import { Home, FileText, FolderOpen, Settings } from "lucide-react";
+import { Home, FileText, FolderOpen, BarChart3, Settings } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,6 +8,7 @@ const navigationItems = [
   { name: "Dashboard", path: "/dashboard", icon: Home },
   { name: "Fill the Form", path: "/form", icon: FileText },
   { name: "Access Reports", path: "/reports", icon: FolderOpen },
+  { name: "Analytics", path: "/analytics", icon: BarChart3 },
   { name: "Settings", path: "/settings", icon: Settings },
 ];
 
@@ -38,7 +39,7 @@ const THEMES = [
 
 export const Sidebar = () => {
   const location = useLocation();
-  const isCollapsed = ["/form", "/reports", "/settings"].includes(location.pathname);
+  const isCollapsed = ["/form", "/reports", "/analytics", "/settings"].includes(location.pathname);
 
   return (
     <motion.aside
@@ -80,8 +81,8 @@ export const Sidebar = () => {
         <ul className="space-y-2">
           {navigationItems.map((item, idx) => {
             const Icon = item.icon;
-            // Répartition des thèmes : 0=sky, 1=blue, 2=indigo, 3=blue
-            const theme = idx === 0 ? THEMES[0] : idx === 1 ? THEMES[1] : idx === 2 ? THEMES[2] : THEMES[1];
+            // Theme distribution: 0=sky, 1=blue, 2=indigo, 3=indigo, 4=blue
+            const theme = idx === 0 ? THEMES[0] : idx === 1 ? THEMES[1] : idx === 2 ? THEMES[2] : idx === 3 ? THEMES[2] : THEMES[1];
 
             const navContent = ({ isActive }: { isActive: boolean }) => (
               <>
