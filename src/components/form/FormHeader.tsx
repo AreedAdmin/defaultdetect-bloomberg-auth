@@ -18,12 +18,23 @@ export const FormHeader = () => {
         {/* Title box and Save button on same row */}
         <div className="flex items-center justify-between gap-4">
           {/* Main title box - fits content */}
-          <div className="group relative overflow-hidden px-8 py-6 rounded-xl backdrop-blur-xl bg-gradient-to-br from-blue-600/20 to-blue-800/5 border border-blue-400/30 transition-all duration-500 ease-out hover:border-blue-400/50 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)]">
+          <div
+            className="group relative overflow-hidden px-8 py-6 rounded-xl backdrop-blur-xl bg-gradient-to-br from-sky-500/20 to-sky-800/5 border border-sky-400/30 transition-all duration-500 ease-out hover:border-sky-400/50 hover:-translate-y-1"
+            style={{
+              boxShadow: "0 10px 30px -10px rgba(14, 165, 233, 0.2)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = "0 20px 40px -10px rgba(14, 165, 233, 0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "0 10px 30px -10px rgba(14, 165, 233, 0.2)";
+            }}
+          >
             {/* Glow effect on hover */}
             <div
               className="absolute inset-0 rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               style={{
-                background: "radial-gradient(circle at center, rgba(37, 99, 235, 0.15), transparent 70%)",
+                background: "radial-gradient(circle at center, rgba(14, 165, 233, 0.15), transparent 70%)",
               }}
             />
 
@@ -32,7 +43,7 @@ export const FormHeader = () => {
 
             {/* Content */}
             <div className="relative">
-              <h1 className="text-3xl font-bold text-cyan-400 whitespace-nowrap">Financial Risk Assessment Form</h1>
+              <h1 className="text-3xl font-bold text-sky-400 whitespace-nowrap">Financial Risk Assessment Form</h1>
             </div>
 
             {/* Animated shine effect */}
@@ -48,7 +59,7 @@ export const FormHeader = () => {
           {/* Save button - style like "Financial intelligence" */}
           <Button
             onClick={handleSaveAndExit}
-            className="group/btn relative gap-2 px-6 py-3 bg-transparent border border-cyan-400/40 text-cyan-400 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/60 hover:bg-cyan-400/5 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] rounded-full flex-shrink-0"
+            className="group/btn relative gap-2 px-6 py-3 bg-transparent border border-sky-400/40 text-sky-400 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/60 hover:bg-sky-400/5 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] rounded-full flex-shrink-0"
           >
             <Save className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110" />
             <span className="relative font-medium">Save & Exit</span>
