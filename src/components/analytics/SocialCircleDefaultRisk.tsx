@@ -44,6 +44,7 @@ export const SocialCircleDefaultRisk = ({ skIdCurr }: SocialCircleDefaultRiskPro
             def_60_cnt_social_circle_missing`
           )
           .eq("sk_id_curr", parseInt(skIdCurr))
+          .limit(1)
           .maybeSingle();
 
         if (fetchError) throw fetchError;
