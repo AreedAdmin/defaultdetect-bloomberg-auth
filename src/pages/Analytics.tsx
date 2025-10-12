@@ -59,18 +59,18 @@ const Analytics = () => {
           </div>
 
           {/* Results Area */}
-          {searchedId && (
-            <div className="space-y-6">
+          <div className="space-y-6">
+            {searchedId && (
               <div className="bg-[#0b1220]/50 border border-blue-400/20 rounded-xl p-4">
                 <p className="text-blue-200/70">
                   Displaying analytics for <span className="text-sky-400 font-semibold">{searchedId}</span>
                 </p>
               </div>
+            )}
 
-              {/* Social Circle Default Risk Visualization */}
-              <SocialCircleDefaultRisk skIdCurr={searchedId} />
-            </div>
-          )}
+            {/* Social Circle Default Risk Visualization */}
+            <SocialCircleDefaultRisk skIdCurr={searchedId} />
+          </div>
         </div>
       </div>
     </DashboardLayout>

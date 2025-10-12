@@ -17,7 +17,7 @@ interface SocialCircleData {
 }
 
 interface SocialCircleDefaultRiskProps {
-  skIdCurr: string;
+  skIdCurr: string | null;
 }
 
 export const SocialCircleDefaultRisk = ({ skIdCurr }: SocialCircleDefaultRiskProps) => {
@@ -62,6 +62,10 @@ export const SocialCircleDefaultRisk = ({ skIdCurr }: SocialCircleDefaultRiskPro
 
     if (skIdCurr) {
       fetchData();
+    } else {
+      setData(null);
+      setLoading(false);
+      setError(null);
     }
   }, [skIdCurr]);
 
@@ -87,15 +91,94 @@ export const SocialCircleDefaultRisk = ({ skIdCurr }: SocialCircleDefaultRiskPro
     );
   }
 
-  if (error || !data) {
+  // Show empty chart if no search performed yet
+  if (!skIdCurr) {
     return (
       <Card className="p-6 bg-[#0b1220]/50 border-blue-400/20">
-        <div className="flex items-center gap-2 text-red-400">
-          <AlertCircle className="h-5 w-5" />
-          <p>{error || "No data available"}</p>
+        <h3 className="text-xl font-semibold text-white mb-2">Social Circle Default Risk</h3>
+        <p className="text-blue-200/70 text-sm mb-6">Network exposure to defaulted loans</p>
+
+        {/* Empty Summary Metrics */}
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="bg-[#0b1220]/80 rounded-lg p-4 border border-blue-400/10">
+            <p className="text-xs text-blue-200/70 mb-1">30-Day Rate</p>
+            <p className="text-2xl font-bold text-blue-200/30">--</p>
+            <p className="text-xs mt-1 text-blue-200/30">No Data</p>
+          </div>
+
+          <div className="bg-[#0b1220]/80 rounded-lg p-4 border border-blue-400/10">
+            <p className="text-xs text-blue-200/70 mb-1">60-Day Rate</p>
+            <p className="text-2xl font-bold text-blue-200/30">--</p>
+            <p className="text-xs mt-1 text-blue-200/30">No Data</p>
+          </div>
+
+          <div className="bg-[#0b1220]/80 rounded-lg p-4 border border-blue-400/10">
+            <p className="text-xs text-blue-200/70 mb-1">Risk Trend</p>
+            <p className="text-2xl font-bold text-blue-200/30">--</p>
+            <p className="text-xs mt-1 text-blue-200/30">No Data</p>
+          </div>
+        </div>
+
+        {/* Empty Bar Chart with axes visible */}
+        <ResponsiveContainer width="100%" height={350}>
+          <BarChart data={[
+            { period: "30 Days", observations: 0, defaults: 0 },
+            { period: "60 Days", observations: 0, defaults: 0 },
+          ]}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#1e3a8a" opacity={0.1} />
+            <XAxis 
+              dataKey="period" 
+              stroke="#93c5fd" 
+              tick={{ fill: "#93c5fd" }}
+            />
+            <YAxis stroke="#93c5fd" tick={{ fill: "#93c5fd" }} />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#0b1220",
+                border: "1px solid rgba(96, 165, 250, 0.2)",
+                borderRadius: "8px",
+              }}
+              labelStyle={{ color: "#93c5fd" }}
+              itemStyle={{ color: "#ffffff" }}
+            />
+            <Legend 
+              wrapperStyle={{ color: "#93c5fd" }}
+              formatter={(value) => {
+                if (value === "observations") return "Observations";
+                if (value === "defaults") return "Defaults";
+                return value;
+              }}
+            />
+            <Bar dataKey="observations" fill="#3b82f6" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="defaults" fill="#ef4444" radius={[8, 8, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+
+        <div className="mt-4 flex items-center justify-center p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+          <p className="text-sm text-blue-200/70">
+            Enter an SK_ID_CURR above to view social circle default risk analysis
+          </p>
         </div>
       </Card>
     );
+  }
+
+  if (error) {
+    return (
+      <Card className="p-6 bg-[#0b1220]/50 border-blue-400/20">
+        <h3 className="text-xl font-semibold text-white mb-2">Social Circle Default Risk</h3>
+        <p className="text-blue-200/70 text-sm mb-6">Network exposure to defaulted loans</p>
+        
+        <div className="flex items-center gap-2 text-red-400 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+          <AlertCircle className="h-5 w-5" />
+          <p>{error}</p>
+        </div>
+      </Card>
+    );
+  }
+
+  if (!data) {
+    return null;
   }
 
   const rate30 = calculateRate(data.def_30_cnt_social_circle, data.obs_30_cnt_social_circle);
