@@ -9,15 +9,14 @@ interface DashboardLayoutProps {
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const location = useLocation();
-  const isFormPage = location.pathname === "/form";
-  const isCollapsed = ["/reports", "/settings"].includes(location.pathname);
+  const isCollapsed = ["/form", "/reports", "/settings"].includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-background">
-      {!isFormPage && <Sidebar />}
+      <Sidebar />
       <motion.main 
         className="min-h-screen"
-        animate={{ marginLeft: isFormPage ? "0px" : (isCollapsed ? "80px" : "250px") }}
+        animate={{ marginLeft: isCollapsed ? "80px" : "250px" }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
         {children}
