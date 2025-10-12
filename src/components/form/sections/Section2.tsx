@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function Section2() {
   const [formData, setFormData] = useState({
-    CODE_GENDER: "",
+    CODE_GENDER: null,
     FLAG_OWN_CAR: false,
     FLAG_OWN_REALTY: false,
     CNT_CHILDREN: null,
@@ -23,7 +23,7 @@ export default function Section2() {
     <div className="min-h-screen bg-slate-950 p-8">
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="space-y-4">
-          {/* Gender - Indigo */}
+          {/* Gender - Indigo Dropdown */}
           <div
             className="group/input relative"
             onMouseEnter={() => setHoveredInput("CODE_GENDER")}
@@ -36,15 +36,27 @@ export default function Section2() {
               Gender
             </label>
             <div className="relative mt-2">
-              <input
+              <select
                 id="CODE_GENDER"
-                type="text"
-                placeholder="Enter gender (e.g., Male, Female, Other)"
-                value={formData.CODE_GENDER}
-                onChange={(e) => updateFormData({ CODE_GENDER: e.target.value })}
+                value={formData.CODE_GENDER === null ? "" : formData.CODE_GENDER}
+                onChange={(e) => updateFormData({ CODE_GENDER: e.target.value === "" ? null : Number(e.target.value) })}
                 required
-                className="w-full px-4 py-2 rounded-md transition-all duration-300 border-indigo-400/30 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] bg-slate-900/50 text-indigo-100 placeholder:text-indigo-300/30 border focus:outline-none"
-              />
+                className="w-full px-4 py-2 rounded-md transition-all duration-300 border-indigo-400/30 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 hover:border-indigo-400/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] bg-slate-900/50 text-indigo-100 border focus:outline-none appearance-none cursor-pointer"
+              >
+                <option value="" className="bg-slate-900">
+                  Select gender
+                </option>
+                <option value="1" className="bg-slate-900">
+                  Male (1)
+                </option>
+                <option value="0.5" className="bg-slate-900">
+                  N/A (0.5)
+                </option>
+                <option value="0" className="bg-slate-900">
+                  Female (0)
+                </option>
+              </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-indigo-300">▼</div>
               {hoveredInput === "CODE_GENDER" && (
                 <div
                   className="absolute inset-0 rounded-md pointer-events-none"
