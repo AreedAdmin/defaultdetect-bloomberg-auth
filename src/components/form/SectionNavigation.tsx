@@ -8,9 +8,9 @@ const sections = [
   "Income & Financial",
   "Age & Employment",
   "Contact Information",
-  "Regional & Social & Bureau",
-  "Documents & Timing",
-  "Previous Loan Attributes",
+  "Regional, Social, and Bureau Information",
+  "Document Verification and Historical Application Timing",
+  "Previous Loan Attributes and Stability Indicatorss",
 ];
 
 export const SectionNavigation = () => {
@@ -36,7 +36,7 @@ export const SectionNavigation = () => {
           </span>
         </div>
       </div>
-      
+
       <nav className="flex-1 overflow-hidden py-3 px-3">
         <ul className="space-y-1">
           {sections.map((section, index) => {
@@ -55,12 +55,10 @@ export const SectionNavigation = () => {
                     isCurrent && "bg-accent/20 text-foreground font-medium",
                     !isCurrent && isVisited && "hover:bg-accent/10 text-muted-foreground hover:text-foreground",
                     !isVisited && "text-muted-foreground/50 cursor-not-allowed",
-                    isCompleted && !isCurrent && "text-muted-foreground"
+                    isCompleted && !isCurrent && "text-muted-foreground",
                   )}
                 >
-                  {isCurrent && (
-                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-accent rounded-r-full" />
-                  )}
+                  {isCurrent && <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-accent rounded-r-full" />}
                   <div className="flex-shrink-0 flex items-center justify-center">
                     {isCompleted ? (
                       <div className="w-4 h-4 rounded-full bg-success flex items-center justify-center animate-in zoom-in duration-200">
@@ -70,7 +68,7 @@ export const SectionNavigation = () => {
                       <Circle
                         className={cn(
                           "w-4 h-4 transition-colors",
-                          isCurrent ? "text-accent fill-accent/20" : "text-muted-foreground/50"
+                          isCurrent ? "text-accent fill-accent/20" : "text-muted-foreground/50",
                         )}
                       />
                     )}
