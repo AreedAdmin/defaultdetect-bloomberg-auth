@@ -127,6 +127,7 @@ export type Database = {
           is_cashloan: number | null
           live_city_not_work_city: number | null
           live_region_not_work_region: number | null
+          ml_api_status: string | null
           name_cash_loan_purpose: string | null
           name_client_type: string | null
           name_contract_status: string | null
@@ -157,6 +158,7 @@ export type Database = {
           payment_rate: number | null
           pdf_path: string | null
           phone_change_years_ago: number | null
+          prediction_timestamp: string | null
           product_combination: string | null
           reg_city_not_live_city: number | null
           reg_city_not_work_city: number | null
@@ -295,6 +297,7 @@ export type Database = {
           is_cashloan?: number | null
           live_city_not_work_city?: number | null
           live_region_not_work_region?: number | null
+          ml_api_status?: string | null
           name_cash_loan_purpose?: string | null
           name_client_type?: string | null
           name_contract_status?: string | null
@@ -325,6 +328,7 @@ export type Database = {
           payment_rate?: number | null
           pdf_path?: string | null
           phone_change_years_ago?: number | null
+          prediction_timestamp?: string | null
           product_combination?: string | null
           reg_city_not_live_city?: number | null
           reg_city_not_work_city?: number | null
@@ -463,6 +467,7 @@ export type Database = {
           is_cashloan?: number | null
           live_city_not_work_city?: number | null
           live_region_not_work_region?: number | null
+          ml_api_status?: string | null
           name_cash_loan_purpose?: string | null
           name_client_type?: string | null
           name_contract_status?: string | null
@@ -493,6 +498,7 @@ export type Database = {
           payment_rate?: number | null
           pdf_path?: string | null
           phone_change_years_ago?: number | null
+          prediction_timestamp?: string | null
           product_combination?: string | null
           reg_city_not_live_city?: number | null
           reg_city_not_work_city?: number | null
@@ -1058,6 +1064,15 @@ export type Database = {
       geomfromewkt: {
         Args: { "": string }
         Returns: unknown
+      }
+      get_pending_predictions: {
+        Args: { batch_size?: number }
+        Returns: {
+          created_at: string
+          id: number
+          ml_api_status: string
+          sk_id_curr: number
+        }[]
       }
       get_proj4_from_srid: {
         Args: { "": number }
@@ -2353,6 +2368,15 @@ export type Database = {
       unlockrows: {
         Args: { "": string }
         Returns: number
+      }
+      update_prediction_result: {
+        Args: {
+          p_record_id: number
+          p_risk_score: number
+          p_status: string
+          p_target: number
+        }
+        Returns: undefined
       }
       updategeometrysrid: {
         Args: {
