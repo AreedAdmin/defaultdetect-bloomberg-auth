@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { SocialCircleDefaultRisk } from "@/components/analytics/SocialCircleDefaultRisk";
+import { BasicInformation } from "@/components/analytics/BasicInformation";
 
 const Analytics = () => {
   const [skIdCurr, setSkIdCurr] = useState("");
@@ -67,6 +68,9 @@ const Analytics = () => {
                 </p>
               </div>
             )}
+
+            {/* Basic Information */}
+            <BasicInformation skIdCurr={searchedId} />
 
             {/* Social Circle Default Risk Visualization */}
             <SocialCircleDefaultRisk skIdCurr={searchedId} />
