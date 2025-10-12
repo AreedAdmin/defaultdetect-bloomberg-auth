@@ -7,10 +7,7 @@ export const Section1 = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">Section 1: Client Identification</h2>
-        <p className="text-muted-foreground">Basic identification information</p>
-      </div>
+      {/* (Section title + description removed) */}
 
       <div className="space-y-4">
         <div>
