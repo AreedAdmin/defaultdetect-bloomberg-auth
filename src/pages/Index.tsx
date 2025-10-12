@@ -11,12 +11,12 @@ const Index = () => {
 
   useEffect(() => {
     // Set up auth state listener first
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user ?? null);
-        setLoading(false);
-      }
-    );
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
 
     // Then check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -75,12 +75,8 @@ const Index = () => {
         <div className="space-y-6">
           {/* Welcome Section */}
           <div className="bg-card border border-border rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-foreground mb-2">
-              Welcome to DefaultDetect
-            </h2>
-            <p className="text-muted-foreground">
-              Your comprehensive default risk monitoring system is ready to use.
-            </p>
+            <h2 className="text-2xl font-bold text-foreground mb-2">Welcome to DefaultDetect</h2>
+            <p className="text-muted-foreground">Your comprehensive default risk monitoring system is ready to use.</p>
           </div>
 
           {/* Quick Stats Grid */}
@@ -112,9 +108,7 @@ const Index = () => {
                 </div>
                 <div>
                   <div className="font-medium text-foreground">Connect Data Sources</div>
-                  <div className="text-sm text-muted-foreground">
-                    Import your portfolio data to begin monitoring
-                  </div>
+                  <div className="text-sm text-muted-foreground">Import your portfolio data to begin monitoring</div>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 bg-muted/50 rounded border border-border">
@@ -123,9 +117,7 @@ const Index = () => {
                 </div>
                 <div>
                   <div className="font-medium text-foreground">Configure Risk Parameters</div>
-                  <div className="text-sm text-muted-foreground">
-                    Set thresholds and alert preferences
-                  </div>
+                  <div className="text-sm text-muted-foreground">Set thresholds and alert preferences</div>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-3 bg-muted/50 rounded border border-border">
@@ -134,9 +126,7 @@ const Index = () => {
                 </div>
                 <div>
                   <div className="font-medium text-foreground">Monitor & Analyze</div>
-                  <div className="text-sm text-muted-foreground">
-                    Track real-time risk metrics and trends
-                  </div>
+                  <div className="text-sm text-muted-foreground">Track real-time risk metrics and trends</div>
                 </div>
               </div>
             </div>
