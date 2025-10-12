@@ -1,15 +1,17 @@
-import { Home, FileText, FolderOpen, BarChart3, Settings } from "lucide-react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Home, FileText, FolderOpen, BarChart3, LogOut } from "lucide-react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { SignOutDialog } from "@/components/auth/SignOutDialog";
 
 const navigationItems = [
   { name: "Dashboard", path: "/dashboard", icon: Home },
   { name: "Fill the Form", path: "/form", icon: FileText },
   { name: "Access Reports", path: "/reports", icon: FolderOpen },
   { name: "Analytics", path: "/analytics", icon: BarChart3 },
-  { name: "Settings", path: "/settings", icon: Settings },
 ];
 
 // Thèmes EXACTS alignés sur tes FeatureCards
@@ -39,7 +41,14 @@ const THEMES = [
 
 export const Sidebar = () => {
   const location = useLocation();
-  const isCollapsed = ["/form", "/reports", "/analytics", "/settings"].includes(location.pathname);
+  const navigate = useNavigate();
+  const [showSignOutDialog, setShowSignOutDialog] = useState(false);
+  const isCollapsed = ["/form", "/reports", "/analytics"].includes(location.pathname);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/signout-confirmation");
+  };
 
   return (
     <motion.aside
@@ -231,10 +240,58 @@ export const Sidebar = () => {
         </ul>
       </nav>
 
+      {/* Sign Out Button */}
+      <div className="absolute bottom-12 left-4 right-4">
+        {isCollapsed ? (
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger asChild>
+              <button
+                onClick={() => setShowSignOutDialog(true)}
+                className={cn(
+                  "relative flex items-center justify-center w-full px-5 py-4 rounded-xl transition-all duration-300 min-h-[64px]",
+                  "text-red-400/80 hover:text-red-300 overflow-hidden group",
+                  "hover:bg-gradient-to-br hover:from-red-500/20 hover:to-red-800/5"
+                )}
+              >
+                <LogOut size={22} className="relative z-10 transition-all duration-300 shrink-0" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="right" className="bg-[#0b1220] border-blue-400/20 text-blue-100">
+              <p>Sign Out</p>
+            </TooltipContent>
+          </Tooltip>
+        ) : (
+          <button
+            onClick={() => setShowSignOutDialog(true)}
+            className={cn(
+              "relative flex items-center gap-3 w-full px-5 py-4 rounded-xl transition-all duration-300",
+              "text-red-400/80 hover:text-red-300 overflow-hidden group",
+              "hover:bg-gradient-to-br hover:from-red-500/20 hover:to-red-800/5"
+            )}
+          >
+            <LogOut size={20} className="relative z-10 transition-all duration-300 shrink-0" />
+            <motion.span
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "auto" }}
+              exit={{ opacity: 0, width: 0 }}
+              className="font-medium relative z-10 transition-colors duration-300 overflow-hidden whitespace-nowrap"
+            >
+              Sign Out
+            </motion.span>
+          </button>
+        )}
+      </div>
+
       {/* Bottom decoration */}
       <div className="absolute bottom-8 left-4 right-4">
         <div className="h-[1px] bg-gradient-to-r from-transparent via-blue-400/20 to-transparent" />
       </div>
+
+      <SignOutDialog
+        open={showSignOutDialog}
+        onOpenChange={setShowSignOutDialog}
+        onConfirm={handleSignOut}
+      />
     </motion.aside>
   );
 };
