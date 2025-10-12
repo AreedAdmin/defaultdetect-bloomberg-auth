@@ -25,6 +25,7 @@ export const BasicInformation = ({ skIdCurr }: BasicInfoProps) => {
     if (!skIdCurr) {
       setData(null);
       setError(null);
+      setLoading(false);
       return;
     }
 
@@ -67,8 +68,6 @@ export const BasicInformation = ({ skIdCurr }: BasicInfoProps) => {
     fetchBasicInfo();
   }, [skIdCurr]);
 
-  if (!skIdCurr) return null;
-
   if (loading) {
     return (
       <Card className="bg-[#0b1220]/50 border-blue-400/20 p-6">
@@ -79,17 +78,12 @@ export const BasicInformation = ({ skIdCurr }: BasicInfoProps) => {
     );
   }
 
-  if (error) {
-    return (
-      <Card className="bg-[#0b1220]/50 border-red-400/20 p-6">
-        <div className="text-center py-8">
-          <p className="text-red-400">{error}</p>
-        </div>
-      </Card>
-    );
-  }
-
-  if (!data) return null;
+  const getDisplayValue = (value: any, defaultText: string = "Not specified") => {
+    if (!skIdCurr) return "—";
+    if (loading) return "Loading...";
+    if (error) return "Error";
+    return value !== null && value !== undefined ? value : defaultText;
+  };
 
   const formatGender = (gender: string | null) => {
     if (!gender) return "Not specified";
@@ -100,37 +94,37 @@ export const BasicInformation = ({ skIdCurr }: BasicInfoProps) => {
     {
       icon: Calendar,
       label: "Age",
-      value: data.age_years ? `${Math.round(data.age_years)} years` : "Not specified",
+      value: data?.age_years ? `${Math.round(data.age_years)} years` : getDisplayValue(null),
       color: "text-sky-400",
     },
     {
       icon: User,
       label: "Gender",
-      value: formatGender(data.code_gender),
+      value: getDisplayValue(data?.code_gender ? formatGender(data.code_gender) : null),
       color: "text-indigo-400",
     },
     {
       icon: Users,
       label: "Children",
-      value: data.cnt_children !== null ? `${data.cnt_children}` : "Not specified",
+      value: getDisplayValue(data?.cnt_children),
       color: "text-blue-400",
     },
     {
       icon: Briefcase,
       label: "Income Type",
-      value: data.name_income_type || "Not specified",
+      value: getDisplayValue(data?.name_income_type),
       color: "text-purple-400",
     },
     {
       icon: GraduationCap,
       label: "Education",
-      value: data.name_education_type || "Not specified",
+      value: getDisplayValue(data?.name_education_type),
       color: "text-cyan-400",
     },
     {
       icon: Heart,
       label: "Family Status",
-      value: data.name_family_status || "Not specified",
+      value: getDisplayValue(data?.name_family_status),
       color: "text-pink-400",
     },
   ];

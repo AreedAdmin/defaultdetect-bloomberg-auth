@@ -73,7 +73,7 @@ const Analytics = () => {
             <BasicInformation skIdCurr={searchedId} />
 
             {/* Social Circle Default Risk Visualization */}
-            <SocialCircleDefaultRisk skIdCurr={searchedId} />
+            {searchedId && <SocialCircleDefaultRisk skIdCurr={searchedId} />}
           </div>
         </div>
       </div>
