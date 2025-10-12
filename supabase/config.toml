@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.generate-test-data]
 verify_jwt = false
+
+[functions.predict-default-risk]
+verify_jwt = false
