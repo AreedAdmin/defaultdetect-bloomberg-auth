@@ -66,8 +66,8 @@ export const Sidebar = () => {
                   className={cn(
                     "absolute inset-0 rounded-xl transition-all duration-300",
                     "bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0",
-                    "group-hover:opacity-10",
-                    isActive && "opacity-10 from-cyan-500/10 to-blue-500/10",
+                    "group-hover:opacity-100",
+                    isActive && "opacity-100 from-cyan-500/10 to-blue-500/10",
                   )}
                 />
 
