@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.predict-default-risk]
 verify_jwt = false
+
+[functions.generate-loan-pdf]
+verify_jwt = false
