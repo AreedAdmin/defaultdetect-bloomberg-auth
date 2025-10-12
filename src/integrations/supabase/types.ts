@@ -14,816 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      events_emdat: {
-        Row: {
-          admin_units: string | null
-          aid_contribution_usd: number | null
-          appeal: string | null
-          associated_types: string | null
-          classification_key: string | null
-          country: string | null
-          cpi: number | null
-          declaration: string | null
-          dis_no: string
-          disaster_group: string | null
-          disaster_subgroup: string | null
-          disaster_subtype: string | null
-          disaster_type: string | null
-          end_date: string | null
-          entry_date: string | null
-          event_name: string | null
-          external_ids: Json | null
-          geom: unknown | null
-          historic: boolean | null
-          inserted_at: string | null
-          insured_damage_adjusted_usd: number | null
-          insured_damage_usd: number | null
-          iso: string | null
-          last_update: string | null
-          lat: number | null
-          location: string | null
-          lon: number | null
-          magnitude: number | null
-          magnitude_scale: string | null
-          no_affected: number | null
-          no_homeless: number | null
-          no_injured: number | null
-          ofda_bha_response: string | null
-          origin: string | null
-          reconstruction_costs_adjusted_usd: number | null
-          reconstruction_costs_usd: number | null
-          region: string | null
-          river_basin: string | null
-          start_date: string | null
-          subregion: string | null
-          total_affected: number | null
-          total_damage_adjusted_usd: number | null
-          total_damage_usd: number | null
-          total_deaths: number | null
-          updated_at: string | null
-        }
-        Insert: {
-          admin_units?: string | null
-          aid_contribution_usd?: number | null
-          appeal?: string | null
-          associated_types?: string | null
-          classification_key?: string | null
-          country?: string | null
-          cpi?: number | null
-          declaration?: string | null
-          dis_no: string
-          disaster_group?: string | null
-          disaster_subgroup?: string | null
-          disaster_subtype?: string | null
-          disaster_type?: string | null
-          end_date?: string | null
-          entry_date?: string | null
-          event_name?: string | null
-          external_ids?: Json | null
-          geom?: unknown | null
-          historic?: boolean | null
-          inserted_at?: string | null
-          insured_damage_adjusted_usd?: number | null
-          insured_damage_usd?: number | null
-          iso?: string | null
-          last_update?: string | null
-          lat?: number | null
-          location?: string | null
-          lon?: number | null
-          magnitude?: number | null
-          magnitude_scale?: string | null
-          no_affected?: number | null
-          no_homeless?: number | null
-          no_injured?: number | null
-          ofda_bha_response?: string | null
-          origin?: string | null
-          reconstruction_costs_adjusted_usd?: number | null
-          reconstruction_costs_usd?: number | null
-          region?: string | null
-          river_basin?: string | null
-          start_date?: string | null
-          subregion?: string | null
-          total_affected?: number | null
-          total_damage_adjusted_usd?: number | null
-          total_damage_usd?: number | null
-          total_deaths?: number | null
-          updated_at?: string | null
-        }
-        Update: {
-          admin_units?: string | null
-          aid_contribution_usd?: number | null
-          appeal?: string | null
-          associated_types?: string | null
-          classification_key?: string | null
-          country?: string | null
-          cpi?: number | null
-          declaration?: string | null
-          dis_no?: string
-          disaster_group?: string | null
-          disaster_subgroup?: string | null
-          disaster_subtype?: string | null
-          disaster_type?: string | null
-          end_date?: string | null
-          entry_date?: string | null
-          event_name?: string | null
-          external_ids?: Json | null
-          geom?: unknown | null
-          historic?: boolean | null
-          inserted_at?: string | null
-          insured_damage_adjusted_usd?: number | null
-          insured_damage_usd?: number | null
-          iso?: string | null
-          last_update?: string | null
-          lat?: number | null
-          location?: string | null
-          lon?: number | null
-          magnitude?: number | null
-          magnitude_scale?: string | null
-          no_affected?: number | null
-          no_homeless?: number | null
-          no_injured?: number | null
-          ofda_bha_response?: string | null
-          origin?: string | null
-          reconstruction_costs_adjusted_usd?: number | null
-          reconstruction_costs_usd?: number | null
-          region?: string | null
-          river_basin?: string | null
-          start_date?: string | null
-          subregion?: string | null
-          total_affected?: number | null
-          total_damage_adjusted_usd?: number | null
-          total_damage_usd?: number | null
-          total_deaths?: number | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      events_gdacs: {
-        Row: {
-          alert_level: string | null
-          bbox: Json | null
-          country: string | null
-          description: string | null
-          duration_in_week: number | null
-          event_name: string | null
-          event_type: string
-          event_type_name: string | null
-          from_date: string | null
-          geom: unknown | null
-          glide: string | null
-          icon_url: string | null
-          id: string
-          inserted_at: string | null
-          is_current: boolean | null
-          lat: number
-          lon: number
-          population_affected: number | null
-          raw: Json | null
-          report_links: Json | null
-          severity: number | null
-          temporary: boolean | null
-          title: string | null
-          to_date: string | null
-          updated_at: string | null
-          version: number | null
-          vulnerability: Json | null
-        }
-        Insert: {
-          alert_level?: string | null
-          bbox?: Json | null
-          country?: string | null
-          description?: string | null
-          duration_in_week?: number | null
-          event_name?: string | null
-          event_type: string
-          event_type_name?: string | null
-          from_date?: string | null
-          geom?: unknown | null
-          glide?: string | null
-          icon_url?: string | null
-          id: string
-          inserted_at?: string | null
-          is_current?: boolean | null
-          lat: number
-          lon: number
-          population_affected?: number | null
-          raw?: Json | null
-          report_links?: Json | null
-          severity?: number | null
-          temporary?: boolean | null
-          title?: string | null
-          to_date?: string | null
-          updated_at?: string | null
-          version?: number | null
-          vulnerability?: Json | null
-        }
-        Update: {
-          alert_level?: string | null
-          bbox?: Json | null
-          country?: string | null
-          description?: string | null
-          duration_in_week?: number | null
-          event_name?: string | null
-          event_type?: string
-          event_type_name?: string | null
-          from_date?: string | null
-          geom?: unknown | null
-          glide?: string | null
-          icon_url?: string | null
-          id?: string
-          inserted_at?: string | null
-          is_current?: boolean | null
-          lat?: number
-          lon?: number
-          population_affected?: number | null
-          raw?: Json | null
-          report_links?: Json | null
-          severity?: number | null
-          temporary?: boolean | null
-          title?: string | null
-          to_date?: string | null
-          updated_at?: string | null
-          version?: number | null
-          vulnerability?: Json | null
-        }
-        Relationships: []
-      }
-      events_usgs: {
-        Row: {
-          alert: string | null
-          cdi: number | null
-          depth_km: number | null
-          felt: number | null
-          geom: unknown | null
-          id: string
-          inserted_at: string | null
-          lat: number
-          lon: number
-          mag: number | null
-          mag_type: string | null
-          mmi: number | null
-          place: string | null
-          raw: Json | null
-          status: string | null
-          time: string
-          tsunami: number | null
-          updated: string | null
-          updated_at: string | null
-          url: string | null
-        }
-        Insert: {
-          alert?: string | null
-          cdi?: number | null
-          depth_km?: number | null
-          felt?: number | null
-          geom?: unknown | null
-          id: string
-          inserted_at?: string | null
-          lat: number
-          lon: number
-          mag?: number | null
-          mag_type?: string | null
-          mmi?: number | null
-          place?: string | null
-          raw?: Json | null
-          status?: string | null
-          time: string
-          tsunami?: number | null
-          updated?: string | null
-          updated_at?: string | null
-          url?: string | null
-        }
-        Update: {
-          alert?: string | null
-          cdi?: number | null
-          depth_km?: number | null
-          felt?: number | null
-          geom?: unknown | null
-          id?: string
-          inserted_at?: string | null
-          lat?: number
-          lon?: number
-          mag?: number | null
-          mag_type?: string | null
-          mmi?: number | null
-          place?: string | null
-          raw?: Json | null
-          status?: string | null
-          time?: string
-          tsunami?: number | null
-          updated?: string | null
-          updated_at?: string | null
-          url?: string | null
-        }
-        Relationships: []
-      }
-      loan_applications: {
-        Row: {
-          age_years: number | null
-          amt_annuity_x: number | null
-          amt_annuity_x_missing: boolean | null
-          amt_annuity_y: number | null
-          amt_annuity_y_missing: boolean | null
-          amt_application: number | null
-          amt_credit_x: number | null
-          amt_credit_y: number | null
-          amt_goods_price_x: number | null
-          amt_goods_price_x_missing: boolean | null
-          amt_goods_price_y: number | null
-          amt_goods_price_y_missing: boolean | null
-          amt_income_total: number | null
-          amt_req_credit_bureau_day: number | null
-          amt_req_credit_bureau_day_missing: boolean | null
-          amt_req_credit_bureau_hour: number | null
-          amt_req_credit_bureau_hour_missing: boolean | null
-          amt_req_credit_bureau_mon: number | null
-          amt_req_credit_bureau_mon_missing: boolean | null
-          amt_req_credit_bureau_qrt: number | null
-          amt_req_credit_bureau_qrt_missing: boolean | null
-          amt_req_credit_bureau_week: number | null
-          amt_req_credit_bureau_week_missing: boolean | null
-          amt_req_credit_bureau_year: number | null
-          amt_req_credit_bureau_year_missing: boolean | null
-          annuity_diff: number | null
-          annuity_income_ratio: number | null
-          bureau_query_intensity: number | null
-          channel_type: string | null
-          children_ratio: number | null
-          city_region_mismatch_score: number | null
-          cnt_children: number | null
-          cnt_fam_members: number | null
-          cnt_payment: number | null
-          cnt_payment_missing: boolean | null
-          code_gender: string | null
-          code_reject_reason: string | null
-          community_id: number | null
-          created_at: string | null
-          credit_diff: number | null
-          credit_duration_days: number | null
-          credit_goods_ratio: number | null
-          credit_income_ratio: number | null
-          credit_to_goods_delta_ratio: number | null
-          days_birth: number | null
-          days_decision: number | null
-          days_employed: number | null
-          days_first_drawing: number | null
-          days_first_drawing_missing: boolean | null
-          days_first_due: number | null
-          days_first_due_missing: boolean | null
-          days_id_publish: number | null
-          days_last_due: number | null
-          days_last_due_1st_version: number | null
-          days_last_due_1st_version_missing: boolean | null
-          days_last_due_missing: boolean | null
-          days_last_phone_change: number | null
-          days_registration: number | null
-          days_termination: number | null
-          days_termination_missing: boolean | null
-          def_30_cnt_social_circle: number | null
-          def_30_cnt_social_circle_missing: boolean | null
-          def_60_cnt_social_circle: number | null
-          def_60_cnt_social_circle_missing: boolean | null
-          employed_years: number | null
-          employment_to_age_ratio: number | null
-          ext_source_2: number | null
-          ext_source_2_missing: boolean | null
-          ext_source_3: number | null
-          ext_source_3_missing: boolean | null
-          flag_cont_mobile: boolean | null
-          flag_document_10: boolean | null
-          flag_document_11: boolean | null
-          flag_document_12: boolean | null
-          flag_document_13: boolean | null
-          flag_document_14: boolean | null
-          flag_document_15: boolean | null
-          flag_document_16: boolean | null
-          flag_document_17: boolean | null
-          flag_document_18: boolean | null
-          flag_document_19: boolean | null
-          flag_document_2: boolean | null
-          flag_document_20: boolean | null
-          flag_document_21: boolean | null
-          flag_document_3: boolean | null
-          flag_document_4: boolean | null
-          flag_document_5: boolean | null
-          flag_document_6: boolean | null
-          flag_document_7: boolean | null
-          flag_document_8: boolean | null
-          flag_document_9: boolean | null
-          flag_email: boolean | null
-          flag_emp_phone: boolean | null
-          flag_last_appl_per_contract: boolean | null
-          flag_mobil: boolean | null
-          flag_own_car: boolean | null
-          flag_own_realty: boolean | null
-          flag_phone: boolean | null
-          flag_work_phone: boolean | null
-          goods_price_diff: number | null
-          has_all_docs: number | null
-          has_work_contact: boolean | null
-          hour_appr_diff: number | null
-          hour_appr_process_start_x: number | null
-          hour_appr_process_start_y: number | null
-          id: number
-          id_publish_years_ago: number | null
-          income_per_person: number | null
-          is_cashloan: boolean | null
-          live_city_not_work_city: boolean | null
-          live_region_not_work_region: boolean | null
-          name_cash_loan_purpose: string | null
-          name_client_type: string | null
-          name_contract_status: string | null
-          name_contract_type_x: string | null
-          name_contract_type_y: string | null
-          name_education_type: string | null
-          name_family_status: string | null
-          name_goods_category: string | null
-          name_housing_type: string | null
-          name_income_type: string | null
-          name_payment_type: string | null
-          name_portfolio: string | null
-          name_product_type: string | null
-          name_seller_industry: string | null
-          name_type_suite_x: string | null
-          name_yield_group: string | null
-          nflag_insured_on_approval: boolean | null
-          nflag_insured_on_approval_missing: boolean | null
-          nflag_last_appl_in_day: boolean | null
-          num_active_contacts: number | null
-          obs_30_cnt_social_circle: number | null
-          obs_30_cnt_social_circle_missing: boolean | null
-          obs_60_cnt_social_circle: number | null
-          obs_60_cnt_social_circle_missing: boolean | null
-          occupation_type: string | null
-          organization_type: string | null
-          overlap_with_current: boolean | null
-          payment_rate: number | null
-          pdf_path: string | null
-          phone_change_years_ago: number | null
-          product_combination: string | null
-          reg_city_not_live_city: boolean | null
-          reg_city_not_work_city: boolean | null
-          reg_region_not_live_region: boolean | null
-          reg_region_not_work_region: boolean | null
-          region_population_relative: boolean | null
-          region_rating_client: number | null
-          region_rating_client_w_city: number | null
-          registration_years_ago: number | null
-          risk_score: number | null
-          same_contract_type: boolean | null
-          same_weekday_appr: boolean | null
-          sellerplace_area: number | null
-          short_term_bureau_ratio: number | null
-          sk_id_curr: number
-          sk_id_prev: number | null
-          stability_score: number | null
-          target_default: boolean | null
-          time_to_first_payment_days: number | null
-          time_to_termination_days: number | null
-          updated_at: string | null
-          urban_rural: boolean | null
-          user_id: string | null
-          weekday_appr_process_start_x: string | null
-          weekday_appr_process_start_y: string | null
-        }
-        Insert: {
-          age_years?: number | null
-          amt_annuity_x?: number | null
-          amt_annuity_x_missing?: boolean | null
-          amt_annuity_y?: number | null
-          amt_annuity_y_missing?: boolean | null
-          amt_application?: number | null
-          amt_credit_x?: number | null
-          amt_credit_y?: number | null
-          amt_goods_price_x?: number | null
-          amt_goods_price_x_missing?: boolean | null
-          amt_goods_price_y?: number | null
-          amt_goods_price_y_missing?: boolean | null
-          amt_income_total?: number | null
-          amt_req_credit_bureau_day?: number | null
-          amt_req_credit_bureau_day_missing?: boolean | null
-          amt_req_credit_bureau_hour?: number | null
-          amt_req_credit_bureau_hour_missing?: boolean | null
-          amt_req_credit_bureau_mon?: number | null
-          amt_req_credit_bureau_mon_missing?: boolean | null
-          amt_req_credit_bureau_qrt?: number | null
-          amt_req_credit_bureau_qrt_missing?: boolean | null
-          amt_req_credit_bureau_week?: number | null
-          amt_req_credit_bureau_week_missing?: boolean | null
-          amt_req_credit_bureau_year?: number | null
-          amt_req_credit_bureau_year_missing?: boolean | null
-          annuity_diff?: number | null
-          annuity_income_ratio?: number | null
-          bureau_query_intensity?: number | null
-          channel_type?: string | null
-          children_ratio?: number | null
-          city_region_mismatch_score?: number | null
-          cnt_children?: number | null
-          cnt_fam_members?: number | null
-          cnt_payment?: number | null
-          cnt_payment_missing?: boolean | null
-          code_gender?: string | null
-          code_reject_reason?: string | null
-          community_id?: number | null
-          created_at?: string | null
-          credit_diff?: number | null
-          credit_duration_days?: number | null
-          credit_goods_ratio?: number | null
-          credit_income_ratio?: number | null
-          credit_to_goods_delta_ratio?: number | null
-          days_birth?: number | null
-          days_decision?: number | null
-          days_employed?: number | null
-          days_first_drawing?: number | null
-          days_first_drawing_missing?: boolean | null
-          days_first_due?: number | null
-          days_first_due_missing?: boolean | null
-          days_id_publish?: number | null
-          days_last_due?: number | null
-          days_last_due_1st_version?: number | null
-          days_last_due_1st_version_missing?: boolean | null
-          days_last_due_missing?: boolean | null
-          days_last_phone_change?: number | null
-          days_registration?: number | null
-          days_termination?: number | null
-          days_termination_missing?: boolean | null
-          def_30_cnt_social_circle?: number | null
-          def_30_cnt_social_circle_missing?: boolean | null
-          def_60_cnt_social_circle?: number | null
-          def_60_cnt_social_circle_missing?: boolean | null
-          employed_years?: number | null
-          employment_to_age_ratio?: number | null
-          ext_source_2?: number | null
-          ext_source_2_missing?: boolean | null
-          ext_source_3?: number | null
-          ext_source_3_missing?: boolean | null
-          flag_cont_mobile?: boolean | null
-          flag_document_10?: boolean | null
-          flag_document_11?: boolean | null
-          flag_document_12?: boolean | null
-          flag_document_13?: boolean | null
-          flag_document_14?: boolean | null
-          flag_document_15?: boolean | null
-          flag_document_16?: boolean | null
-          flag_document_17?: boolean | null
-          flag_document_18?: boolean | null
-          flag_document_19?: boolean | null
-          flag_document_2?: boolean | null
-          flag_document_20?: boolean | null
-          flag_document_21?: boolean | null
-          flag_document_3?: boolean | null
-          flag_document_4?: boolean | null
-          flag_document_5?: boolean | null
-          flag_document_6?: boolean | null
-          flag_document_7?: boolean | null
-          flag_document_8?: boolean | null
-          flag_document_9?: boolean | null
-          flag_email?: boolean | null
-          flag_emp_phone?: boolean | null
-          flag_last_appl_per_contract?: boolean | null
-          flag_mobil?: boolean | null
-          flag_own_car?: boolean | null
-          flag_own_realty?: boolean | null
-          flag_phone?: boolean | null
-          flag_work_phone?: boolean | null
-          goods_price_diff?: number | null
-          has_all_docs?: number | null
-          has_work_contact?: boolean | null
-          hour_appr_diff?: number | null
-          hour_appr_process_start_x?: number | null
-          hour_appr_process_start_y?: number | null
-          id?: number
-          id_publish_years_ago?: number | null
-          income_per_person?: number | null
-          is_cashloan?: boolean | null
-          live_city_not_work_city?: boolean | null
-          live_region_not_work_region?: boolean | null
-          name_cash_loan_purpose?: string | null
-          name_client_type?: string | null
-          name_contract_status?: string | null
-          name_contract_type_x?: string | null
-          name_contract_type_y?: string | null
-          name_education_type?: string | null
-          name_family_status?: string | null
-          name_goods_category?: string | null
-          name_housing_type?: string | null
-          name_income_type?: string | null
-          name_payment_type?: string | null
-          name_portfolio?: string | null
-          name_product_type?: string | null
-          name_seller_industry?: string | null
-          name_type_suite_x?: string | null
-          name_yield_group?: string | null
-          nflag_insured_on_approval?: boolean | null
-          nflag_insured_on_approval_missing?: boolean | null
-          nflag_last_appl_in_day?: boolean | null
-          num_active_contacts?: number | null
-          obs_30_cnt_social_circle?: number | null
-          obs_30_cnt_social_circle_missing?: boolean | null
-          obs_60_cnt_social_circle?: number | null
-          obs_60_cnt_social_circle_missing?: boolean | null
-          occupation_type?: string | null
-          organization_type?: string | null
-          overlap_with_current?: boolean | null
-          payment_rate?: number | null
-          pdf_path?: string | null
-          phone_change_years_ago?: number | null
-          product_combination?: string | null
-          reg_city_not_live_city?: boolean | null
-          reg_city_not_work_city?: boolean | null
-          reg_region_not_live_region?: boolean | null
-          reg_region_not_work_region?: boolean | null
-          region_population_relative?: boolean | null
-          region_rating_client?: number | null
-          region_rating_client_w_city?: number | null
-          registration_years_ago?: number | null
-          risk_score?: number | null
-          same_contract_type?: boolean | null
-          same_weekday_appr?: boolean | null
-          sellerplace_area?: number | null
-          short_term_bureau_ratio?: number | null
-          sk_id_curr: number
-          sk_id_prev?: number | null
-          stability_score?: number | null
-          target_default?: boolean | null
-          time_to_first_payment_days?: number | null
-          time_to_termination_days?: number | null
-          updated_at?: string | null
-          urban_rural?: boolean | null
-          user_id?: string | null
-          weekday_appr_process_start_x?: string | null
-          weekday_appr_process_start_y?: string | null
-        }
-        Update: {
-          age_years?: number | null
-          amt_annuity_x?: number | null
-          amt_annuity_x_missing?: boolean | null
-          amt_annuity_y?: number | null
-          amt_annuity_y_missing?: boolean | null
-          amt_application?: number | null
-          amt_credit_x?: number | null
-          amt_credit_y?: number | null
-          amt_goods_price_x?: number | null
-          amt_goods_price_x_missing?: boolean | null
-          amt_goods_price_y?: number | null
-          amt_goods_price_y_missing?: boolean | null
-          amt_income_total?: number | null
-          amt_req_credit_bureau_day?: number | null
-          amt_req_credit_bureau_day_missing?: boolean | null
-          amt_req_credit_bureau_hour?: number | null
-          amt_req_credit_bureau_hour_missing?: boolean | null
-          amt_req_credit_bureau_mon?: number | null
-          amt_req_credit_bureau_mon_missing?: boolean | null
-          amt_req_credit_bureau_qrt?: number | null
-          amt_req_credit_bureau_qrt_missing?: boolean | null
-          amt_req_credit_bureau_week?: number | null
-          amt_req_credit_bureau_week_missing?: boolean | null
-          amt_req_credit_bureau_year?: number | null
-          amt_req_credit_bureau_year_missing?: boolean | null
-          annuity_diff?: number | null
-          annuity_income_ratio?: number | null
-          bureau_query_intensity?: number | null
-          channel_type?: string | null
-          children_ratio?: number | null
-          city_region_mismatch_score?: number | null
-          cnt_children?: number | null
-          cnt_fam_members?: number | null
-          cnt_payment?: number | null
-          cnt_payment_missing?: boolean | null
-          code_gender?: string | null
-          code_reject_reason?: string | null
-          community_id?: number | null
-          created_at?: string | null
-          credit_diff?: number | null
-          credit_duration_days?: number | null
-          credit_goods_ratio?: number | null
-          credit_income_ratio?: number | null
-          credit_to_goods_delta_ratio?: number | null
-          days_birth?: number | null
-          days_decision?: number | null
-          days_employed?: number | null
-          days_first_drawing?: number | null
-          days_first_drawing_missing?: boolean | null
-          days_first_due?: number | null
-          days_first_due_missing?: boolean | null
-          days_id_publish?: number | null
-          days_last_due?: number | null
-          days_last_due_1st_version?: number | null
-          days_last_due_1st_version_missing?: boolean | null
-          days_last_due_missing?: boolean | null
-          days_last_phone_change?: number | null
-          days_registration?: number | null
-          days_termination?: number | null
-          days_termination_missing?: boolean | null
-          def_30_cnt_social_circle?: number | null
-          def_30_cnt_social_circle_missing?: boolean | null
-          def_60_cnt_social_circle?: number | null
-          def_60_cnt_social_circle_missing?: boolean | null
-          employed_years?: number | null
-          employment_to_age_ratio?: number | null
-          ext_source_2?: number | null
-          ext_source_2_missing?: boolean | null
-          ext_source_3?: number | null
-          ext_source_3_missing?: boolean | null
-          flag_cont_mobile?: boolean | null
-          flag_document_10?: boolean | null
-          flag_document_11?: boolean | null
-          flag_document_12?: boolean | null
-          flag_document_13?: boolean | null
-          flag_document_14?: boolean | null
-          flag_document_15?: boolean | null
-          flag_document_16?: boolean | null
-          flag_document_17?: boolean | null
-          flag_document_18?: boolean | null
-          flag_document_19?: boolean | null
-          flag_document_2?: boolean | null
-          flag_document_20?: boolean | null
-          flag_document_21?: boolean | null
-          flag_document_3?: boolean | null
-          flag_document_4?: boolean | null
-          flag_document_5?: boolean | null
-          flag_document_6?: boolean | null
-          flag_document_7?: boolean | null
-          flag_document_8?: boolean | null
-          flag_document_9?: boolean | null
-          flag_email?: boolean | null
-          flag_emp_phone?: boolean | null
-          flag_last_appl_per_contract?: boolean | null
-          flag_mobil?: boolean | null
-          flag_own_car?: boolean | null
-          flag_own_realty?: boolean | null
-          flag_phone?: boolean | null
-          flag_work_phone?: boolean | null
-          goods_price_diff?: number | null
-          has_all_docs?: number | null
-          has_work_contact?: boolean | null
-          hour_appr_diff?: number | null
-          hour_appr_process_start_x?: number | null
-          hour_appr_process_start_y?: number | null
-          id?: number
-          id_publish_years_ago?: number | null
-          income_per_person?: number | null
-          is_cashloan?: boolean | null
-          live_city_not_work_city?: boolean | null
-          live_region_not_work_region?: boolean | null
-          name_cash_loan_purpose?: string | null
-          name_client_type?: string | null
-          name_contract_status?: string | null
-          name_contract_type_x?: string | null
-          name_contract_type_y?: string | null
-          name_education_type?: string | null
-          name_family_status?: string | null
-          name_goods_category?: string | null
-          name_housing_type?: string | null
-          name_income_type?: string | null
-          name_payment_type?: string | null
-          name_portfolio?: string | null
-          name_product_type?: string | null
-          name_seller_industry?: string | null
-          name_type_suite_x?: string | null
-          name_yield_group?: string | null
-          nflag_insured_on_approval?: boolean | null
-          nflag_insured_on_approval_missing?: boolean | null
-          nflag_last_appl_in_day?: boolean | null
-          num_active_contacts?: number | null
-          obs_30_cnt_social_circle?: number | null
-          obs_30_cnt_social_circle_missing?: boolean | null
-          obs_60_cnt_social_circle?: number | null
-          obs_60_cnt_social_circle_missing?: boolean | null
-          occupation_type?: string | null
-          organization_type?: string | null
-          overlap_with_current?: boolean | null
-          payment_rate?: number | null
-          pdf_path?: string | null
-          phone_change_years_ago?: number | null
-          product_combination?: string | null
-          reg_city_not_live_city?: boolean | null
-          reg_city_not_work_city?: boolean | null
-          reg_region_not_live_region?: boolean | null
-          reg_region_not_work_region?: boolean | null
-          region_population_relative?: boolean | null
-          region_rating_client?: number | null
-          region_rating_client_w_city?: number | null
-          registration_years_ago?: number | null
-          risk_score?: number | null
-          same_contract_type?: boolean | null
-          same_weekday_appr?: boolean | null
-          sellerplace_area?: number | null
-          short_term_bureau_ratio?: number | null
-          sk_id_curr?: number
-          sk_id_prev?: number | null
-          stability_score?: number | null
-          target_default?: boolean | null
-          time_to_first_payment_days?: number | null
-          time_to_termination_days?: number | null
-          updated_at?: string | null
-          urban_rural?: boolean | null
-          user_id?: string | null
-          weekday_appr_process_start_x?: string | null
-          weekday_appr_process_start_y?: string | null
-        }
-        Relationships: []
-      }
       loan_staging: {
         Row: {
           age_years: number | null
@@ -864,6 +54,7 @@ export type Database = {
           code_gender: string | null
           code_reject_reason: string | null
           community_id: number | null
+          created_at: string | null
           credit_diff: number | null
           credit_duration_days: number | null
           credit_goods_ratio: number | null
@@ -930,6 +121,7 @@ export type Database = {
           hour_appr_diff: number | null
           hour_appr_process_start_x: number | null
           hour_appr_process_start_y: number | null
+          id: number
           id_publish_years_ago: number | null
           income_per_person: number | null
           is_cashloan: number | null
@@ -963,6 +155,7 @@ export type Database = {
           organization_type: string | null
           overlap_with_current: number | null
           payment_rate: number | null
+          pdf_path: string | null
           phone_change_years_ago: number | null
           product_combination: string | null
           reg_city_not_live_city: number | null
@@ -973,6 +166,7 @@ export type Database = {
           region_rating_client: number | null
           region_rating_client_w_city: number | null
           registration_years_ago: number | null
+          risk_score: number | null
           same_contract_type: number | null
           same_weekday_appr: number | null
           sellerplace_area: number | null
@@ -983,7 +177,9 @@ export type Database = {
           target: number | null
           time_to_first_payment_days: number | null
           time_to_termination_days: number | null
+          updated_at: string | null
           urban_rural: number | null
+          user_id: string | null
           weekday_appr_process_start_x: string | null
           weekday_appr_process_start_y: string | null
         }
@@ -1026,6 +222,7 @@ export type Database = {
           code_gender?: string | null
           code_reject_reason?: string | null
           community_id?: number | null
+          created_at?: string | null
           credit_diff?: number | null
           credit_duration_days?: number | null
           credit_goods_ratio?: number | null
@@ -1092,6 +289,7 @@ export type Database = {
           hour_appr_diff?: number | null
           hour_appr_process_start_x?: number | null
           hour_appr_process_start_y?: number | null
+          id?: number
           id_publish_years_ago?: number | null
           income_per_person?: number | null
           is_cashloan?: number | null
@@ -1125,6 +323,7 @@ export type Database = {
           organization_type?: string | null
           overlap_with_current?: number | null
           payment_rate?: number | null
+          pdf_path?: string | null
           phone_change_years_ago?: number | null
           product_combination?: string | null
           reg_city_not_live_city?: number | null
@@ -1135,6 +334,7 @@ export type Database = {
           region_rating_client?: number | null
           region_rating_client_w_city?: number | null
           registration_years_ago?: number | null
+          risk_score?: number | null
           same_contract_type?: number | null
           same_weekday_appr?: number | null
           sellerplace_area?: number | null
@@ -1145,7 +345,9 @@ export type Database = {
           target?: number | null
           time_to_first_payment_days?: number | null
           time_to_termination_days?: number | null
+          updated_at?: string | null
           urban_rural?: number | null
+          user_id?: string | null
           weekday_appr_process_start_x?: string | null
           weekday_appr_process_start_y?: string | null
         }
@@ -1188,6 +390,7 @@ export type Database = {
           code_gender?: string | null
           code_reject_reason?: string | null
           community_id?: number | null
+          created_at?: string | null
           credit_diff?: number | null
           credit_duration_days?: number | null
           credit_goods_ratio?: number | null
@@ -1254,6 +457,7 @@ export type Database = {
           hour_appr_diff?: number | null
           hour_appr_process_start_x?: number | null
           hour_appr_process_start_y?: number | null
+          id?: number
           id_publish_years_ago?: number | null
           income_per_person?: number | null
           is_cashloan?: number | null
@@ -1287,6 +491,7 @@ export type Database = {
           organization_type?: string | null
           overlap_with_current?: number | null
           payment_rate?: number | null
+          pdf_path?: string | null
           phone_change_years_ago?: number | null
           product_combination?: string | null
           reg_city_not_live_city?: number | null
@@ -1297,6 +502,7 @@ export type Database = {
           region_rating_client?: number | null
           region_rating_client_w_city?: number | null
           registration_years_ago?: number | null
+          risk_score?: number | null
           same_contract_type?: number | null
           same_weekday_appr?: number | null
           sellerplace_area?: number | null
@@ -1307,7 +513,9 @@ export type Database = {
           target?: number | null
           time_to_first_payment_days?: number | null
           time_to_termination_days?: number | null
+          updated_at?: string | null
           urban_rural?: number | null
+          user_id?: string | null
           weekday_appr_process_start_x?: string | null
           weekday_appr_process_start_y?: string | null
         }
@@ -1339,6 +547,22 @@ export type Database = {
       }
     }
     Views: {
+      defaulted_applications_view: {
+        Row: {
+          created_at: string | null
+          def_30_cnt_social_circle: number | null
+          income_per_person: number | null
+          monthly_payment: number | null
+          name_client_type: string | null
+          name_contract_type_x: string | null
+          original_loan_amount: number | null
+          outstanding_loan_amount: number | null
+          payments_made: number | null
+          phone_change_years_ago: number | null
+          sk_id_curr: number | null
+        }
+        Relationships: []
+      }
       geography_columns: {
         Row: {
           coord_dimension: number | null
