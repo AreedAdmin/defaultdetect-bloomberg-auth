@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.generate-loan-pdf]
 verify_jwt = false
+
+[functions.update-risk-mock]
+verify_jwt = false
