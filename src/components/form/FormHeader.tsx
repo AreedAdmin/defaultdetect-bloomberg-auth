@@ -1,15 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { useFormContext } from "@/contexts/FormContext";
 import { useNavigate } from "react-router-dom";
-import { LogOut } from "lucide-react";
+import { LogOut, Sparkles, Loader2 } from "lucide-react";
 
 export const FormHeader = () => {
-  const { saveToLocalStorage } = useFormContext();
+  const { saveToLocalStorage, isGenerating, generateTestData } = useFormContext();
   const navigate = useNavigate();
 
   const handleSaveAndExit = () => {
     saveToLocalStorage();
     navigate("/dashboard");
+  };
+
+  const handleGenerateTestData = async () => {
+    try {
+      await generateTestData();
+    } catch (error) {
+      // Error already handled in context
+    }
   };
 
   return (
@@ -52,14 +60,33 @@ export const FormHeader = () => {
               }}
             />
           </div>
-          {/* Save button */}
-          <Button
-            onClick={handleSaveAndExit}
-            className="group/btn relative gap-2 px-6 py-3 bg-transparent border border-sky-400/40 text-sky-400 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/60 hover:bg-sky-400/5 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] rounded-full flex-shrink-0"
-          >
-            <LogOut className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110" />
-            <span className="relative font-medium">Save & Exit</span>
-          </Button>
+          {/* Action buttons */}
+          <div className="flex gap-3 flex-shrink-0">
+            <Button
+              onClick={handleGenerateTestData}
+              disabled={isGenerating}
+              className="group/btn relative gap-2 px-6 py-3 bg-transparent border border-violet-400/40 text-violet-400 backdrop-blur-sm transition-all duration-300 hover:border-violet-400/60 hover:bg-violet-400/5 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] rounded-full"
+            >
+              {isGenerating ? (
+                <>
+                  <Loader2 className="w-4 h-4 relative transition-transform duration-300 animate-spin" />
+                  <span className="relative font-medium">Generating...</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110" />
+                  <span className="relative font-medium">Generate Test Data</span>
+                </>
+              )}
+            </Button>
+            <Button
+              onClick={handleSaveAndExit}
+              className="group/btn relative gap-2 px-6 py-3 bg-transparent border border-sky-400/40 text-sky-400 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/60 hover:bg-sky-400/5 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] rounded-full"
+            >
+              <LogOut className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110" />
+              <span className="relative font-medium">Save & Exit</span>
+            </Button>
+          </div>
         </div>
       </div>
       <style>{`

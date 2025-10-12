@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { FormData, defaultFormData } from "@/types/formData";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FormContextType {
   formData: FormData;
@@ -13,6 +14,8 @@ interface FormContextType {
   saveToLocalStorage: () => void;
   loadFromLocalStorage: () => boolean;
   clearDraft: () => void;
+  isGenerating: boolean;
+  generateTestData: () => Promise<any>;
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -34,6 +37,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
   const [currentSection, setCurrentSection] = useState(1);
   const [visitedSections, setVisitedSections] = useState<Set<number>>(new Set([1]));
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const updateFormData = (data: Partial<FormData>) => {
     setFormData((prev) => ({ ...prev, ...data }));
@@ -81,6 +85,29 @@ export const FormProvider = ({ children }: FormProviderProps) => {
     setLastSaved(null);
   };
 
+  const generateTestData = async () => {
+    try {
+      setIsGenerating(true);
+      const { data, error } = await supabase.functions.invoke('generate-test-data', {
+        body: { count: 1 }
+      });
+      
+      if (error) throw error;
+      
+      toast.success(`Test data generated! SK_ID_CURR: ${data.sk_id_curr}`, {
+        duration: 4000,
+        position: "bottom-right",
+      });
+      return data;
+    } catch (error: any) {
+      console.error('Generate test data error:', error);
+      toast.error(error.message || 'Failed to generate test data');
+      throw error;
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   // Auto-save every 20 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -103,6 +130,8 @@ export const FormProvider = ({ children }: FormProviderProps) => {
         saveToLocalStorage,
         loadFromLocalStorage,
         clearDraft,
+        isGenerating,
+        generateTestData,
       }}
     >
       {children}
