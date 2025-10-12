@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Form from "./pages/Form";
+import FormSuccess from "./pages/FormSuccess";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import BulkImport from "./pages/BulkImport";
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/form" element={<Form />} />
+          <Route path="/form-success" element={<FormSuccess />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/analytics" element={<Analytics />} />
