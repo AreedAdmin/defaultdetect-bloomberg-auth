@@ -10,7 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertCircle, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { AlertCircle, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface DefaultedApplication {
@@ -31,21 +32,35 @@ export const DefaultedApplicationsTable = () => {
   const [applications, setApplications] = useState<DefaultedApplication[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
+  const pageSize = 25;
 
   useEffect(() => {
     fetchDefaultedApplications();
-  }, []);
+  }, [currentPage]);
 
   const fetchDefaultedApplications = async () => {
     try {
       setLoading(true);
       setError(null);
       
+      const from = currentPage * pageSize;
+      const to = from + pageSize - 1;
+
+      // Get total count
+      const { count } = await supabase
+        .from("defaulted_applications_view")
+        .select("*", { count: "exact", head: true });
+
+      setTotalCount(count || 0);
+
+      // Get paginated data
       const { data, error: fetchError } = await supabase
         .from("defaulted_applications_view")
         .select("*")
         .order("outstanding_loan_amount", { ascending: false })
-        .limit(50);
+        .range(from, to);
 
       if (fetchError) throw fetchError;
       
@@ -57,6 +72,10 @@ export const DefaultedApplicationsTable = () => {
       setLoading(false);
     }
   };
+
+  const totalPages = Math.ceil(totalCount / pageSize);
+  const canGoPrevious = currentPage > 0;
+  const canGoNext = currentPage < totalPages - 1;
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -97,10 +116,35 @@ export const DefaultedApplicationsTable = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Defaulted Loan Applications</CardTitle>
-        <CardDescription>
-          Overview of loan applications that have defaulted, sorted by outstanding amount
-        </CardDescription>
+        <div className="flex items-start justify-between">
+          <div>
+            <CardTitle>Defaulted Loan Applications</CardTitle>
+            <CardDescription>
+              Overview of loan applications that have defaulted, sorted by outstanding amount
+            </CardDescription>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">
+              Page {currentPage + 1} of {totalPages}
+            </span>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={!canGoPrevious || loading}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={!canGoNext || loading}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
         <div className="rounded-md border">
