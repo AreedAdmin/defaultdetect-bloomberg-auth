@@ -1,5 +1,3 @@
-side bar 
-
 import { Home, FileText, FolderOpen, Settings } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -83,11 +81,7 @@ export const Sidebar = () => {
           {navigationItems.map((item, idx) => {
             const Icon = item.icon;
             // Répartition des thèmes : 0=sky, 1=blue, 2=indigo, 3=blue
-            const theme =
-              idx === 0 ? THEMES[0] :
-              idx === 1 ? THEMES[1] :
-              idx === 2 ? THEMES[2] :
-              THEMES[1];
+            const theme = idx === 0 ? THEMES[0] : idx === 1 ? THEMES[1] : idx === 2 ? THEMES[2] : THEMES[1];
 
             const navContent = ({ isActive }: { isActive: boolean }) => (
               <>
@@ -108,14 +102,14 @@ export const Sidebar = () => {
                     "bg-gradient-to-br",
                     theme.hoverGrad,
                     "opacity-0 group-hover:opacity-100",
-                    isActive && "opacity-100"
+                    isActive && "opacity-100",
                   )}
                 />
 
                 {/* Glow doux EXACT (rgba de tes cards) */}
                 <div
                   className={cn(
-                    "absolute inset-0 rounded-xl transition-opacity duration-300 opacity-0 pointer-events-none"
+                    "absolute inset-0 rounded-xl transition-opacity duration-300 opacity-0 pointer-events-none",
                   )}
                   style={{
                     background: `radial-gradient(140px 90px at 75% 50%, ${theme.glowColor}, transparent 70%)`,
@@ -132,7 +126,7 @@ export const Sidebar = () => {
                     "group-hover:scale-110",
                     theme.iconHover, // donne la teinte au hover via cascade
                     isActive && theme.iconHover,
-                    !isCollapsed && "size-5"
+                    !isCollapsed && "size-5",
                   )}
                 />
 
@@ -146,7 +140,7 @@ export const Sidebar = () => {
                       className={cn(
                         "font-medium relative z-10 transition-colors duration-300 overflow-hidden whitespace-nowrap",
                         "text-blue-100/90 group-hover:text-white",
-                        isActive && "text-white"
+                        isActive && "text-white",
                       )}
                     >
                       {item.name}
@@ -167,7 +161,7 @@ export const Sidebar = () => {
                           cn(
                             "relative flex items-center justify-center px-5 py-4 rounded-xl transition-all duration-300 min-h-[64px]",
                             "text-blue-200/80 group overflow-hidden",
-                            isActive && "text-white"
+                            isActive && "text-white",
                           )
                         }
                       >
@@ -185,7 +179,7 @@ export const Sidebar = () => {
                       cn(
                         "relative flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-300",
                         "text-blue-200/80 group overflow-hidden",
-                        isActive && "text-white"
+                        isActive && "text-white",
                       )
                     }
                   >
@@ -205,5 +199,3 @@ export const Sidebar = () => {
     </motion.aside>
   );
 };
-
-
