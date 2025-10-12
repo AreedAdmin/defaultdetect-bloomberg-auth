@@ -62,19 +62,43 @@ export const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
         });
       }
     } catch (error: any) {
+      console.error("Auth error:", error);
+      
       if (error instanceof z.ZodError) {
         toast({
           title: "Validation Error",
           description: error.errors[0].message,
           variant: "destructive",
-          duration: 5000, // Auto dismiss error after 5 seconds
+          duration: 5000,
         });
       } else {
+        // Handle different types of errors
+        let errorMessage = "An error occurred during authentication.";
+        
+        if (error?.message) {
+          errorMessage = error.message;
+        } else if (error?.error_description) {
+          errorMessage = error.error_description;
+        } else if (error?.status === 503 || error?.code === 'ECONNREFUSED') {
+          errorMessage = "Unable to connect to authentication service. Please check your internet connection and try again.";
+        } else if (typeof error === 'string') {
+          errorMessage = error;
+        }
+        
+        // Handle specific Supabase auth errors
+        if (errorMessage.includes("Invalid login credentials")) {
+          errorMessage = "Invalid email or password. Please check your credentials and try again.";
+        } else if (errorMessage.includes("Email not confirmed")) {
+          errorMessage = "Please verify your email address before signing in.";
+        } else if (errorMessage.includes("User already registered")) {
+          errorMessage = "This email is already registered. Please sign in instead.";
+        }
+        
         toast({
           title: "Authentication Error",
-          description: error.message || "An error occurred during authentication.",
+          description: errorMessage,
           variant: "destructive",
-          duration: 5000, // Auto dismiss error after 5 seconds
+          duration: 5000,
         });
       }
     } finally {
