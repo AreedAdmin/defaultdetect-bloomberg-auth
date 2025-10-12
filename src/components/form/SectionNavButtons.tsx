@@ -20,7 +20,7 @@ export const SectionNavButtons = () => {
   };
 
   return (
-    <div className="flex items-center justify-between pt-8 mt-8 border-t border-border/50">
+    <div className="flex items-center justify-between pt-6">
       <Button
         onClick={handlePrevious}
         disabled={currentSection === 1}
@@ -34,7 +34,7 @@ export const SectionNavButtons = () => {
       <Button
         onClick={handleNext}
         disabled={currentSection === 12}
-        className="gap-2 bg-gradient-to-r from-accent to-primary text-white border-0 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+        className="gap-2 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
       >
         Next
         <ChevronRight className="w-4 h-4" />

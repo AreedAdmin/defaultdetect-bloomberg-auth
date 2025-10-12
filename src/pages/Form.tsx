@@ -1,7 +1,6 @@
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { FormProvider, useFormContext } from "@/contexts/FormContext";
 import { ProgressBar } from "@/components/form/ProgressBar";
-import { SectionNavigation } from "@/components/form/SectionNavigation";
 import { FormHeader } from "@/components/form/FormHeader";
 import Section1 from "@/components/form/sections/Section1";
 import { Section2 } from "@/components/form/sections/Section2";
@@ -119,8 +118,6 @@ const FormContent = () => {
         <ProgressBar />
         
         <div className="flex flex-1 overflow-hidden">
-          <SectionNavigation />
-          
           <main className="flex-1 overflow-y-auto">
             <div className="max-w-4xl mx-auto px-12 py-8">
               <AnimatePresence mode="wait">
