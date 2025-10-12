@@ -1,7 +1,6 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3'
 import jsPDF from 'https://esm.sh/jspdf@2.5.1'
-import 'https://esm.sh/jspdf-autotable@3.8.2'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -71,14 +70,13 @@ serve(async (req) => {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')
     const dateStr = timestamp[0]
     const timeStr = timestamp[1].split('-').slice(0, 3).join('-')
-    const userName = record.code_gender === 'M' ? 'Client' : 'Client'
-    const filename = `Default_Bank_Report_${record.sk_id_curr}_${dateStr}_${timeStr}.pdf`
-    const filePath = `reports/${filename}`
+    const fileName = `loan_report_${record.sk_id_curr}_${dateStr}_${timeStr}.pdf`
+    const filePath = `reports/${fileName}`
 
     console.log('📤 Uploading PDF to storage:', filePath)
 
     const { error: uploadError } = await supabase.storage
-      .from('loan_applications')
+      .from('loan-pdfs')
       .upload(filePath, pdfBuffer, {
         contentType: 'application/pdf',
         upsert: true
@@ -86,32 +84,15 @@ serve(async (req) => {
 
     if (uploadError) {
       console.error('Storage upload error:', uploadError)
-      // Try to create bucket if it doesn't exist
-      const { error: bucketError } = await supabase.storage.createBucket('loan_applications', {
-        public: true,
-        fileSizeLimit: 52428800, // 50MB
-      })
-      
-      if (bucketError) {
-        console.error('Bucket creation error:', bucketError)
-      } else {
-        // Retry upload
-        const { error: retryError } = await supabase.storage
-          .from('loan_applications')
-          .upload(filePath, pdfBuffer, {
-            contentType: 'application/pdf',
-            upsert: true
-          })
-        
-        if (retryError) {
-          throw retryError
-        }
-      }
+      return new Response(
+        JSON.stringify({ error: `Upload failed: ${uploadError.message}` }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
+      )
     }
 
     // Get public URL
     const { data: urlData } = supabase.storage
-      .from('loan_applications')
+      .from('loan-pdfs')
       .getPublicUrl(filePath)
 
     const pdfUrl = urlData.publicUrl
@@ -132,7 +113,7 @@ serve(async (req) => {
       JSON.stringify({ 
         success: true, 
         pdf_url: pdfUrl,
-        filename: filename
+        filename: fileName
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
@@ -147,7 +128,7 @@ serve(async (req) => {
 })
 
 async function generatePDF(record: LoanRecord): Promise<Uint8Array> {
-  const doc = new jsPDF() as any
+  const doc = new jsPDF()
   const pageWidth = doc.internal.pageSize.getWidth()
   const pageHeight = doc.internal.pageSize.getHeight()
 
@@ -163,7 +144,7 @@ async function generatePDF(record: LoanRecord): Promise<Uint8Array> {
     doc.text('DefaultDetect | Fraud Detection Report', 14, pageHeight - 15)
     doc.text(`Page ${pageNum} of ${totalPages}`, pageWidth - 40, pageHeight - 15)
     doc.text(`Generated: ${new Date().toLocaleString()}`, 14, pageHeight - 10)
-    doc.text('CONFIDENTIAL - Internal Use Only', pageWidth / 2, pageHeight - 10, { align: 'center' })
+    doc.text('CONFIDENTIAL - Internal Use Only', pageWidth / 2, pageHeight - 10, { align: 'center' as const })
   }
 
   // Cover Page
@@ -173,11 +154,11 @@ async function generatePDF(record: LoanRecord): Promise<Uint8Array> {
   doc.setTextColor(255, 255, 255)
   doc.setFontSize(28)
   doc.setFont('helvetica', 'bold')
-  doc.text('FRAUD DETECTION REPORT', pageWidth / 2, 35, { align: 'center' })
+  doc.text('FRAUD DETECTION REPORT', pageWidth / 2, 35, { align: 'center' as const })
   
   doc.setFontSize(12)
   doc.setFont('helvetica', 'normal')
-  doc.text('Comprehensive Risk Assessment Analysis', pageWidth / 2, 45, { align: 'center' })
+  doc.text('Comprehensive Risk Assessment Analysis', pageWidth / 2, 45, { align: 'center' as const })
   
   // Report metadata box
   doc.setDrawColor(240, 240, 240)
@@ -214,13 +195,13 @@ async function generatePDF(record: LoanRecord): Promise<Uint8Array> {
   doc.text('Risk Assessment:', 30, 160)
   doc.setFontSize(20)
   doc.setFont('helvetica', 'bold')
-  const riskColor = riskScore > 0.7 ? [220, 53, 69] : riskScore > 0.4 ? [255, 193, 7] : [40, 167, 69]
+  const riskColor: [number, number, number] = riskScore > 0.7 ? [220, 53, 69] : riskScore > 0.4 ? [255, 193, 7] : [40, 167, 69]
   doc.setTextColor(riskColor[0], riskColor[1], riskColor[2])
   doc.text(`${(riskScore * 100).toFixed(1)}%`, 30, 172)
   doc.setFontSize(14)
   doc.text(riskLevel, 80, 172)
 
-  addFooter(1, 1)
+  addFooter(1, 2)
 
   // Data Summary Page
   doc.addPage()
@@ -231,38 +212,56 @@ async function generatePDF(record: LoanRecord): Promise<Uint8Array> {
   doc.text('DATA SUMMARY', 14, yPos)
   yPos += 10
 
-  doc.autoTable({
-    startY: yPos,
-    head: [['Field', 'Value']],
-    body: [
-      ['Client ID', record.sk_id_curr?.toString() || 'N/A'],
-      ['Gender', record.code_gender || 'N/A'],
-      ['Owns Car', record.flag_own_car ? 'Yes' : 'No'],
-      ['Owns Realty', record.flag_own_realty ? 'Yes' : 'No'],
-      ['Children', record.cnt_children?.toString() || '0'],
-      ['Family Members', record.cnt_fam_members?.toString() || 'N/A'],
-      ['Education', record.name_education_type || 'N/A'],
-      ['Family Status', record.name_family_status || 'N/A'],
-      ['Housing', record.name_housing_type || 'N/A'],
-      ['Occupation', record.occupation_type || 'N/A'],
-      ['Organization', record.organization_type || 'N/A'],
-      ['Total Income', record.amt_income_total ? `$${record.amt_income_total.toLocaleString()}` : 'N/A'],
-      ['Income Type', record.name_income_type || 'N/A'],
-      ['Credit Amount', record.amt_credit_x ? `$${record.amt_credit_x.toLocaleString()}` : 'N/A'],
-      ['Days Birth', record.days_birth?.toString() || 'N/A'],
-      ['Days Employed', record.days_employed?.toString() || 'N/A'],
-    ],
-    theme: 'striped',
-    headStyles: { fillColor: [13, 26, 38], textColor: [255, 255, 255] },
-    styles: { fontSize: 10 },
+  // Create table manually
+  doc.setFontSize(10)
+  doc.setFont('helvetica', 'bold')
+  doc.setFillColor(13, 26, 38)
+  doc.setTextColor(255, 255, 255)
+  doc.rect(14, yPos, pageWidth - 28, 8, 'F')
+  doc.text('Field', 16, yPos + 5)
+  doc.text('Value', 110, yPos + 5)
+  yPos += 10
+
+  // Table data
+  const tableData = [
+    ['Client ID', record.sk_id_curr?.toString() || 'N/A'],
+    ['Gender', record.code_gender || 'N/A'],
+    ['Owns Car', record.flag_own_car ? 'Yes' : 'No'],
+    ['Owns Realty', record.flag_own_realty ? 'Yes' : 'No'],
+    ['Children', record.cnt_children?.toString() || '0'],
+    ['Family Members', record.cnt_fam_members?.toString() || 'N/A'],
+    ['Education', record.name_education_type || 'N/A'],
+    ['Family Status', record.name_family_status || 'N/A'],
+    ['Housing', record.name_housing_type || 'N/A'],
+    ['Occupation', record.occupation_type || 'N/A'],
+    ['Organization', record.organization_type || 'N/A'],
+    ['Total Income', record.amt_income_total ? `$${record.amt_income_total.toLocaleString()}` : 'N/A'],
+    ['Income Type', record.name_income_type || 'N/A'],
+    ['Credit Amount', record.amt_credit_x ? `$${record.amt_credit_x.toLocaleString()}` : 'N/A'],
+    ['Days Birth', record.days_birth?.toString() || 'N/A'],
+    ['Days Employed', record.days_employed?.toString() || 'N/A'],
+  ]
+
+  doc.setFont('helvetica', 'normal')
+  doc.setTextColor(0, 0, 0)
+  
+  tableData.forEach((row, index) => {
+    const bgColor = index % 2 === 0 ? [249, 250, 251] : [255, 255, 255]
+    doc.setFillColor(bgColor[0], bgColor[1], bgColor[2])
+    doc.rect(14, yPos, pageWidth - 28, 8, 'F')
+    doc.text(row[0], 16, yPos + 5)
+    doc.text(row[1], 110, yPos + 5)
+    yPos += 8
+
+    // Add new page if needed
+    if (yPos > pageHeight - 30 && index < tableData.length - 1) {
+      addFooter(2, 2)
+      doc.addPage()
+      yPos = 20
+    }
   })
 
-  // Add footers
-  const totalPages = doc.internal.pages.length - 1
-  for (let i = 2; i <= totalPages; i++) {
-    doc.setPage(i)
-    addFooter(i, totalPages)
-  }
+  addFooter(2, 2)
 
   // Convert to buffer
   const pdfOutput = doc.output('arraybuffer')
