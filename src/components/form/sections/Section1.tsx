@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Section1() {
+export const Section1 = () => {
   const [formData, setFormData] = useState({
     SK_ID_CURR: null,
     SK_ID_PREV: null,
