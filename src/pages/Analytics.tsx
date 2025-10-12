@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { SocialCircleDefaultRisk } from "@/components/analytics/SocialCircleDefaultRisk";
 import { BasicInformation } from "@/components/analytics/BasicInformation";
 import { FinancialAnalysis } from "@/components/analytics/FinancialAnalysis";
+import { ContactAnalysis } from "@/components/analytics/ContactAnalysis";
 
 const Analytics = () => {
   const [skIdCurr, setSkIdCurr] = useState("");
@@ -75,6 +76,9 @@ const Analytics = () => {
 
             {/* Financial Analysis */}
             <FinancialAnalysis skIdCurr={searchedId} />
+
+            {/* Contact Analysis */}
+            <ContactAnalysis skIdCurr={searchedId} />
 
             {/* Social Circle Default Risk Visualization */}
             <SocialCircleDefaultRisk skIdCurr={searchedId} />
