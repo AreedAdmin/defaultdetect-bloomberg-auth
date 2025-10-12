@@ -21,9 +21,9 @@ export const FormHeader = () => {
           <LastSavedIndicator />
           <Button
             onClick={handleSaveAndExit}
-            className="group/btn relative gap-2 px-5 py-2.5 bg-gradient-to-br from-sky-500/20 to-sky-800/5 hover:from-sky-500/30 hover:to-sky-800/10 border border-sky-400/30 text-sky-400 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/50 hover:shadow-[0_8px_20px_-5px_rgba(14,165,233,0.4)] overflow-hidden"
+            className="group/btn relative gap-2 px-5 py-2.5 bg-gradient-to-br from-blue-900/80 to-indigo-900/80 hover:from-blue-800/90 hover:to-indigo-800/90 border border-blue-400/40 text-blue-100 backdrop-blur-sm transition-all duration-300 hover:border-blue-300/60 hover:shadow-[0_8px_20px_-5px_rgba(37,99,235,0.5)] overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-sky-500/10 to-blue-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-indigo-400/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
             <Save className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110 group-hover/btn:rotate-12" />
             <span className="relative font-medium">Save & Exit</span>
           </Button>
@@ -44,7 +44,7 @@ export const FormHeader = () => {
 
           {/* Content */}
           <div className="relative">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-900 via-blue-600 to-cyan-500 bg-clip-text text-transparent">
               Financial Risk Assessment Form
             </h1>
           </div>
