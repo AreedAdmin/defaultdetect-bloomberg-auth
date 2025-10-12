@@ -50,33 +50,14 @@ Deno.serve(async (req) => {
     }
 
     console.log('Successfully generated data with SK_ID_CURR:', insertedData.sk_id_curr);
-
-    // Trigger ML prediction by calling predict-default-risk edge function
-    console.log('🚀 Triggering ML prediction for record:', insertedData.id);
-    supabaseClient.functions
-      .invoke('predict-default-risk', {
-        body: {
-          record_id: insertedData.id,
-          sk_id_curr: insertedData.sk_id_curr,
-        },
-      })
-      .then((response) => {
-        if (response.error) {
-          console.error('Error triggering prediction:', response.error);
-        } else {
-          console.log('✅ ML prediction triggered successfully');
-        }
-      })
-      .catch((error) => {
-        console.error('Failed to invoke predict-default-risk:', error);
-      });
+    console.log('Database trigger will automatically update risk score for record:', insertedData.id);
 
     return new Response(
       JSON.stringify({
         success: true,
         sk_id_curr: insertedData.sk_id_curr,
         id: insertedData.id,
-        message: 'Test data generated successfully. ML prediction triggered.',
+        message: 'Test data generated successfully. Risk score will be updated automatically by database trigger.',
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
