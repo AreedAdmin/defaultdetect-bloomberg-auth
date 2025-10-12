@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useFormContext } from "@/contexts/FormContext";
 import { useNavigate } from "react-router-dom";
-import { Save } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 export const FormHeader = () => {
   const { saveToLocalStorage } = useFormContext();
@@ -56,12 +56,12 @@ export const FormHeader = () => {
             />
           </div>
 
-          {/* Save button - style like "Financial intelligence" */}
+          {/* Save button */}
           <Button
             onClick={handleSaveAndExit}
             className="group/btn relative gap-2 px-6 py-3 bg-transparent border border-sky-400/40 text-sky-400 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/60 hover:bg-sky-400/5 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] rounded-full flex-shrink-0"
           >
-            <Save className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110" />
+            <LogOut className="w-4 h-4 relative transition-transform duration-300 group-hover/btn:scale-110" />
             <span className="relative font-medium">Save & Exit</span>
           </Button>
         </div>
