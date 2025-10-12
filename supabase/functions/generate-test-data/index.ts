@@ -207,7 +207,9 @@ function generateVariations(sample: any): any {
   generated.has_work_contact = (generated.flag_work_phone === 1 || generated.flag_emp_phone === 1) ? 1 : 0;
   generated.stability_score = calculateStabilityScore(generated);
   generated.is_cashloan = generated.name_contract_type_x === 'Cash loans' ? 1 : 0;
-  generated.target = 0;
+  
+  // Leave target as null - this is what the model will predict
+  generated.target = null;
   
   return generated;
 }
