@@ -122,11 +122,28 @@ export const Sidebar = () => {
                   size={22}
                   className={cn(
                     "relative z-10 transition-all duration-300 shrink-0",
-                    "text-blue-200/90",
-                    "group-hover:" + theme.iconHover.replace("text-", "text-"),
+                    "text-blue-200/90 group-hover:text-sky-400",
                     isActive && theme.iconHover,
                     !isCollapsed && "size-5",
                   )}
+                  style={{
+                    color: undefined,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      const colorMap: Record<string, string> = {
+                        "text-sky-400": "#38bdf8",
+                        "text-blue-400": "#60a5fa",
+                        "text-indigo-400": "#818cf8",
+                      };
+                      e.currentTarget.style.color = colorMap[theme.iconHover] || "#38bdf8";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = "";
+                    }
+                  }}
                 />
 
                 {/* Label */}
