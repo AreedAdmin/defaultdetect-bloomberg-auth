@@ -20,14 +20,21 @@ There is a lack of **automated, data-driven risk prediction systems** capable of
 Ineffective assessment leads to **billions in potential losses** from loan defaults each year.
 
 <p align="center">
-  <img src="./docs/images/auth-page.png" alt="Auth Page" width="45%" style="margin:10px;"/>
-  <img src="./docs/images/dashboard-page.png" alt="Dashboard Page" width="45%" style="margin:10px;"/>
+  <img 
+    src="./docs/images/auth-page.png" 
+    alt="Auth Page" 
+    width="45%" 
+    style="border-radius:8px; margin:10px;"
+  />
+  <img 
+    src="./docs/images/dashboard-page.png" 
+    alt="Dashboard Page" 
+    width="45%" 
+    style="border-radius:8px; margin:10px;"
+  />
 </p>
 
-<p align="center">
-  <img src="./docs/images/analytics-page.png" alt="Analytics Page" width="45%" style="margin:10px;"/>
-  <img src="./docs/images/form-page.png" alt="Form Page" width="45%" style="margin:10px;"/>
-</p>
+
 
 ## 💡 2. Solution Summary
 
@@ -134,7 +141,8 @@ Implements role-based access (`admin`, `user`) with RLS enforced.
 - **Animations:** Framer Motion  
 
 <p align="center">
-  <img src="./docs/images/dashboard.png" alt="DefaultDetect Dashboard" width="850"/>
+  <img src="./docs/images/analytics-page.png" alt="Analytics Page" width="45%" style="border-radius:8px; margin:10px;"/>
+  <img src="./docs/images/analytics-page-2.png" alt="Analytics Page" width="45%" style="border-radius:8px; margin:10px;"/>
 </p>
 
 ### **Main Pages**
@@ -142,7 +150,11 @@ Implements role-based access (`admin`, `user`) with RLS enforced.
 - **Form** — 8-step multi-section form (109 fields, auto-save)  
 - **Analytics** — Risk visualizations, ratios, charts  
 - **Bulk Import** — CSV uploader & progress monitor  
-- **Form Success** — Summary + PDF download  
+- **Form Success** — Summary + PDF download
+
+<p align="center">
+  <img src="./docs/images/form-page.png" alt="Form Page" width="45%" style="border-radius:8px; margin:10px;"/>
+</p>
 
 ### **Key Interactions**
 - Auto-save every 20s & on navigation  
