@@ -54,7 +54,7 @@ Ineffective assessment leads to **billions in potential losses** from loan defau
 - 💾 Auto-save functionality  
 
 <p align="center">
-  <img src="./docs/images/architecture.svg" alt="DefaultDetect System Architecture" width="800"/>
+  <img src="./docs/images/architecture.png" alt="DefaultDetect System Architecture" width="800"/>
 </p>
 
 
