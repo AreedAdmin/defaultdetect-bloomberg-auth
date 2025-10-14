@@ -234,3 +234,5 @@ npm run build
 
 # 5. Preview production build
 npm run preview
+
+### license 
