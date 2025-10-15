@@ -215,6 +215,11 @@ Implements role-based access (`admin`, `user`) with RLS enforced.
 | Frontend | **Lovable** | Auto-deploy on push |
 | Backend | **Supabase** | Managed PostgreSQL + Edge Functions |
 | Domain | Custom domain | SSL enabled |
+---
+
+## 🧑‍💻 9.Contributors
+
+- **Salomée Smila** — Added contributor section 
 
 
 ### **Local Development Setup**
