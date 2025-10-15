@@ -9,6 +9,9 @@
 
 
 ## 🏦 1. Project Overview & Problem Statement
+### Testing Login Credentials
+username: shehab@defaultdetect.com
+password: 123456
 
 ### **Real-World Context**
 Financial institutions face challenges with **manual loan risk assessment processes** that are slow, inconsistent, and prone to human error.
@@ -216,6 +219,13 @@ Implements role-based access (`admin`, `user`) with RLS enforced.
 | Backend | **Supabase** | Managed PostgreSQL + Edge Functions |
 | Domain | Custom domain | SSL enabled |
 
+---
+
+## 🧑‍💻 9. Contributors
+
+- **Salomée Smila** — Added contributor section 
+
+- **Fares Gharbi** — Added contributor section
 
 ### **Local Development Setup**
 ```bash
