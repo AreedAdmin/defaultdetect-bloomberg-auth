@@ -223,7 +223,9 @@ Implements role-based access (`admin`, `user`) with RLS enforced.
 
 ## 🧑‍💻 9. Contributors
 
-- **Salomée Smila** — Added contributor section and documentation update
+- **Salomée Smila** — Added contributor section 
+
+- **Fares Gharbi** — Added contributor section
 
 ### **Local Development Setup**
 ```bash
