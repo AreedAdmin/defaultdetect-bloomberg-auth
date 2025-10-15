@@ -9,6 +9,9 @@
 
 
 ## 🏦 1. Project Overview & Problem Statement
+### Testing Login Credentials
+username: shehab@defaultdetect.com
+password: 123456
 
 ### **Real-World Context**
 Financial institutions face challenges with **manual loan risk assessment processes** that are slow, inconsistent, and prone to human error.
